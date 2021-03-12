@@ -1,0 +1,34 @@
+body{
+  height: 100vh;
+  width: 100vw;
+  background-color: #282c34;
+}
+
+.App{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: "topbar topbar" "editor terminal";
+  column-gap: 30px;
+
+  padding: 30px;
+}
+
+.topbar{
+  grid-area: topbar;
+}
+
+.editor{
+  grid-area: editor;
+  line-height: 1.4;
+}
+
+.editor textarea{
+    padding: 35px 25px 25px 25px;
+    border-radius: 3px;
+    background: #21252b;
+}
+
+.terminal{
+  grid-area: terminal;
+}
