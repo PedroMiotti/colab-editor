@@ -1,6 +1,4 @@
 body{
-  height: 100vh;
-  width: 100vw;
   background-color: #282c34;
 }
 
@@ -10,7 +8,7 @@ body{
   grid-template-rows: 50px 1fr;
   grid-template-areas: "topbar topbar" "editor terminal";
   column-gap: 30px;
-
+  
   padding: 30px;
 }
 
