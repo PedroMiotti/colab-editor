@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background-color: var(--corFundo);
+    color: var(--corSecundaria);
+}
+
+#paginaSalasContainer h1, h2 {
+    font-family: var(--fonteRoboto);
+    font-weight: 800;
+}
+
+#boasVindas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 7.5vh;
+    padding-bottom: 7.5vh;
+}
+
+#boasVindas h1 {
+    font-size: 3.75rem;
+    font-family: var(--fonteRoboto);
+    font-weight: 400;
+}
+
+#caixas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
+
+#criarSala {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    background-color: var(--corPreto);
+}
+
+#criarSala h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    padding-top: 1.75vh;
+    padding-bottom: 1.75vh; 
+}
+
+#criarSala h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 35%;
+    background-color: var(--corPrimaria);
+    font-size: 2.5rem;
+    padding-top: 1.15vh;
+    padding-bottom: 1.15vh;
+    padding-right: 2.15vw;
+    padding-left: 2.15vw;
+}
+
+#entrarSala {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20vw;
+    background-color: var(--corPreto);
+}
+
+#entrarSala h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    padding-top: 1.75vh;
+    padding-bottom: 1.75vh; 
+}
+
+#entrarSala input {
+    width: 15vw;
+    height: 7.5vh;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+    margin-bottom: 1.75vh;
+    font-size: 2.5rem;
+}
+
+#entrarSala h1 {
+    display: flex;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    font-size: 1.65rem;
+    margin-left: 4.75vw;
+    margin-right: 4.75vw;
+    margin-bottom: 4.25vh;
+    padding-top: 1.15vh;
+    padding-bottom: 1.15vh;
+}
