@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
-import { XTerm } from "xterm-for-react";
-
-import MonacoEditor from './components/editor'
+import MonacoEditor from "./components/Editor/";
+import Terminal from "./components/Terminal/";
 
 import { languages } from "./assets/languages.js";
 
@@ -20,24 +19,26 @@ function App() {
   const xtermRef = useRef(null);
   const editorRef = useRef(null);
 
+  const writeToTerminal = (data) => {
+    xtermRef.current.terminal.writeln(data);
+  };
+
   const runSouceCode = () => {
     let solutionResponse = runCode(codeToSubmit, stdin, language.id).then(
       (res) => {
         if (res.stdout) {
-          xtermRef.current.terminal.writeln(res.stdout);
-          xtermRef.current.terminal.writeln(
+          writeToTerminal(res.stdout);
+          writeToTerminal(
             `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`
           );
-        }
-        else if(res.stderr){
-          xtermRef.current.terminal.write(res.stderr);
-          xtermRef.current.terminal.writeln(
+        } else if (res.stderr) {
+          writeToTerminal(res.stderr);
+          writeToTerminal(
             `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`
           );
-        }
-        else{
-          xtermRef.current.terminal.writeln(res.compile_output);
-          xtermRef.current.terminal.writeln(
+        } else {
+          writeToTerminal(res.compile_output);
+          writeToTerminal(
             `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`
           );
         }
@@ -47,7 +48,7 @@ function App() {
 
   const handleEditorChange = (value, e) => {
     setCodeToSubmit(value);
-  }
+  };
 
   const chooseLanguage = (e) => {
     const selectedIndex = e.target.options.selectedIndex;
@@ -80,10 +81,15 @@ function App() {
         </button>
       </div>
       <div className="editor">
-        <MonacoEditor valueProp={codeToSubmit} languageProp={language.name} themeProp={theme} onChangeProp={handleEditorChange}/>
+        <MonacoEditor
+          valueProp={codeToSubmit}
+          languageProp={language.name}
+          themeProp={theme}
+          onChangeProp={handleEditorChange}
+        />
       </div>
       <div className="terminal">
-        <XTerm ref={xtermRef} />
+        <Terminal terminalRef={xtermRef} />
       </div>
     </div>
   );
