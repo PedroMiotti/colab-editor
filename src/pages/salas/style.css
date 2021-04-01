@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.paginaSalasContainer{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--corFundo);
+  color: var(--corSecundaria);
+}
+
+.paginaSalasContainer h1, h2, a {
+    font-family: var(--fonteRoboto);
+    font-weight: 800;
+}
+
+.boasVindas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin: 100px 0;
+}
+
+.boasVindas h1 {
+    font-size: 3.75rem;
+    font-family: var(--fonteRoboto);
+    font-weight: 400;
+}
+
+.caixas {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.criarSala {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 350px;
+    margin-right: 10%;
+    background-color: var(--corPreto);
+}
+
+.criarSala h2, .entrarSala h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    width: 100%;
+    height: 75px;
+}
+
+.criarSala a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    font-size: 2.5rem;
+    width: 80px;
+    height: 80px;
+    margin-top: 25%;
+}
+
+.criarSala a:hover{
+  cursor: pointer;
+}
+
+.entrarSala {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    height: 350px;
+    background-color: var(--corPreto);
+}
+
+.entrarSala input {
+    font-size: 2.5rem;
+    width: 80%;
+
+}
+
+.entrarSala a {
+    display: flex;
+    justify-content: center;
+    background-color: var(--corPrimaria);
+    font-size: 1.65rem;
+    width: 130px;
+    padding: 10px 0;
+    margin-bottom: 10%;
+}
+
+@media screen and (max-width: 900px) {
+  .caixas {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .criarSala {
+      margin-right: 0;
+      margin-bottom: 10%;
+  }
+}

@@ -1,8 +1,4 @@
-body{
-  background-color: #282c34;
-}
-
-.App{
+.container-editor{
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px 1fr;

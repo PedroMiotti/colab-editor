@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;700&display=swap%27');
+
+body{
+  background-color: #282c34;
+}
+
+:root {
+  --fonteRoboto: 'Roboto', sans-serif;
+
+  --corPrimaria: #4c01a4;
+  --corSecundaria: #f1d4d4;
+  --corTerciaria: #6f40a7;
+  --corPreto: #111c30; 
+  --corFundo: #343241;
+}
