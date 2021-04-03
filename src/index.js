@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Editor from "./pages/editor/";
-import Salas from "./pages/salas/";
+import Routes from './Router';
 
 import "./style.css";
 
@@ -17,8 +16,9 @@ ReactDOM.render(
     <NamespaceContextProvider>
       <SocketContextProvider>
         <RoomState>
-          {/* <Editor /> */}
-          <Salas />
+          
+          <Routes/>
+          
         </RoomState>
       </SocketContextProvider>
     </NamespaceContextProvider>
