@@ -43,18 +43,35 @@ const PaginaInicial = () => {
       </div>
 
       <div className="caixas">
-        <div className="criarSala">
-          <h2>Criar Sala</h2>
-
-          <a onClick={createNamespace}>&#43;</a>
+        <div className="card">
+          <div className="face face1">
+            <div className="content">
+              <h2>Criar Sala</h2>
+            </div>
+            
+          </div>
+          <div class="face face2">
+            <div className="content">
+              <a id="but-criar" onClick={createNamespace}>&#43;</a>
+            </div>
+          </div>
         </div>
 
-        <div className="entrarSala">
-          <h2>Entrar em uma sala</h2>
-
-          <input onChange={handleInput} type="text" spellCheck="false" />
-
-          <a onClick={joinNamespace}>Entrar</a>
+        <div className="card">
+          <div className="face face1">
+            <div className="content">
+              <h2>Encontrar Sala</h2>
+            </div>
+          </div>
+          <div className="face face2">
+            <div className="content">
+              <input onChange={handleInput} type="text" spellCheck="false" />
+              <a id="but-entrar" onClick={joinNamespace}>Entrar</a>
+            
+            </div>
+            
+          </div>
+          
         </div>
       </div>
     </div>
