@@ -8,14 +8,18 @@
 .paginaSalasContainer{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   background-color: var(--corFundo);
   color: var(--corSecundaria);
+  
 }
 
 .paginaSalasContainer h1, h2, a {
     font-family: var(--fonteRoboto);
     font-weight: 800;
+    
 }
 
 .boasVindas {
@@ -23,7 +27,7 @@
     align-items: center;
     justify-content: center;
     
-    margin: 100px 0;
+    
 }
 
 .boasVindas h1 {
@@ -33,71 +37,156 @@
 }
 
 .caixas {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
+    
+    width: 50vw;
+    height: 50vh;
+    position: relative;
+    display:flex;
+    justify-self: center;
     justify-content: center;
+    
 }
 
-.criarSala {
+
+
+.card {
+    position: relative;
+    margin: 10%;
+}
+
+.face {
+    width: 300px;
+    height: 70px;
+    transition: 0.5s;
+}
+
+.face1 {
+    position: relative;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; 
+
+}
+
+.card:hover .face1{
+    background-color: var(--corPrimaria);
+    
+}
+
+.card:hover .content{
+    opacity: 1;
+}
+
+.face2{
+    position: relative;
+    background-color: #333;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transform: translateY(-99%);
+    transition: .4s;
+    height: 0;
+}
+
+.card:hover .face2{
+    background-color: var(--corPreto);
+    transform: translateY(0);
+    transition: .4s;
+    height: 100%;
+}
+
+
+
+.card:hover .face2 .content{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 350px;
-    margin-right: 10%;
-    background-color: var(--corPreto);
-}
-
-.criarSala h2, .entrarSala h2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--corPrimaria);
+    justify-content: space-around;
+    height: 80%;
     width: 100%;
-    height: 75px;
 }
 
-.criarSala a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--corPrimaria);
-    font-size: 2.5rem;
-    width: 80px;
-    height: 80px;
-    margin-top: 25%;
+.face1 .content{
+    opacity: .5;
+    transition: .2s;
 }
 
-.criarSala a:hover{
-  cursor: pointer;
+.face1 .content:hover{
+    
+    transition: .2s;
 }
 
-.entrarSala {
+.content{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    width: 400px;
-    height: 350px;
-    background-color: var(--corPreto);
 }
 
-.entrarSala input {
+.card a{
+    cursor: pointer;
+}
+
+#but-criar{
+    visibility: hidden;
+    
+}
+
+.card:hover #but-criar{
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    background-color: var(--corPrimaria);
+    font-size: 1.65rem;
+    height: 40%;
+    width: 50%;
+    padding: 10px 0;
+
+}
+
+.content input{
+    font-family: var(--fonteRoboto);
+    font-weight: 500;
+    padding: 10px;
+    visibility: hidden;
+    margin: 10px;
+}
+
+.card:hover .content input {
+    
+    visibility: visible;
+    
     font-size: 2.5rem;
+    height: 30%;
     width: 80%;
 
 }
 
-.entrarSala a {
+#but-entrar{
+    visibility: hidden;
+    margin: 10px;
+}
+
+.card:hover #but-entrar {
+    
+    visibility: visible;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--corPrimaria);
     font-size: 1.65rem;
-    width: 130px;
+    height: 40%;
+    width: 50%;
     padding: 10px 0;
-    margin-bottom: 10%;
 }
+
+
 
 @media screen and (max-width: 900px) {
   .caixas {
@@ -105,8 +194,16 @@
       align-items: center;
   }
 
-  .criarSala {
+  .card {
       margin-right: 0;
-      margin-bottom: 10%;
+      margin-bottom: 5%;
+  }
+  .card:hover {
+      margin-bottom: 15%;
+  }
+
+  .card:hover #but-criar{
+    padding: 30px 0;
+
   }
 }

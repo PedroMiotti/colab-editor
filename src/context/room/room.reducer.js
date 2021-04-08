@@ -18,7 +18,6 @@ const action = {
 
 export const initialState = {
   _id: '',
-  roomName: '',
   currentUser: '',
   activeUsers: [],
   roomCode: 'print("hello")',
@@ -43,7 +42,6 @@ export const initialState = {
   updateMessages: () => null,
 
   setRoomUser: () => null,
-  setLoading: () => null,
 
   leaveRoom: () => null,
 }
@@ -59,7 +57,7 @@ export default function roomReducer(state = initialState, action) {
             return {
                 ...state,
                 _id: payload._id,
-                roomName: payload.roomName,
+                currentUser: payload.currentUser,
                 activeUsers: payload.activeUsers,
                 roomLoaded: true,
             };
@@ -112,7 +110,6 @@ export default function roomReducer(state = initialState, action) {
             return {
                 ...state,
                 _id: '',
-                roomName: '',
                 currentUser: '',
                 activeUsers: [],
                 roomCode: '',

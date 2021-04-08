@@ -20,6 +20,8 @@ import { instance as axios } from "../../api";
 import RoomContext from "./room.context";
 import roomReducer, { initialState as initialValues } from "./room.reducer";
 
+import history from "../../utils/history";
+
 const RoomState = ({ children }) => {
   const initialState = {
     ...initialValues,
@@ -31,28 +33,21 @@ const RoomState = ({ children }) => {
 
   const [state, dispatch] = useReducer(roomReducer, initialState);
 
-  const createRoom = (namespaceId, username) => {
-    socket.emit('create:room', username);
-    console.log(socket.id)
-    // return new Promise((resolve, reject) => {
-    //   axios
-    //     .get(baseUrl + `/create/${namespaceId}/${username}`)
-    //     .then((res) => {
-    //       console.log(res);
-    //       resolve(res);
-    //       // dispatch({
-    //       //   type: USER_PROFILE,
-    //       //   payload: { name, username, avatar, coins, trophies }
-    //       // })
-    //     })
-    //     .catch((e) => {
-    //       reject(e.response.data)
-    //       // dispatch({
-    //       //   type: SET_ERROR,
-    //       //   payload: { message: e.response.data.message },
-    //       // });
-    //     });
-    // });
+  const createOrJoinRoom = (namespaceId, username) => {
+    socket.emit("create:room", username);
+
+    socket.on("update:room", (data) => {
+      dispatch({
+        type: CREATE_ROOM,
+        payload: {
+          _id: namespaceId,
+          currentUser: username,
+          activeUsers: data.activeUsers,
+        },
+      });
+    });
+    history.push(`editor/${namespaceId}`);
+
   };
 
   const joinRoom = (namespaceId, username) => {
@@ -62,18 +57,9 @@ const RoomState = ({ children }) => {
         .then((res) => {
           console.log(res);
           resolve(res);
-          socket.emit('create:room', username);
-          // dispatch({
-          //   type: USER_PROFILE,
-          //   payload: { name, username, avatar, coins, trophies }
-          // })
         })
         .catch((e) => {
-          reject(e.response.data)
-          // dispatch({
-          //   type: SET_ERROR,
-          //   payload: { message: e.response.data.message },
-          // });
+          reject(e.response.data);
         });
     });
   };
@@ -92,7 +78,7 @@ const RoomState = ({ children }) => {
         roomLoaded: state.roomLoaded,
         roomMessages: state.roomMessages,
         loading: state.loading,
-        createRoom,
+        createOrJoinRoom,
         joinRoom,
       }}
     >

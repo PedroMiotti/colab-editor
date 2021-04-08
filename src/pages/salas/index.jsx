@@ -11,45 +11,41 @@ import { v4 as uuidv4 } from "uuid";
 import { message } from "antd";
 
 const PaginaInicial = () => {
-  const { createRoom, joinRoom } = useRoomContext();
+  const { createOrJoinRoom, joinRoom } = useRoomContext();
   const [nspName, setNamespace] = useContext(NamespaceContext);
 
   const [sessionCode, setSessionCode] = useState("");
 
   const setNamespaceId = (namespaceId) => {
-    return new Promise((resolve) => {
-      sessionStorage.setItem("Namespace", namespaceId);
-      setNamespace(namespaceId)
-      resolve();
-    })
+    sessionStorage.setItem("Namespace", namespaceId);
+    setNamespace(namespaceId);
   };
 
-  const createNamespace = async () => {
+  const createNamespace = () => {
     const genNspId = uuidv4();
-
-
-    await setNamespaceId(genNspId);
-    createRoom(genNspId, "Pedro")
-    // sessionStorage.setItem("Namespace", genNspId);
-    // setNamespace(genNspId);
+    setNamespaceId(genNspId);
   };
 
+  const confirmCreateNamespace = () => {
+    createOrJoinRoom(nspName, "Pedro");
+  };
+  
+  // Remove this after there is a way to set the name
+  const confirmJoinNamespace = () => {
+    createOrJoinRoom(nspName, "Thiago");
+  };
 
-  const joinNamespace = async () => {
+  // Check if the namespace is valid && if the username is already in use
+  const joinNamespace = () => {
     const codeToJoin = sessionCode;
 
     joinRoom(codeToJoin, "Thiago")
       .then(() => {
-        setNamespace(codeToJoin);
-        sessionStorage.setItem("Namespace", codeToJoin);
+        setNamespaceId(codeToJoin);
       })
       .catch((e) => {
         message.error(e);
       });
-  };
-
-  const createSession = () => {
-    createRoom({ username: "Pedro", roomName: "Tech" });
   };
 
   const handleInput = (e) => {
@@ -66,18 +62,37 @@ const PaginaInicial = () => {
         </div>
 
         <div className="caixas">
-          <div className="criarSala">
-            <h2>Criar Sala</h2>
-
-            <a onClick={createNamespace}>&#43;</a>
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <h2>Criar Sala</h2>
+              </div>
+            </div>
+            <div className="face face2">
+              <div className="content">
+                <a id="but-criar" onClick={createNamespace}>
+                  &#43;
+                </a>
+                <button onClick={confirmCreateNamespace}>confirm</button>
+              </div>
+            </div>
           </div>
 
-          <div className="entrarSala">
-            <h2>Entrar em uma sala</h2>
-
-            <input onChange={handleInput} type="text" spellCheck="false" />
-
-            <a onClick={joinNamespace}>Entrar</a>
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <h2>Encontrar Sala</h2>
+              </div>
+            </div>
+            <div className="face face2">
+              <div className="content">
+                <input onChange={handleInput} type="text" spellCheck="false" />
+                <a id="but-entrar" onClick={joinNamespace}>
+                  Entrar
+                </a>
+                <button onClick={confirmJoinNamespace}>confirm</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
