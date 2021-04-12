@@ -12,6 +12,7 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path="/menu" component={MenuSala} />
+      <Route exact path="/editor" component={Editor} />
       <Route exact path="/editor/:namespaceId" component={Editor} />
     </Switch>
   );

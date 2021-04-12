@@ -13,60 +13,127 @@
   grid-area: topbar;
   display: grid;
   
-  grid-template-columns: 15% 70% 15%;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "main config info";
   
-  
-  
   align-items: center;
-  justify-items: auto;
-  
   background-color: var(--corPrimaria);
 
-}
-
-.icon{
-  justify-self: start;
-  grid-area: main;
-  
-  font-size: 22px;
-  color: var(--corSecundaria);
-}
-.navbar-editor h1{
-  justify-self: center;
   color: var(--corSecundaria);
   font-family: var(--fonteRoboto);
-  font-size: 22px;
-  
+
+}
+
+.navbar-main{
   grid-area: main;
 
+  display: flex;
+  align-items: center;
 }
-#lan-selector{
-  width: 50px;
-  grid-area: config;
-  justify-self: start;
 
+.menu-ico{
+  font-size: 22px;
+  margin-right: 20px;
+  cursor: pointer;
 }
-#run-btn{
-  width: 50px;
-  grid-area: config;
-  justify-self: end;
 
+.navbar-main h1{
+  cursor: pointer;
 }
-.navbar-editor h2{
-  
-  grid-area: info;
+
+
+
+
+.navbar-config{
+  grid-area: config;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+
+
+.dropdown{
+  background-color: var(--corTerciaria);
+  padding: 10px 45px 10px 15px;
+  border-radius: 50px;
+
   color: var(--corSecundaria);
-  justify-self: start;
+  border: 0;
+
+  appearance: none;
+  
 
 }
 
-.navbar-editor a{
+
+.custom-select{
+  position: relative;
+  margin-right: 15px;
+}
+
+.custom-arrow{
+  position:absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 35px;
+  height: 100%;
+  background-color: #7B4BB5;
+  pointer-events: none;
+
+  border-radius: 0 50px 50px 0 ;
+}
+
+.arrow{
+  position: relative;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+
+.run-button{
+  background-color: var(--corTerciaria);
+  border: 0;
+  border-radius: 50px;
+  color: #32CD32;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px 10px 20px;
+
+  cursor: pointer;
+
+  margin-left: 45px;
+  
+
+}
+.run-button:hover{
+  background-color: #7B4BB5;
+}
+
+.play-ico{
+  font-size: 18px;
+}
+
+
+
+
+.navbar-info{
   grid-area: info;
-  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
+.navbar-info a{
+  color: #32CD32;
+  cursor: pointer;
+}
 
 .sidebar{
   grid-area: sidebar;
