@@ -1,20 +1,83 @@
 .container-editor{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50px 1fr;
-  grid-template-areas: "topbar topbar" "editor terminal";
-  column-gap: 30px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: "topbar topbar topbar" "sidebar editor terminal";
+  column-gap: 10px;
   
   padding: 30px;
 }
 
-.topbar{
+.navbar-editor{
+  padding: 0 35px;
   grid-area: topbar;
+  display: grid;
+  
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "main config info";
+  
+  
+  
+  align-items: center;
+  justify-items: auto;
+  
+  background-color: var(--corPrimaria);
+
+}
+
+.icon{
+  justify-self: start;
+  grid-area: main;
+  
+  font-size: 22px;
+  color: var(--corSecundaria);
+}
+.navbar-editor h1{
+  justify-self: center;
+  color: var(--corSecundaria);
+  font-family: var(--fonteRoboto);
+  font-size: 22px;
+  
+  grid-area: main;
+
+}
+#lan-selector{
+  width: 50px;
+  grid-area: config;
+  justify-self: start;
+
+}
+#run-btn{
+  width: 50px;
+  grid-area: config;
+  justify-self: end;
+
+}
+.navbar-editor h2{
+  
+  grid-area: info;
+  color: var(--corSecundaria);
+  justify-self: start;
+
+}
+
+.navbar-editor a{
+  grid-area: info;
+  justify-self: end;
+}
+
+
+.sidebar{
+  grid-area: sidebar;
+  background-color: #21252b;
+
 }
 
 .editor{
   grid-area: editor;
   line-height: 1.4;
+  
 }
 
 .editor textarea{

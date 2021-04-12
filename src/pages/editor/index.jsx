@@ -8,6 +8,9 @@ import { languages } from "../../assets/languages.js";
 
 import { runCode } from "../../api/runCode.js";
 
+// Icons
+import {MenuOutlined} from '@ant-design/icons';
+
 
 const Editor = () => {
   const code = "print('hello')";
@@ -61,6 +64,18 @@ const Editor = () => {
 
   return (
     <div className="container-editor">
+
+      <div className="navbar-editor">
+        <MenuOutlined className="icon"/>
+        <h1>CoEditor</h1>
+        <button id="lan-selector">Python</button>
+        <button id="run-btn">Run</button>
+        <h2>FShinoda/313232</h2>
+        <a>Copy</a>
+
+
+      </div>
+
       <div className="topbar">
         <select className="language" onChange={chooseLanguage}>
           {languages.map((language) => (
@@ -81,6 +96,21 @@ const Editor = () => {
           run
         </button>
       </div>
+
+      <div className="sidebar">
+        <div id="sidebar-header">
+          <h1>Files</h1>
+          <h2>Ico</h2>
+        </div>
+
+        <div id="sidebar-files">
+          <a>main.py</a>
+          <a>teste.py</a>
+          <a>go.py</a>
+        </div>
+
+      </div>
+
       <div className="editor">
         <MonacoEditor
           valueProp={codeToSubmit}
