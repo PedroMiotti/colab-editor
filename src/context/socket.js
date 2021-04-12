@@ -9,7 +9,7 @@ export const SocketContextProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (nspName !== null) {
-      setSocket(io.connect(`http://localhost:3001/${nspName}`));
+      setSocket(io.connect(`http://localhost:3005/${nspName}`));
     }
   }, [nspName]);
 

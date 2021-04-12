@@ -10,10 +10,15 @@ import { runCode } from "../../api/runCode.js";
 
 // Icons
 import {MenuOutlined} from '@ant-design/icons';
+import { useRoomContext } from "../../context/room/room.context";
 
 
 const Editor = () => {
+  const { roomLoaded } = useRoomContext();
+
   const code = "print('hello')";
+
+  const [ roomLoad, setRoomLoad ] = useState(roomLoaded);
 
   const [language, setLanguage] = useState({ id: "63", name: "javascript" });
   const [theme, setTheme] = useState("vs-dark");
@@ -76,6 +81,7 @@ const Editor = () => {
 
       </div>
 
+      {roomLoad && <h1>loading...</h1>}
       <div className="topbar">
         <select className="language" onChange={chooseLanguage}>
           {languages.map((language) => (
