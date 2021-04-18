@@ -132,3 +132,13 @@
 .errorcode_errorPage {
   color: white;
 }
+
+@media screen and (max-width: 1150px) {
+  #PaginaErro {
+    font-size: 1.15em;
+  }
+
+  .output_errorPage {
+    max-width: 80%
+  }
+}
