@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 ///Pages
 //Pagina editor
@@ -22,6 +22,7 @@ const Router = () => {
       <Route exact path="/editor/:namespaceId" component={Editor} />
       <Route exact path="/nome" component={PaginaNome} />
       <Route exact path="/erro" component={PaginaErro} />
+      <Redirect to="/erro"/>
     </Switch>
   );
 };
