@@ -1,10 +1,10 @@
 .container-editor{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 210px 1fr 1fr;
   grid-template-rows: 60px 1fr;
   grid-template-areas: "topbar topbar topbar" "sidebar editor terminal";
   column-gap: 10px;
-  
+  font-family: var(--fonteRoboto);
   padding: 30px;
 }
 
@@ -21,7 +21,7 @@
   background-color: var(--corPrimaria);
 
   color: var(--corSecundaria);
-  font-family: var(--fonteRoboto);
+  
 
 }
 
@@ -67,7 +67,6 @@
   
 
 }
-
 
 .custom-select{
   position: relative;
@@ -137,9 +136,60 @@
 
 .sidebar{
   grid-area: sidebar;
-  background-color: #21252b;
+  background-color: var(--corPreto);
+  color: var(--corSecundaria);
+
+  display: flex;
+  flex-direction: column;
+  
 
 }
+
+#sidebar-header{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--corPreto);
+  padding: 18px;
+  padding-left: 22px;
+  padding-top: 22px;
+  align-items: center;
+  /* border-bottom: 2px solid;
+  border-color: var(--corPrimaria) ; */
+
+  font-size: 14px;
+}
+
+.file-ico{
+  font-size: 20px;
+}
+
+.bg-dark{
+  background-color: var(--corTerciaria);
+}
+
+
+#sidebar-files{
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar-files div{
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  align-items: center;
+}
+
+#sidebar-files div:hover{
+  background-color: #1a2436;
+
+}
+
+.more-ico{
+  font-size: 22px;
+}
+
 
 .editor{
   grid-area: editor;
@@ -150,7 +200,7 @@
 .editor textarea{
     padding: 35px 25px 25px 25px;
     border-radius: 3px;
-    background: #21252b;
+    background: var(--corPreto);
 }
 
 .terminal{

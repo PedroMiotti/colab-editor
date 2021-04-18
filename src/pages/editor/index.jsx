@@ -9,7 +9,7 @@ import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
 
 // Icons
-import {MenuOutlined, CaretDownOutlined, CaretRightOutlined, CopyFilled} from '@ant-design/icons';
+import {MenuOutlined, CaretDownOutlined, CaretRightOutlined, CopyFilled, FileAddOutlined, MoreOutlined} from '@ant-design/icons';
 import { useRoomContext } from "../../context/room/room.context";
 
 
@@ -116,14 +116,26 @@ const Editor = () => {
 
       <div className="sidebar">
         <div id="sidebar-header">
-          <h1>Files</h1>
-          <h2>Ico</h2>
+          <h2>Files</h2>
+          <FileAddOutlined className="file-ico"/>
         </div>
 
         <div id="sidebar-files">
-          <a>main.py</a>
-          <a>teste.py</a>
-          <a>go.py</a>
+          <div >
+            <a>main.py</a>
+            <MoreOutlined className="more-ico"/>
+          </div>
+          <div className="bg-dark">
+            <a>teste.py</a>
+            <MoreOutlined className="more-ico"/>
+          </div>
+          <div>
+            <a>go.py</a>
+            <MoreOutlined className="more-ico"/>
+          </div>
+          
+          
+          
         </div>
 
       </div>
