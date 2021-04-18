@@ -10,16 +10,25 @@
   min-height: 100%;
   
   height: 100%;
-  background-color: #000000;
+  /* background-color: #000000; */
   background-image: radial-gradient(#11581E, #041607), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+  /* background-image: radial-gradient(#4c01a4, #111c30), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif"); */
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Inconsolata', Helvetica, sans-serif;
   font-size: 1.5rem;
-  color: rgba(128, 255, 128, 0.8);
-  text-shadow:
+  /* color: rgba(128, 255, 128, 0.8); */
+
+  /* Cor Primária */
+  /* color: rgba(76, 1, 164, 0.8); */
+
+  color: rgba(111, 64, 167, 0.8);
+  /* text-shadow:
       0 0 1ex rgba(51, 255, 51, 1),
-      0 0 2px rgba(255, 255, 255, 0.8);
+      0 0 2px rgba(255, 255, 255, 0.8); */
+  text-shadow:
+      0 0 1ex rgba(76, 1, 164, 1),
+      0 0 2px rgba(241, 212, 212, 0.8);
 }
 
 .noise_errorPage {
@@ -39,12 +48,19 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background:
+  /* background:
       repeating-linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0,
       rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0) 100%);
+      rgba(0, 0, 0, 0) 100%); */
+
+  /* background:
+      repeating-linear-gradient(
+      180deg,
+      rgba(52, 50, 65, 0) 0,
+      rgba(52, 50, 65, 0.3) 50%,
+      rgba(52, 50, 65, 0) 100%); */
   background-size: auto 4px;
   z-index: 1;
 }
@@ -60,12 +76,20 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
       0deg,
       transparent 0%,
       rgba(32, 128, 32, 0.2) 2%,
       rgba(32, 128, 32, 0.8) 3%,
       rgba(32, 128, 32, 0.2) 3%,
+      transparent 100%); */
+
+  background-image: linear-gradient(
+      0deg,
+      transparent 0%,
+      rgba(76, 1, 164, 0.2) 2%,
+      rgba(76, 1, 164, 0.8) 3%,
+      rgba(76, 1, 164, 0.2) 3%,
       transparent 100%);
   background-repeat: no-repeat;
   animation: scan 7.5s linear 0s infinite;
@@ -91,10 +115,14 @@
 }
 
 .output_errorPage {
-  color: rgba(128, 255, 128, 0.8);
-  text-shadow:
+  color: rgba(241, 212, 212, 1);
+  /* text-shadow:
       0 0 1px rgba(51, 255, 51, 0.4),
-      0 0 2px rgba(255, 255, 255, 0.8);
+      0 0 2px rgba(255, 255, 255, 0.8); */
+
+  text-shadow:
+      0 0 1ex rgba(76, 1, 164, 1),
+      0 0 2px rgba(241, 212, 212, 0.8);
 
     margin-bottom: 5%;
 }
