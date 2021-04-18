@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Inconsolata';
+/* @import 'https://fonts.googleapis.com/css?family=Inconsolata'; */
 
 /* html {
   min-height: 100%;
@@ -15,7 +15,10 @@
   /* background-image: radial-gradient(#4c01a4, #111c30), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif"); */
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Inconsolata', Helvetica, sans-serif;
+
+  /* font-family: 'Inconsolata', Helvetica, sans-serif; */
+  font-family: var(--fonteRoboto);
+
   font-size: 1.5rem;
   /* color: rgba(128, 255, 128, 0.8); */
 
