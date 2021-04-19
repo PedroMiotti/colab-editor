@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
 import "./style.css";
 
+// Ant Design
+import { message } from 'antd';
+
 import CreateRoomModal from "../../components/CreateRoomModal";
 
 import { useRoomContext } from "../../context/room/room.context";
 import { NamespaceContext } from "../../context/namespace.js";
 
 import { v4 as uuidv4 } from "uuid";
-
-import { message } from "antd";
 
 const PaginaInicial = () => {
   const { createOrJoinRoom, joinRoom } = useRoomContext();
@@ -29,7 +30,7 @@ const PaginaInicial = () => {
   const confirmCreateNamespace = () => {
     createOrJoinRoom(nspName, "Pedro");
   };
-  
+
   // Remove this after there is a way to set the name
   const confirmJoinNamespace = () => {
     createOrJoinRoom(nspName, "Thiago");
@@ -69,11 +70,19 @@ const PaginaInicial = () => {
               </div>
             </div>
             <div className="face face2">
-              <div className="content">
+              {/* <div className="content">
                 <a id="but-criar" onClick={createNamespace}>
                   &#43;
                 </a>
                 <button onClick={confirmCreateNamespace}>confirm</button>
+              </div> */}
+
+              <div className="content">
+                <a id="but-criar" onClick={confirmCreateNamespace}>
+                  &#43;
+                </a>
+
+                {/* <button onClick={confirmCreateNamespace}>confirm</button> */}
               </div>
             </div>
           </div>
@@ -85,12 +94,22 @@ const PaginaInicial = () => {
               </div>
             </div>
             <div className="face face2">
-              <div className="content">
+              {/* <div className="content">
                 <input onChange={handleInput} type="text" spellCheck="false" />
                 <a id="but-entrar" onClick={joinNamespace}>
                   Entrar
                 </a>
                 <button onClick={confirmJoinNamespace}>confirm</button>
+              </div> */}
+
+              <div className="content">
+                <input onChange={handleInput} type="text" spellCheck="false" />
+
+                <a id="but-entrar" onClick={confirmJoinNamespace}>
+                  Entrar
+                </a>
+
+                {/* <button onClick={confirmJoinNamespace}>confirm</button> */}
               </div>
             </div>
           </div>
