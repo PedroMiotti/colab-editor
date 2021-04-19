@@ -6,11 +6,10 @@ import "./style.css";
 import { Button, notification, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
+// Back-End
 import CreateRoomModal from "../../components/CreateRoomModal";
-
 import { useRoomContext } from "../../context/room/room.context";
 import { NamespaceContext } from "../../context/namespace.js";
-
 import { v4 as uuidv4 } from "uuid";
 
 const PaginaInicial = () => {
@@ -101,40 +100,46 @@ const PaginaInicial = () => {
 
   return (
     <>
-      <div className="paginaSalasContainer">
-        <div className="boasVindas">
-          <h1>
-            Olá, <strong>FShinoda</strong>!
-          </h1>
-        </div>
+      <div id="paginaSalasContainer">
+        <div className="noise_roomPage"></div>
 
-        <div className="caixas">
-          <div className="card">
-            <div className="face face1">
-              <div id="contentHeader">
-                <h2>Criar Sala</h2>
-              </div>
-            </div>
-            <div className="face face2">
-              {/* <div className="content">
-                <a id="but-criar" onClick={createNamespace}>
-                  &#43;
-                </a>
-                <button onClick={confirmCreateNamespace}>confirm</button>
-              </div> */}
+        <div className="overlay_roomPage"></div>
 
-              <div className="content">
-                <Button id="but-criar" type="link" onClick={createNamespace}>
-                  &#43;
-                </Button>
-              </div>
-            </div>
+        <div className="terminal_roomPage">
+          <div className="boasVindas">
+            <h1>
+              Olá, <strong>FShinoda</strong>!
+            </h1>
           </div>
 
-          <div className="card">
-            <div className="face face1">
-              <div id="contentHeader">
-                <h2>Encontrar Sala</h2>
+          <div className="caixas">
+            <div className="card">
+              <div className="face face1">
+                <div id="contentHeader">
+                  <h2>Criar Sala</h2>
+                </div>
+              </div>
+              <div className="face face2">
+                {/* <div className="content">
+                  <a id="but-criar" onClick={createNamespace}>
+                    &#43;
+                  </a>
+                  <button onClick={confirmCreateNamespace}>confirm</button>
+                </div> */}
+
+                <div className="content">
+                  <Button id="but-criar" type="link" onClick={createNamespace}>
+                    &#43;
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="face face1">
+                <div id="contentHeader">
+                  <h2>Encontrar Sala</h2>
+                </div>
               </div>
             </div>
             <div className="face face2">
