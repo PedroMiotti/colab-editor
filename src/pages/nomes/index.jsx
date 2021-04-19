@@ -22,7 +22,7 @@ const PaginaNome = () => {
                     <input type="text" spellcheck="false" maxLength="20" aria-required></input>
 
                     <div id="cnfBtn">
-                        <Button type="primary">Confirmar</Button>
+                        <Button type="link">Confirmar</Button>
                     </div>
                 </div>
             </div>
