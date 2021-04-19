@@ -55,23 +55,24 @@
 }
 
 .face {
-    width: 300px;
-    height: 70px;
+    width: 20em;
+    height: 10em;
     transition: 0.5s;
 }
 
 .face1 {
     position: relative;
-    background-color: #333;
+    background-color: #161616;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1; 
-
+    border-radius: .25em;
 }
 
 .card:hover .face1{
     background-color: var(--corPrimaria);
+    border-radius: 0%;
     
 }
 
@@ -81,7 +82,7 @@
 
 .face2{
     position: relative;
-    background-color: #333;
+    background-color: #161616;
     display:  flex;
     justify-content: center;
     align-items: center;
@@ -127,13 +128,30 @@
     align-items: center;
 }
 
+.content :hover {
+    opacity: .65;
+}
+
+#contentHeader {
+    font-size: 1.35em;
+}
+
+.createRoomNotification {
+    font-family: var(--fonteRoboto);
+    color: var(--corPreto);
+    background-color: var(--corSecundaria);
+    border-radius: .25em;
+    font-weight: 800;
+}
+
 .card a{
     cursor: pointer;
 }
 
-#but-criar{
+#but-criar {
     visibility: hidden;
     
+    color: var(--corSecundaria);
 }
 
 .card:hover #but-criar{
@@ -162,9 +180,9 @@
     
     visibility: visible;
     
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     height: 30%;
-    width: 80%;
+    width: 95%;
 
 }
 
@@ -199,7 +217,7 @@
       margin-bottom: 5%;
   }
   .card:hover {
-      margin-bottom: 15%;
+      /* margin-bottom: 15%; */
   }
 
   .card:hover #but-criar{
