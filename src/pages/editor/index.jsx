@@ -14,7 +14,7 @@ import { useRoomContext } from "../../context/room/room.context";
 const Editor = () => {
   const { roomLoaded } = useRoomContext();
 
-  const code = "print('hello')";
+  const code = "console.log('Hello');";
 
   const [ roomLoad, setRoomLoad ] = useState(roomLoaded);
 
