@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
+import ReactDOM from 'react-dom';
 import "./style.css";
 
 // Ant Design
-import { message } from 'antd';
+import { Button, notification, message } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import CreateRoomModal from "../../components/CreateRoomModal";
 
@@ -25,6 +27,19 @@ const PaginaInicial = () => {
   const createNamespace = () => {
     const genNspId = uuidv4();
     setNamespaceId(genNspId);
+
+    // Ant Design - Notification
+    notification.open({
+      message : "Sala criada com sucesso!",
+      description : "Você será redirecionado assim que esta janela for fechada!",
+      onClose: confirmCreateNamespace,
+      icon : <LoadingOutlined style={{ color: "#111c30" }} />,
+      className : "createRoomNotification",      
+      placement : "bottomLeft",
+      bottom : 50,
+      duration : 1.5,
+      rtl : true
+    });
   };
 
   const confirmCreateNamespace = () => {
@@ -65,7 +80,7 @@ const PaginaInicial = () => {
         <div className="caixas">
           <div className="card">
             <div className="face face1">
-              <div className="content">
+              <div id="contentHeader">
                 <h2>Criar Sala</h2>
               </div>
             </div>
@@ -78,18 +93,16 @@ const PaginaInicial = () => {
               </div> */}
 
               <div className="content">
-                <a id="but-criar" onClick={confirmCreateNamespace}>
+                <Button id="but-criar" type="link" onClick={createNamespace}>
                   &#43;
-                </a>
-
-                {/* <button onClick={confirmCreateNamespace}>confirm</button> */}
+                </Button>
               </div>
             </div>
           </div>
 
           <div className="card">
             <div className="face face1">
-              <div className="content">
+              <div id="contentHeader">
                 <h2>Encontrar Sala</h2>
               </div>
             </div>

@@ -128,17 +128,30 @@
     align-items: center;
 }
 
-.content h2 {
-    font-size: 2.25em;
+.content :hover {
+    opacity: .65;
+}
+
+#contentHeader {
+    font-size: 1.35em;
+}
+
+.createRoomNotification {
+    font-family: var(--fonteRoboto);
+    color: var(--corPreto);
+    background-color: var(--corSecundaria);
+    border-radius: .25em;
+    font-weight: 800;
 }
 
 .card a{
     cursor: pointer;
 }
 
-#but-criar{
+#but-criar {
     visibility: hidden;
     
+    color: var(--corSecundaria);
 }
 
 .card:hover #but-criar{
@@ -153,10 +166,6 @@
     width: 50%;
     padding: 10px 0;
 
-}
-
-#but-criar :hover {
-    opacity: .2;
 }
 
 .content input{
