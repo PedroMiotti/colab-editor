@@ -11,8 +11,8 @@
   
   height: 100%;
   /* background-color: #000000; */
-  background-image: radial-gradient(#11581E, #041607), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
-  /* background-image: radial-gradient(#4c01a4, #111c30), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif"); */
+  /* background-image: radial-gradient(#11581E, #041607), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif"); */
+  background-image: radial-gradient(#4c01a4, #111c30), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -161,7 +161,7 @@
 }
 
 .errorcode_errorPage {
-  color: white;
+  color: #f1d4d4;
 }
 
 @media screen and (max-width: 1150px) {
