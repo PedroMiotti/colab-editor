@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import "./style.css";
 
@@ -16,8 +16,24 @@ import { v4 as uuidv4 } from "uuid";
 const PaginaInicial = () => {
   const { createOrJoinRoom, joinRoom } = useRoomContext();
   const [nspName, setNamespace] = useContext(NamespaceContext);
+  const [ confirmCreateRoom, setConfirmCreateRoom ] = useState(false);
+  const [ confirmJoinRoom, setConfirmJoinRoom ] = useState(false);
 
   const [sessionCode, setSessionCode] = useState("");
+
+  useEffect(() => {
+
+    if(nspName)
+      confirmCreateNamespace();
+
+  }, [confirmCreateRoom])
+
+  useEffect(() => {
+
+    if(nspName && confirmJoinRoom)
+      confirmJoinNamespace();
+
+  }, [confirmJoinRoom])
 
   const setNamespaceId = (namespaceId) => {
     sessionStorage.setItem("Namespace", namespaceId);
@@ -26,13 +42,13 @@ const PaginaInicial = () => {
 
   const createNamespace = () => {
     const genNspId = uuidv4();
-    setNamespaceId(genNspId);
+    setNamespaceId(genNspId)
 
     // Ant Design - Notification
     notification.open({
       message : "Sala criada com sucesso!",
       description : "Você será redirecionado assim que esta janela for fechada!",
-      onClose: confirmCreateNamespace,
+      onClose: (() => setConfirmCreateRoom(true)),
       icon : <LoadingOutlined style={{ color: "#111c30" }} />,
       className : "createRoomNotification",      
       placement : "bottomLeft",
@@ -40,6 +56,7 @@ const PaginaInicial = () => {
       duration : 1.5,
       rtl : true
     });
+
   };
 
   const confirmCreateNamespace = () => {
@@ -58,6 +75,20 @@ const PaginaInicial = () => {
     joinRoom(codeToJoin, "Thiago")
       .then(() => {
         setNamespaceId(codeToJoin);
+
+        // Ant Design - Notification
+        notification.open({
+          message : "Entrando na sala !",
+          description : "Você será redirecionado assim que esta janela for fechada!",
+          onClose: (() => setConfirmJoinRoom(true)),
+          icon : <LoadingOutlined style={{ color: "#111c30" }} />,
+          className : "createRoomNotification",      
+          placement : "bottomLeft",
+          bottom : 50,
+          duration : 1.5,
+          rtl : true
+        });
+
       })
       .catch((e) => {
         message.error(e);
@@ -118,7 +149,7 @@ const PaginaInicial = () => {
               <div className="content">
                 <input onChange={handleInput} type="text" spellCheck="false" />
 
-                <a id="but-entrar" onClick={confirmJoinNamespace}>
+                <a id="but-entrar" onClick={joinNamespace}>
                   Entrar
                 </a>
 
