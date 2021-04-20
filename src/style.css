@@ -1,6 +1,3 @@
-/* @import '~antd/dist/antd.dark.css'; */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;700&display=swap%27');
-
 * {
   margin: 0;
   padding: 0;
@@ -8,16 +5,51 @@
   box-sizing: border-box;
 }
 
-body{
-  background-color: #282c34;
+html, body {
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+html {
+  font-size: calc(1em + 1vw);
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  color: #eee;
+  background-color: var(--backgroundColor);
 }
 
 :root {
-  --fonteRoboto: 'Roboto', sans-serif;
+  --bodyTextFont: 'Inconsolata', monospace;
+  --projectNameFont: 'Audiowide', cursive;
 
-  --corPrimaria: #4c01a4;
-  --corSecundaria: #f1d4d4;
-  --corTerciaria: #6f40a7;
-  --corPreto: #111c30; 
-  --corFundo: #343241;
+  --backgroundColor: #282c34;
+  --deepPurple: #592794;
+  --mediumPurple: #6f40a7;
+  --lightPurple: #8a5ebe;
+  --darkGrey: #161616;
+  --mediumGrey: #262626;
+  --lightGrey: #343241;
+  --lightPink: #f1d4d4;
+  --golden: #ffda7b;
+  --lightBlue: #80ffdb;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+/*
+  RESPONSIVENESS
+
+  Breakpoint Width:
+  - xxs: '320px';
+  - xs: '480px';
+  - sm: '576px';
+  - md: '768px';
+  - lg: '992px';
+  - xl: '1200px';
+  - xxl: '1600px';
+*/

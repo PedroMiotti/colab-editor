@@ -1,101 +1,32 @@
 /* ERROR PAGE */
-#paginaErro {
-  box-sizing: border-box;
-  min-height: 100%;
-  height: 100%;
-  background-image: radial-gradient(#4c01a4, #111c30), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: var(--fonteRoboto);
-  font-size: 1.5rem;
-  color: rgba(111, 64, 167, 0.8);
+#errorPage {
+  color: rgba(89, 39, 148, 0.8);
   text-shadow: 
-    0 0 1ex rgba(76, 1, 164, 1),
-    0 0 2px rgba(241, 212, 212, 0.8);
-}
-
-
-/* Noise */
-.noise_errorPage {
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-  opacity: .02;
-}
-
-
-/* Overlay */
-.overlay_errorPage {
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: auto 4px;
-  z-index: 1;
-}
-
-.overlay_errorPage::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(
-    0deg,
-    transparent 0%,
-    rgba(76, 1, 164, 0.2) 2%,
-    rgba(76, 1, 164, 0.8) 3%,
-    rgba(76, 1, 164, 0.2) 3%,
-    transparent 100%
-  );
-  background-repeat: no-repeat;
-  animation: scan 7.5s linear 0s infinite;
-}
-
-@keyframes scan {
-  0%        { background-position: 0 -100vh; }
-  35%, 100% { background-position: 0 100vh; }
+    0 0 1ex rgba(111, 64, 167, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
 }
 
 
 /* Terminal */
 .terminal_errorPage {
-  box-sizing: inherit;
-  position: absolute;
-  height: 100%;
-  width: 1000px;
-  max-width: 100%;
   padding: 4rem;
   text-transform: uppercase;
+  width: 75%;
 }
 
 .terminal_errorPage h1 {
     margin-bottom: 5%;
+    font-size: 3em;
 }
 
 
 /* Output */
 .output_errorPage {
-  color: rgba(241, 212, 212, 1);
-  /* text-shadow:
-      0 0 1px rgba(51, 255, 51, 0.4),
-      0 0 2px rgba(255, 255, 255, 0.8); */
-
+  color: #eee;
   text-shadow:
-      0 0 1ex rgba(76, 1, 164, 1),
-      0 0 2px rgba(241, 212, 212, 0.8);
-
-    margin-bottom: 5%;
+    0 0 1ex rgba(89, 39, 148, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
+  margin-bottom: 5%;
 }
 
 .output_errorPage::before {
@@ -104,43 +35,22 @@
 
 
 /* Anchor */
-#a_errorPage {
-  color: var(--corSecundaria);
+.anchor_errorPage {
+  color: var(--lightPurple);
+  text-shadow: 0 0 2px rgba(238, 238, 238, 0.8);
   text-decoration: none;
 }
 
-#a_errorPage::before {
+.anchor_errorPage::before {
   content: "[";
 }
 
-#a_errorPage::after {
+.anchor_errorPage::after {
   content: "]";
 }
 
 
 /* Error Code */
 .errorcode_errorPage {
-  color: var(--corSecundaria);
-}
-
-
-/*
-  RESPONSIVENESS
-
-  Breakpoint Width:
-  - xs: '480px';
-  - sm: '576px';
-  - md: '768px';
-  - lg: '992px';
-  - xl: '1200px';
-  - xxl: '1600px';
-*/
-@media screen and (max-width: 1200px) {
-  #paginaErro {
-    font-size: 1.15em;
-  }
-
-  .output_errorPage {
-    max-width: 80%
-  }
+  color: #eee;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import ReactDOM from 'react-dom';
 import "./style.css";
+import "../backgroundEffect.css";
 
 // Ant Design
 import { Button, notification, message } from 'antd';
@@ -17,23 +17,22 @@ const PaginaInicial = () => {
   const [nspName, setNamespace] = useContext(NamespaceContext);
   const [ confirmCreateRoom, setConfirmCreateRoom ] = useState(false);
   const [ confirmJoinRoom, setConfirmJoinRoom ] = useState(false);
-
   const [sessionCode, setSessionCode] = useState("");
 
+  /* Use Effect */
   useEffect(() => {
-
     if(nspName)
       confirmCreateNamespace();
 
   }, [confirmCreateRoom])
 
   useEffect(() => {
-
     if(nspName && confirmJoinRoom)
       confirmJoinNamespace();
 
   }, [confirmJoinRoom])
 
+  /* General Functions */
   const setNamespaceId = (namespaceId) => {
     sessionStorage.setItem("Namespace", namespaceId);
     setNamespace(namespaceId);
@@ -48,7 +47,7 @@ const PaginaInicial = () => {
       message : "Sala criada com sucesso!",
       description : "Você será redirecionado assim que esta janela for fechada!",
       onClose: (() => setConfirmCreateRoom(true)),
-      icon : <LoadingOutlined style={{ color: "#111c30" }} />,
+      icon : <LoadingOutlined style={{ color: "#161616" }} />,
       className : "createRoomNotification",      
       placement : "bottomLeft",
       bottom : 50,
@@ -82,7 +81,7 @@ const PaginaInicial = () => {
           onClose: (() => setConfirmJoinRoom(true)),
           icon : <LoadingOutlined style={{ color: "#111c30" }} />,
           className : "createRoomNotification",      
-          placement : "bottomLeft",
+          placement : "bottomRight",
           bottom : 50,
           duration : 1.5,
           rtl : true
@@ -100,65 +99,52 @@ const PaginaInicial = () => {
 
   return (
     <>
-      <div id="paginaSalasContainer">
-        <div className="noise_roomPage"></div>
+      <div id="roomPage">
+        <div className="backgroundEffect">
+          <div className="noise"></div>
 
-        <div className="overlay_roomPage"></div>
+          <div className="overlay"></div>
 
-        <div className="terminal_roomPage">
-          <div className="boasVindas">
-            <h1>
-              Olá, <strong>FShinoda</strong>!
-            </h1>
-          </div>
-
-          <div className="caixas">
-            <div className="card">
-              <div className="face face1">
-                <div id="contentHeader">
-                  <h2>Criar Sala</h2>
-                </div>
-              </div>
-              <div className="face face2">
-                {/* <div className="content">
-                  <a id="but-criar" onClick={createNamespace}>
-                    &#43;
-                  </a>
-                  <button onClick={confirmCreateNamespace}>confirm</button>
-                </div> */}
-
-                <div className="content">
-                  <Button id="but-criar" type="link" onClick={createNamespace}>
-                    &#43;
-                  </Button>
-                </div>
-              </div>
+          <div className="terminal terminal_roomPage">
+            <div className="boasVindas">
+              <h1>
+                Olá, <strong>FShinoda</strong>!
+              </h1>
             </div>
 
-            <div className="card">
-              <div className="face face1">
-                <div id="contentHeader">
-                  <h2>Encontrar Sala</h2>
+            <div className="caixas">
+              <div className="card">
+                <div className="face face1">
+                  <div className="contentHeader">
+                    <h2>Criar Sala</h2>
+                  </div>
+                </div>
+
+                <div className="face face2">
+                  <div className="content">
+                    <Button id="but-criar" type="link" onClick={createNamespace}>
+                      &#43;
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="face face2">
-              {/* <div className="content">
-                <input onChange={handleInput} type="text" spellCheck="false" />
-                <a id="but-entrar" onClick={joinNamespace}>
-                  Entrar
-                </a>
-                <button onClick={confirmJoinNamespace}>confirm</button>
-              </div> */}
 
-              <div className="content">
-                <input onChange={handleInput} type="text" spellCheck="false" />
+              <div className="card">
+                <div className="face face1">
+                  <div className="contentHeader">
+                    <h2>Encontrar Sala</h2>
+                  </div>
+                </div>
 
-                <a id="but-entrar" onClick={joinNamespace}>
-                  Entrar
-                </a>
+                <div className="face face2">
+                  <div className="content">
+                    <input onChange={handleInput} type="text" spellCheck="false" />
 
-                {/* <button onClick={confirmJoinNamespace}>confirm</button> */}
+                    <a id="but-entrar" onClick={joinNamespace}>
+                      Entrar
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

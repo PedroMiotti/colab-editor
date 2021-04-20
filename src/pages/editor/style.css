@@ -1,76 +1,58 @@
-.container-editor{
-  display: grid;
-  grid-template-columns: 210px 1fr 1fr;
-  grid-template-rows: 60px 1fr;
-  grid-template-areas: "topbar topbar topbar" "sidebar editor terminal";
-  column-gap: 10px;
-  font-family: var(--fonteRoboto);
-  padding: 30px;
+#container-editor{
+  display: flex;
+  flex-direction: column;
 }
 
-.navbar-editor{
-  padding: 0 35px;
+/* Navbar */
+#navbar-editor{
+  padding: 0 2rem;
+  display: grid;  
   grid-area: topbar;
-  display: grid;
-  
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: "main config info";
-  
+  grid-template-areas: "main config info";  
   align-items: center;
-  background-color: var(--corPrimaria);
-
-  color: var(--corSecundaria);
-  
-
+  background-color: var(--deepPurple);
+  font-family: var(--projectNameFont);
+  color: var(--golden);
+  font-size: .5em;
+  height: 5vh;
+  max-height: 5vh;
+  min-height: 5vh;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .navbar-main{
   grid-area: main;
-
   display: flex;
-  align-items: center;
-}
-
-.menu-ico{
-  font-size: 22px;
-  margin-right: 20px;
-  cursor: pointer;
+  justify-content: flex-start;
 }
 
 .navbar-main h1{
   cursor: pointer;
 }
 
-
-
-
 .navbar-config{
   grid-area: config;
-
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
-
-
 .dropdown{
-  background-color: var(--corTerciaria);
-  padding: 10px 45px 10px 15px;
-  border-radius: 50px;
-
-  color: var(--corSecundaria);
+  background-color: var(--mediumPurple);
+  padding: .25rem 1rem .25rem 1rem;
+  border-radius: 4px;
+  color: var(--lightPink);
+  font-family: var(--bodyTextFont);
+  font-weight: 700;
   border: 0;
-
   appearance: none;
-  
-
 }
 
 .custom-select{
   position: relative;
-  margin-right: 15px;
+  margin-right: .5rem;
 }
 
 .custom-arrow{
@@ -78,12 +60,11 @@
   top: 0;
   right: 0;
   display: block;
-  width: 35px;
+  width: 1rem;
   height: 100%;
-  background-color: #7B4BB5;
+  background-color: var(--lightPurple);
   pointer-events: none;
-
-  border-radius: 0 50px 50px 0 ;
+  border-radius: 0 4px 4px 0 ;
 }
 
 .arrow{
@@ -91,82 +72,85 @@
   left:50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
 }
-
 
 .run-button{
-  background-color: var(--corTerciaria);
+  background-color: var(--mediumPurple);
   border: 0;
-  border-radius: 50px;
-  color: #32CD32;
+  border-radius: 4px;
+  color: var(--lightBlue);
   display: flex;
   align-items: center;
-  padding: 10px 15px 10px 20px;
-
+  justify-content: center;
+  padding: .25rem .5rem .25rem .5rem;
   cursor: pointer;
-
-  margin-left: 45px;
-  
-
+  margin-left: 2rem;
 }
+
 .run-button:hover{
-  background-color: #7B4BB5;
+  background-color: var(--lightPurple);
 }
 
 .play-ico{
-  font-size: 18px;
+  font-size: .5rem;
 }
-
-
-
 
 .navbar-info{
   grid-area: info;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-size: .5rem;
+  font-family: var(--bodyTextFont);
+}
+
+.navbar-info h2 {
+  color: var(--lightPink);
 }
 
 .navbar-info a{
-  color: #32CD32;
+  color: var(--projectNameFont);
   cursor: pointer;
 }
 
-.sidebar{
-  grid-area: sidebar;
-  background-color: var(--corPreto);
-  color: var(--corSecundaria);
-
-  display: flex;
-  flex-direction: column;
-  
-
+/* Page Content */
+#editorPageContent {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: .5fr 4fr 10fr 10fr;
+  height: 95vh;
+  max-height: 95vh;
+  min-height: 95vh;
 }
 
-#sidebar-header{
+/* Sidebar */
+.sidebar {
+  background-color: var(--darkGrey);
+  display: flex;
+  flex-direction: column;
+  color: var(--lightPurple);
+}
+
+.sidebar-header{
   display: flex;
   justify-content: space-between;
-  background-color: var(--corPreto);
+  background-color: var(--darkGrey);
   padding: 18px;
   padding-left: 22px;
   padding-top: 22px;
   align-items: center;
-  /* border-bottom: 2px solid;
-  border-color: var(--corPrimaria) ; */
-
-  font-size: 14px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: .66em;
 }
 
 .file-ico{
-  font-size: 20px;
+  font-size: 1.33em;
 }
 
 .bg-dark{
-  background-color: var(--corTerciaria);
+  background-color: var(--darkGrey);
 }
-
 
 #sidebar-files{
   display: flex;
@@ -187,12 +171,10 @@
 }
 
 .more-ico{
-  font-size: 22px;
+  font-size: 1em;
 }
 
-
 .editor{
-  grid-area: editor;
   line-height: 1.4;
   
 }
@@ -200,9 +182,8 @@
 .editor textarea{
     padding: 35px 25px 25px 25px;
     border-radius: 3px;
-    background: var(--corPreto);
 }
 
-.terminal{
-  grid-area: terminal;
+.codeTerminal{
+  
 }
