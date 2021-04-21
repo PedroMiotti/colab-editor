@@ -4,8 +4,7 @@ import { XTerm } from "xterm-for-react";
 
 
 const Terminal = ({terminalRef}) => {
-
-
+  
   return(
     <>
       <XTerm ref={terminalRef} />

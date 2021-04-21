@@ -1,0 +1,14 @@
+#file-box{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--mediumGrey);
+    font-size: .5em;
+    padding: 15px 15px 15px 35px;
+}
+
+#file-box:hover{
+    background-color: var(--lightGrey);
+    cursor: pointer;
+
+}
+

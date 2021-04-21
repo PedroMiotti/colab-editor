@@ -14,6 +14,8 @@ import PaginaNome from './pages/nomes/index.jsx';
 // Página de Erro
 import PaginaErro from './pages/error_404/index.jsx';
 
+import Teste from './pages/teste/index.jsx';
+
 const Router = () => {
   return (
     <Switch>
@@ -22,6 +24,7 @@ const Router = () => {
       <Route exact path="/editor/:namespaceId" component={Editor} />
       <Route exact path="/nome" component={PaginaNome} />
       <Route exact path="/erro" component={PaginaErro} />
+      <Route exact path="/teste" component={Teste} />
       <Redirect to="/erro"/>
     </Switch>
   );
