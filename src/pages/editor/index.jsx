@@ -51,7 +51,7 @@ const Editor = () => {
   /*xtermRef.current.terminal.loadAddon(fitAddon);
   fitAddon.fit(); */
 
-  xtermRef.current.terminal.resize(20,10);
+  // xtermRef.current.terminal.resize(20,10);
   
   
 

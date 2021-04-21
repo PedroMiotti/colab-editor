@@ -41,6 +41,14 @@ body{
 
 .navbar-main h1{
   cursor: pointer;
+  color: #eee;
+  text-shadow:
+    0 0 1ex rgba(89, 39, 148, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
+}
+
+.navbar-main h1::before {
+  content: "> ";
 }
 
 .navbar-config{
@@ -181,9 +189,9 @@ body{
   padding-left: 22px;
   padding-top: 22px;
   align-items: center;
-  box-shadow: 0px 10px 15px 1px #000000;
-  font-size: .45em;
-  
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  font-size: .45em;  
 }
 
 .plus-ico{
@@ -212,6 +220,10 @@ body{
   width: auto; 
   height: 100%;
   background-color: var(--lightGrey); 
+}
+
+.monaco-editor {
+  padding-top: .25rem;
 }
 
 #resistent-box{
