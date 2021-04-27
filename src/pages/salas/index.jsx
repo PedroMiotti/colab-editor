@@ -108,7 +108,7 @@ const PaginaInicial = () => {
           <div className="terminal terminal_roomPage">
             <div className="boasVindas">
               <h1>
-                Olá, <strong>FShinoda</strong>!
+                Olá, <span>FShinoda</span>!
               </h1>
             </div>
 

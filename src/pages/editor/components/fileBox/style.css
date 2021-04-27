@@ -1,14 +1,40 @@
 #file-box{
+    
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--mediumGrey);
     font-size: .5em;
     padding: 15px 15px 15px 35px;
+    
+}
+
+
+
+#file-box-input{
+    width:70%;
+    border: 0;
+    padding: 3px 0;
+    background-color: var(--mediumGrey);
+    color: #eee;
+    
+}
+
+#file-box-input:focus{
+    border: solid 1px #444;
+    background-color: var(--lightGrey);
 }
 
 #file-box:hover{
     background-color: var(--lightGrey);
     cursor: pointer;
-
 }
+
+#file-box:hover #file-box-input{
+    background-color: var(--lightGrey);
+    cursor: pointer;
+    
+}
+
+
 

@@ -28,9 +28,6 @@ import Split from 'react-split';
 const Editor = () => {
   const { roomLoaded } = useRoomContext();
 
-  
-  
-
   const code = "console.log('Hello');";
 
   const [ roomLoad, setRoomLoad ] = useState(roomLoaded);
@@ -39,6 +36,30 @@ const Editor = () => {
   const [theme, setTheme] = useState("vs-dark");
   const [stdin, setStdin] = useState("");
   const [codeToSubmit, setCodeToSubmit] = useState(code);
+
+  const [isAddingFile, setIsAddingFile] = useState(false);
+  const [isOpenFiles, setIsOpenFiles] = useState(true);
+  const [inputValue, setInputValue] = useState("");
+  const [fileList, setFileList] = useState([
+    {
+      name: 'main.js'
+    }
+  ])
+  const addFile = (name) =>{
+    const newFile = [{name},...fileList];
+    setFileList(newFile);
+  };
+
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      console.log(event.target.value);
+      if(!event.target.value) return;
+      addFile(event.target.value);
+      setIsAddingFile(!isAddingFile);
+      setInputValue('');
+    }
+  };
 
   const xtermRef = useRef(null);
   const fitAddon = new FitAddon();
@@ -51,9 +72,15 @@ const Editor = () => {
   /*xtermRef.current.terminal.loadAddon(fitAddon);
   fitAddon.fit(); */
 
-  // xtermRef.current.terminal.resize(20,10);
-  
-  
+  //xtermRef.current.terminal.resize(20,10);
+
+  const toogleAddFile = () =>{
+    setIsAddingFile(!isAddingFile);
+  }
+
+  const toogleFilesOnClick = () =>{
+    setIsOpenFiles(!isOpenFiles);
+  }
 
   const writeToTerminal = (data) => {
     xtermRef.current.terminal.writeln(data);
@@ -153,7 +180,7 @@ const Editor = () => {
 
           <div id="sidebar">
             <div>
-              <div className="sidebar-item">
+              <div className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"} onClick={toogleFilesOnClick}>
                 <FileOutlined/>
               </div>
               
@@ -171,18 +198,25 @@ const Editor = () => {
             </div>
             
           </div>
-          
+
+
+          {isOpenFiles ? (
           <div id="files">
             <div id="files-header">
               <h2>Files</h2>
-              <PlusOutlined className="plus-ico"/>
+              <PlusOutlined className="plus-ico" onClick={toogleAddFile}/>
             </div>
             <div id="files-body">
-              <FileBox name="python.js"/>
-              <FileBox name="py.java"/>
-              <FileBox name="pypy.py"/>
+              {fileList.map(({name}) => (
+                <FileBox name={name}/>
+              )).reverse()}
+              {isAddingFile ? (<FileBox event={handleKeyDown} toogle={toogleAddFile}/>) : null}
             </div>
+            
           </div>
+
+          ) : null}
+          
 
 
 

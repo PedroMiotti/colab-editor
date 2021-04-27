@@ -19,6 +19,18 @@
     align-items: center;
     justify-content: center;
     margin-top: 17.5%;
+    font-family: var(--projectNameFont);
+    color: #eee;
+    text-shadow:
+    0 0 1ex rgba(89, 39, 148, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
+}
+
+.boasVindas span{
+    color: rgba(89, 39, 148, 0.8);
+    text-shadow: 
+    0 0 1ex rgba(111, 64, 167, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
 }
 
 .caixas {    
@@ -156,7 +168,7 @@
     padding-left: 1.75%;
     padding-right: 1.75%;
     height: 30%;
-    width: 95%;
+    width: 75%;
 }
 
 #but-entrar{

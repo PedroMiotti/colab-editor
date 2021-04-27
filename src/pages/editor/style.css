@@ -169,8 +169,17 @@ body{
   padding: 10px;
 }
 
+.sidebar-item-toogle{
+  background-color: var(--mediumGrey);
+  font-size: .65em;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
 .sidebar-item:hover{
   background-color: var(--mediumGrey);
+  cursor: pointer;
 }
 
 /* FILES */
@@ -207,7 +216,25 @@ body{
   font-size: 1em;
 }
 
+#files-body{
+  overflow-y: auto;
+}
 
+/* customizar scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--mediumGrey); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
 
 
 
