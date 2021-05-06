@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-///Pages
+//Pages
 //Pagina editor
 import Editor from "./pages/editor/index";
 

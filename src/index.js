@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./antd.css";
-import "./style.css";
+import "./assets/style/antd.css";
+import "./assets/style/global.css";
 
 // Contexts
 import RoomState from "./context/room/room.state.jsx";

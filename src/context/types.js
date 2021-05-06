@@ -1,6 +1,6 @@
 // room context
-export const CREATE_ROOM = 'CREATE_ROOM';
-export const JOIN_ROOM = 'JOIN_ROOM';
+export const UPDATE_ROOM = 'UPDATE_ROOM';
+export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_ROOM_CODE = 'UPDATE_ROOM_CODE';
 export const UPDATE_ROOM_LANGUAGE = 'UPDATE_ROOM_LANGUAGE';
 export const UPDATE_ROOM_INPUT = 'UPDATE_ROOM_INPUT';
@@ -10,3 +10,8 @@ export const UPDATE_ROOM_MESSAGES = 'UPDATE_ROOM_ MESSAGES';
 export const LEAVE_ROOM = 'LEAVE_ROOM';
 export const UPDATE_ROOM_USERS = 'UPDATE_ROOM_USERS';
 export const SET_LOADING = 'SET_LOADING';
+
+export const CREATE_FILE = 'CREATE_FILE';
+export const UPDATE_FILE_LIST = 'UPDATE_FILE_LIST';
+
+

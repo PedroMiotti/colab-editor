@@ -1,48 +1,48 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./style.css";
-import "../backgroundEffect.css";
+import "../../assets/style/backgroundEffect.css";
 
 // Ant Design
 import { Button, notification, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-// Back-End
 import CreateRoomModal from "../../components/CreateRoomModal";
 import { useRoomContext } from "../../context/room/room.context";
 import { NamespaceContext } from "../../context/namespace.js";
 import { v4 as uuidv4 } from "uuid";
 
 const PaginaInicial = () => {
-  const { createOrJoinRoom, joinRoom } = useRoomContext();
+  const { createRoom, joinRoom, checkForExistingRoomAndUsername } = useRoomContext();
+
   const [nspName, setNamespace] = useContext(NamespaceContext);
   const [ confirmCreateRoom, setConfirmCreateRoom ] = useState(false);
   const [ confirmJoinRoom, setConfirmJoinRoom ] = useState(false);
   const [sessionCode, setSessionCode] = useState("");
 
-  /* Use Effect */
+  const username = localStorage.getItem('username');
+
   useEffect(() => {
     if(nspName)
-      confirmCreateNamespace();
+      createRoom(nspName, username);
 
   }, [confirmCreateRoom])
 
   useEffect(() => {
     if(nspName && confirmJoinRoom)
-      confirmJoinNamespace();
+      joinRoom(nspName, username);
 
   }, [confirmJoinRoom])
 
-  /* General Functions */
   const setNamespaceId = (namespaceId) => {
     sessionStorage.setItem("Namespace", namespaceId);
     setNamespace(namespaceId);
   };
 
+
   const createNamespace = () => {
     const genNspId = uuidv4();
     setNamespaceId(genNspId)
 
-    // Ant Design - Notification
     notification.open({
       message : "Sala criada com sucesso!",
       description : "Você será redirecionado assim que esta janela for fechada!",
@@ -54,27 +54,16 @@ const PaginaInicial = () => {
       duration : 1.5,
       rtl : true
     });
-
-  };
-
-  const confirmCreateNamespace = () => {
-    createOrJoinRoom(nspName, "Pedro");
-  };
-
-  // Remove this after there is a way to set the name
-  const confirmJoinNamespace = () => {
-    createOrJoinRoom(nspName, "Thiago");
   };
 
   // Check if the namespace is valid && if the username is already in use
   const joinNamespace = () => {
     const codeToJoin = sessionCode;
 
-    joinRoom(codeToJoin, "Thiago")
+    checkForExistingRoomAndUsername(codeToJoin, username)
       .then(() => {
         setNamespaceId(codeToJoin);
 
-        // Ant Design - Notification
         notification.open({
           message : "Entrando na sala !",
           description : "Você será redirecionado assim que esta janela for fechada!",
@@ -108,7 +97,7 @@ const PaginaInicial = () => {
           <div className="terminal terminal_roomPage">
             <div className="boasVindas">
               <h1>
-                Olá, <span>FShinoda</span>!
+                Olá, <span>{username}</span>!
               </h1>
             </div>
 

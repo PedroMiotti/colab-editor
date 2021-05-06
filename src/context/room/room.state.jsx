@@ -1,6 +1,6 @@
 import {
-  CREATE_ROOM,
-  JOIN_ROOM,
+  UPDATE_ROOM,
+  UPDATE_USER,
   SET_CURRENT_USER,
   SET_LOADING,
   UPDATE_ROOM_CODE,
@@ -9,6 +9,8 @@ import {
   UPDATE_ROOM_MESSAGES,
   UPDATE_ROOM_OUTPUT,
   LEAVE_ROOM,
+  CREATE_FILE,
+  UPDATE_FILE_LIST,
 } from "../types.js";
 
 import React, { useReducer, useContext } from "react";
@@ -33,29 +35,62 @@ const RoomState = ({ children }) => {
 
   const [state, dispatch] = useReducer(roomReducer, initialState);
 
-  const createOrJoinRoom = (namespaceId, username) => {
+  React.useEffect(() => {
+    if (socket) {
+      socket.on("update:room", (data) => {
+        dispatch({
+          type: UPDATE_ROOM,
+          payload: {
+            _id: data.room._id,
+            namespaceId: data.room.namespaceId,
+            activeUsers: data.room.users,
+          },
+        });
+      });
+
+      socket.on("update:user", (data) => {
+        dispatch({
+          type: UPDATE_USER,
+          payload: {
+            userId: data.userId,
+            username: data.username,
+            socketId: data.socketId,
+            isHost: data.isHost,
+          },
+        });
+      });
+
+      socket.on("update:files", (data) => {
+        dispatch({
+          type: UPDATE_FILE_LIST,
+          payload: {
+            files: data.files
+          },
+        });
+      });
+    }
+
+    return () => {
+      if (socket) {
+        socket.off("update:room");
+        socket.off("update:user");
+        socket.off("update:files");
+
+      }
+    };
+  }, [socket]);
+
+  const createRoom = (namespaceId, username) => {
     socket.emit("create:room", username);
 
-    socket.on("update:room", (data) => {
-      dispatch({
-        type: CREATE_ROOM,
-        payload: {
-          _id: namespaceId,
-          currentUser: username,
-          activeUsers: data.activeUsers,
-        },
-      });
-    });
     history.push(`editor/${namespaceId}`);
-
   };
 
-  const joinRoom = (namespaceId, username) => {
+  const checkForExistingRoomAndUsername = (namespaceId, username) => {
     return new Promise((resolve, reject) => {
       axios
         .get(baseUrl + `/join/${namespaceId}/${username}`)
         .then((res) => {
-          console.log(res);
           resolve(res);
         })
         .catch((e) => {
@@ -64,6 +99,16 @@ const RoomState = ({ children }) => {
     });
   };
 
+  const joinRoom = (namespaceId, username) => {
+    socket.emit("join:room", username);
+
+    history.push(`editor/${namespaceId}`);
+  };
+
+  const createFile = (filename, namespaceId) => {
+    socket.emit("create:file", filename);
+  }
+
   return (
     <RoomContext.Provider
       value={{
@@ -71,6 +116,7 @@ const RoomState = ({ children }) => {
         roomName: state.roomName,
         currentUser: state.currentUser,
         activeUsers: state.activeUsers,
+        files: state.files,
         roomCode: state.roomCode,
         roomLanguage: state.roomLanguage,
         roomInput: state.roomInput,
@@ -78,8 +124,10 @@ const RoomState = ({ children }) => {
         roomLoaded: state.roomLoaded,
         roomMessages: state.roomMessages,
         loading: state.loading,
-        createOrJoinRoom,
+        createRoom,
+        checkForExistingRoomAndUsername,
         joinRoom,
+        createFile,
       }}
     >
       {children}

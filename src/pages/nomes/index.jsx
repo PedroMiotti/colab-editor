@@ -1,11 +1,26 @@
 import React from "react";
 import "./styles.css";
-import "../backgroundEffect.css";
+import "../../assets/style/backgroundEffect.css";
 
 // Ant Design
 import { Button } from 'antd';
 
+// Utils
+import history from '../../utils/history'
+
 const PaginaNome = () => {
+
+    const [ nomeInput, setNomeInput ] = React.useState('');
+
+    const handleInput = (e) => {
+        setNomeInput(e.target.value);
+    };
+    
+    const saveUsername = () => {
+        localStorage.setItem("username", nomeInput);
+        history.push("/menu");
+    }
+
     return(
         <div id="namePage">
             <div className="backgroundEffect">
@@ -21,10 +36,10 @@ const PaginaNome = () => {
                     <div className="caixaNome">
                         <h1>Insira seu nome</h1>
 
-                        <input type="text" spellcheck="false" maxLength="20" aria-required></input>
+                        <input onChange={handleInput} type="text" spellcheck="false" maxLength="20" aria-required></input>
 
                         <div id="cnfBtn">
-                            <Button type="link">Confirmar</Button>
+                            <Button onClick={saveUsername} type="link">Confirmar</Button>
                         </div>
                     </div>
                 </div>

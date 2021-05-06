@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import "../backgroundEffect.css";
+import "../../assets/style/backgroundEffect.css";
 
 const PaginaErro = () => {
     return(
