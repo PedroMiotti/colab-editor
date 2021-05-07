@@ -3,7 +3,7 @@ import {
   UPDATE_USER,
   SET_CURRENT_USER,
   SET_LOADING,
-  UPDATE_ROOM_CODE,
+  UPDATE_FILE_CODE,
   UPDATE_ROOM_INPUT,
   UPDATE_ROOM_LANGUAGE,
   UPDATE_ROOM_MESSAGES,
@@ -24,7 +24,7 @@ export const initialState = {
   currentUser: { username: "", userId: "", socketId: "", isHost: false },
   activeUsers: [],
   files: [],
-  roomCode: 'print("hello")',
+  currentFileCode: ' ',
   roomInput: "",
   roomLanguage: "javascript",
   roomOutput: {
@@ -38,8 +38,9 @@ export const initialState = {
   joinRoom: () => null,
   checkForExistingRoomAndUsername: () => null,
   createFile: () => null,
+  joinFile: () => null,
+  updateFileCode: () => null,
 
-  updateRoomCode: () => null,
   updateRoomInput: () => null,
   updateRoomLanguage: () => null,
   updateRoomOutput: () => null,
@@ -61,6 +62,7 @@ export default function roomReducer(state = initialState, action) {
         _id: payload._id,
         namespaceId: payload.namespaceId,
         activeUsers: payload.activeUsers,
+        files: payload.files,
         roomLoaded: true,
       };
 
@@ -75,19 +77,17 @@ export default function roomReducer(state = initialState, action) {
         },
       };
 
-    case UPDATE_ROOM_CODE:
+    case UPDATE_FILE_CODE:
       return {
         ...state,
-        roomCode: payload,
+        currentFileCode: payload.code,
       };
 
     case UPDATE_ROOM_LANGUAGE:
       return {
         ...state,
         roomLanguage: payload,
-        // roomCode: getTemplate(payload),
       };
-
 
     case UPDATE_FILE_LIST:
       return {
@@ -132,7 +132,7 @@ export default function roomReducer(state = initialState, action) {
         _id: "",
         currentUser: "",
         activeUsers: [],
-        roomCode: "",
+        currentFileCode: "",
         roomInput: "",
         roomLanguage: "javascript",
         roomOutput: {

@@ -1,7 +1,7 @@
 // room context
 export const UPDATE_ROOM = 'UPDATE_ROOM';
 export const UPDATE_USER = 'UPDATE_USER';
-export const UPDATE_ROOM_CODE = 'UPDATE_ROOM_CODE';
+export const UPDATE_FILE_CODE = 'UPDATE_ROOM_CODE';
 export const UPDATE_ROOM_LANGUAGE = 'UPDATE_ROOM_LANGUAGE';
 export const UPDATE_ROOM_INPUT = 'UPDATE_ROOM_INPUT';
 export const UPDATE_ROOM_OUTPUT = 'UPDATE_ROOM_OUTPUT';

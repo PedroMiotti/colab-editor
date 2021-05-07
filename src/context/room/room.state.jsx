@@ -3,7 +3,7 @@ import {
   UPDATE_USER,
   SET_CURRENT_USER,
   SET_LOADING,
-  UPDATE_ROOM_CODE,
+  UPDATE_FILE_CODE,
   UPDATE_ROOM_INPUT,
   UPDATE_ROOM_LANGUAGE,
   UPDATE_ROOM_MESSAGES,
@@ -44,6 +44,7 @@ const RoomState = ({ children }) => {
             _id: data.room._id,
             namespaceId: data.room.namespaceId,
             activeUsers: data.room.users,
+            files: data.room.files,
           },
         });
       });
@@ -68,6 +69,15 @@ const RoomState = ({ children }) => {
           },
         });
       });
+
+      socket.on("realtime:code", (data) => {
+        dispatch({
+          type: UPDATE_FILE_CODE,
+          payload: {
+            code: data.value
+          },
+        });
+      });
     }
 
     return () => {
@@ -75,7 +85,7 @@ const RoomState = ({ children }) => {
         socket.off("update:room");
         socket.off("update:user");
         socket.off("update:files");
-
+        socket.off("realtime:code");
       }
     };
   }, [socket]);
@@ -105,8 +115,16 @@ const RoomState = ({ children }) => {
     history.push(`editor/${namespaceId}`);
   };
 
-  const createFile = (filename, namespaceId) => {
+  const createFile = (filename) => {
     socket.emit("create:file", filename);
+  }
+
+  const joinFile = (prevFile, currentFile) => {
+    socket.emit("join:file", {prevFile, currentFile});
+  }
+
+  const updateFileCode = (filename, code) => {
+    socket.emit("update:code", {filename, code});
   }
 
   return (
@@ -117,7 +135,7 @@ const RoomState = ({ children }) => {
         currentUser: state.currentUser,
         activeUsers: state.activeUsers,
         files: state.files,
-        roomCode: state.roomCode,
+        currentFileCode: state.currentFileCode,
         roomLanguage: state.roomLanguage,
         roomInput: state.roomInput,
         roomOutput: state.roomOutput,
@@ -128,6 +146,8 @@ const RoomState = ({ children }) => {
         checkForExistingRoomAndUsername,
         joinRoom,
         createFile,
+        joinFile,
+        updateFileCode,
       }}
     >
       {children}

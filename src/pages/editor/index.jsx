@@ -26,14 +26,14 @@ import { useRoomContext } from "../../context/room/room.context";
 import Split from "react-split";
 
 const Editor = () => {
-  const { roomLoaded, files, createFile } = useRoomContext();
+  const { roomLoaded, files, currentFileCode, createFile, joinFile, updateFileCode } = useRoomContext();
 
   const [roomLoad, setRoomLoad] = useState(roomLoaded);
 
   const [ language, setLanguage ] = useState({ id: "63", name: "javascript" });
   const [ theme, setTheme ] = useState("vs-dark");
   const [ stdin, setStdin ] = useState("");
-  const [ codeToSubmit, setCodeToSubmit ] = useState(code);
+  const [ codeToSubmit, setCodeToSubmit ] = useState('');
 
   const [ isAddingFile, setIsAddingFile ] = useState(false);
   const [ isOpenFiles, setIsOpenFiles ] = useState(true);
@@ -57,9 +57,10 @@ const Editor = () => {
       let file_name = event.target.value;
 
       if (!file_name) return;
-
+      
       addFileToListTemp(file_name);
       createFile(file_name);
+
       setIsAddingFile(!isAddingFile);
       setInputValue("");
     }
@@ -68,6 +69,7 @@ const Editor = () => {
   const chooseFile = (fileName) => {
     let file = fileList.find(f => f.filename === fileName);
 
+    joinFile(currentFile.filename, fileName);
     setCurrentFile(file);
   }
 
@@ -112,7 +114,9 @@ const Editor = () => {
   };
 
   const handleEditorChange = (value, e) => {
-    setCodeToSubmit(value);
+    // setCodeToSubmit(value);
+    updateFileCode(currentFile.filename, value);
+
   };
 
   const chooseLanguage = (e) => {
@@ -243,7 +247,7 @@ const Editor = () => {
                   themeProp={theme}
                   onChangeProp={handleEditorChange}
                   path={currentFile?.filename}
-                  valueProp={currentFile?.text}
+                  valueProp={currentFileCode}
                 />
               </div>
             </div>
