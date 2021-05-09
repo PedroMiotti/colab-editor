@@ -3,11 +3,12 @@ import "./style.css";
 
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
+import FileBox from "./components/fileBox/index.jsx";
+
 import { FitAddon } from "xterm-addon-fit";
 
 import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
-import FileBox from "./components/fileBox/index.jsx";
 
 // Icons
 import {
@@ -20,26 +21,34 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 
+// Context
 import { useRoomContext } from "../../context/room/room.context";
 
 // Split.js
 import Split from "react-split";
 
 const Editor = () => {
-  const { roomLoaded, files, currentFileCode, createFile, joinFile, updateFileCode } = useRoomContext();
+  const {
+    roomLoaded,
+    files,
+    currentFileCode,
+    createFile,
+    joinFile,
+    updateFileCode,
+  } = useRoomContext();
 
   const [roomLoad, setRoomLoad] = useState(roomLoaded);
 
-  const [ language, setLanguage ] = useState({ id: "63", name: "javascript" });
-  const [ theme, setTheme ] = useState("vs-dark");
-  const [ stdin, setStdin ] = useState("");
-  const [ codeToSubmit, setCodeToSubmit ] = useState('');
+  const [language, setLanguage] = useState({ id: "63", name: "javascript" });
+  const [theme, setTheme] = useState("vs-dark");
+  const [stdin, setStdin] = useState("");
+  const [codeToSubmit, setCodeToSubmit] = useState("");
 
-  const [ isAddingFile, setIsAddingFile ] = useState(false);
-  const [ isOpenFiles, setIsOpenFiles ] = useState(true);
-  const [ inputValue, setInputValue ] = useState("");
-  const [ fileList, setFileList ] = useState(files);
-  const [ currentFile, setCurrentFile ] = useState({});
+  const [isAddingFile, setIsAddingFile] = useState(false);
+  const [isOpenFiles, setIsOpenFiles] = useState(true);
+  const [inputValue, setInputValue] = useState("");
+  const [fileList, setFileList] = useState(files);
+  const [currentFile, setCurrentFile] = useState({});
 
   const username = localStorage.getItem("username");
 
@@ -57,7 +66,7 @@ const Editor = () => {
       let file_name = event.target.value;
 
       if (!file_name) return;
-      
+
       addFileToListTemp(file_name);
       createFile(file_name);
 
@@ -67,11 +76,11 @@ const Editor = () => {
   };
 
   const chooseFile = (fileName) => {
-    let file = fileList.find(f => f.filename === fileName);
+    let file = fileList.find((f) => f.filename === fileName);
 
     joinFile(currentFile.filename, fileName);
     setCurrentFile(file);
-  }
+  };
 
   const xtermRef = useRef(null);
   const fitAddon = new FitAddon();
@@ -115,8 +124,8 @@ const Editor = () => {
 
   const handleEditorChange = (value, e) => {
     // setCodeToSubmit(value);
+    console.log(e)
     updateFileCode(currentFile.filename, value);
-
   };
 
   const chooseLanguage = (e) => {
@@ -219,10 +228,15 @@ const Editor = () => {
                 />
               </div>
               <div id="files-body">
-
-                {fileList?.map((files) => (
-                  <FileBox name={files.filename} key={files._id} clickEvent={() => chooseFile(files.filename)} />
-                )).reverse()}
+                {fileList
+                  ?.map((files) => (
+                    <FileBox
+                      name={files.filename}
+                      key={files._id}
+                      clickEvent={() => chooseFile(files.filename)}
+                    />
+                  ))
+                  .reverse()}
 
                 {isAddingFile ? (
                   <FileBox

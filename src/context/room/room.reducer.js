@@ -25,12 +25,6 @@ export const initialState = {
   activeUsers: [],
   files: [],
   currentFileCode: ' ',
-  roomInput: "",
-  roomLanguage: "javascript",
-  roomOutput: {
-    stderr: null,
-    stdout: null,
-  },
   roomLoaded: null,
   loading: false,
 
@@ -40,14 +34,7 @@ export const initialState = {
   createFile: () => null,
   joinFile: () => null,
   updateFileCode: () => null,
-
-  updateRoomInput: () => null,
-  updateRoomLanguage: () => null,
-  updateRoomOutput: () => null,
-  updateMessages: () => null,
-
   setRoomUser: () => null,
-
   leaveRoom: () => null,
 };
 
@@ -95,25 +82,6 @@ export default function roomReducer(state = initialState, action) {
         files: payload.files,
       };
 
-    case UPDATE_ROOM_INPUT:
-      return {
-        ...state,
-        roomInput: payload,
-      };
-
-    case UPDATE_ROOM_OUTPUT:
-      return {
-        ...state,
-        roomOutput: payload,
-        loading: false,
-      };
-
-    case UPDATE_ROOM_MESSAGES:
-      return {
-        ...state,
-        roomMessages: [...state.roomMessages, payload],
-      };
-
     case SET_CURRENT_USER:
       return {
         ...state,
@@ -133,13 +101,6 @@ export default function roomReducer(state = initialState, action) {
         currentUser: "",
         activeUsers: [],
         currentFileCode: "",
-        roomInput: "",
-        roomLanguage: "javascript",
-        roomOutput: {
-          stderr: null,
-          stdout: null,
-        },
-        roomMessages: [],
         roomLoaded: null,
         loading: false,
       };

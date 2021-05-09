@@ -49,6 +49,11 @@ const RoomState = ({ children }) => {
         });
       });
 
+      socket.on('user-joined:file', function (data, callback) {
+        console.log('Socket (server-side): received message:', data);
+        callback("File content");
+    });
+
       socket.on("update:user", (data) => {
         dispatch({
           type: UPDATE_USER,
@@ -135,12 +140,8 @@ const RoomState = ({ children }) => {
         currentUser: state.currentUser,
         activeUsers: state.activeUsers,
         files: state.files,
-        currentFileCode: state.currentFileCode,
-        roomLanguage: state.roomLanguage,
-        roomInput: state.roomInput,
-        roomOutput: state.roomOutput,
+        currentFileCode: state.currentFileCode,      
         roomLoaded: state.roomLoaded,
-        roomMessages: state.roomMessages,
         loading: state.loading,
         createRoom,
         checkForExistingRoomAndUsername,
