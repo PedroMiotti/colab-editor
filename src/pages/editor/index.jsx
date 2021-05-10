@@ -10,6 +10,9 @@ import { FitAddon } from "xterm-addon-fit";
 import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
 
+// Antd
+import {notification} from 'antd';
+
 // Icons
 import {
   CaretDownOutlined,
@@ -26,6 +29,7 @@ import { useRoomContext } from "../../context/room/room.context";
 
 // Split.js
 import Split from "react-split";
+
 
 const Editor = () => {
   const {
@@ -51,6 +55,24 @@ const Editor = () => {
   const [currentFile, setCurrentFile] = useState({});
 
   const username = localStorage.getItem("username");
+
+  // copy id to clipboard
+  const url = window.location.href;
+
+  const successNotification = (type, placement) =>{
+    notification[type]({
+      message: 'Copiado para a área de transferência',
+      duration: 1.5,
+      className : "copyNotification",    
+      placement,
+    });
+  };
+
+  const copyToClipboard = (e) =>{
+    navigator.clipboard.writeText(e.target.value); // fix
+    successNotification('success', 'bottomRight');
+  }
+
 
   React.useEffect(() => {
     if (files) setFileList(files);
@@ -136,6 +158,7 @@ const Editor = () => {
     });
   };
 
+
   return (
     <div id="editorPage">
       <div id="container-editor">
@@ -190,10 +213,10 @@ const Editor = () => {
 
             <div className="navbar-info">
               <h2>{username} /</h2>
-              <a>
+              <button value={url} onClick={copyToClipboard}>
                 <CopyFilled />
                 Link
-              </a>
+              </button>
             </div>
           </div>
         </div>
