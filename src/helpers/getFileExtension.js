@@ -48,6 +48,7 @@ export function getLanguage(filename){
             break;
         case "c#":
             language = {id: 51, name: 'c#'} 
+            break;
         default:
             language = {id: 43, name: 'plain text'};
 
