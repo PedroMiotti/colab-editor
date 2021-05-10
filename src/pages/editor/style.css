@@ -1,7 +1,4 @@
 
-body{
-  /* overflow: hidden; */
-}
 #container-editor{
   display: flex;
   flex-direction: column;
@@ -312,4 +309,19 @@ body{
   background-color: var(--notifPurple);
   border-radius: .25em;
   font-weight: 700;
+}
+
+@media screen and (max-width: 2000px){
+  #top{
+    height: 6vh;
+  }
+  
+  /* Navbar */
+  #navbar-editor{
+    
+    height: 6vh;
+    max-height: 6vh;
+    
+  }
+
 }
