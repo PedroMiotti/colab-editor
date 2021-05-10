@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import {useParams} from 'react-router-dom';
 import "./style.css";
 
+// Components
+import UserLine from './components/userLine/userLine';
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
 import FileBox from "./components/fileBox/index.jsx";
@@ -10,6 +12,8 @@ import { FitAddon } from "xterm-addon-fit";
 
 import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
+
+
 
 // Antd
 import {notification} from 'antd';
@@ -75,7 +79,7 @@ const Editor = () => {
   };
 
   const copyToClipboard = (e) =>{
-    navigator.clipboard.writeText(e.target.value); // fix
+    navigator.clipboard.writeText(e.target.value);
     successNotification('success', 'bottomRight');
   }
 
@@ -288,10 +292,26 @@ const Editor = () => {
             <div id="container">
               <div className="user-list">
                 <div className="user-list-header">
-
+                  <div className="line">
+                    <div className="line-title">
+                      <h6>Online</h6>
+                    </div>
+                  </div>
                 </div>
-                <div className="user-list-content"></div>
+                <div className="user-list-content">
+                  <UserLine username="FShinoda" img={<UserOutlined />}/>
+                  <UserLine username="Pedron" img={<UserOutlined />}/>
+                  <UserLine username="Jotaki" img={<UserOutlined />}/>
+                  <UserLine username="Kitashima" img={<UserOutlined />}/>
+                  <UserLine username="Katashima" img={<UserOutlined />}/>
+                  <UserLine username="Hiroshima" img={<UserOutlined />}/>
+                  <UserLine username="Katajima" img={<UserOutlined />}/>
+                  <UserLine username="Keitajima" img={<UserOutlined />}/>
+                  <UserLine username="Katahashi" img={<UserOutlined />}/>
+                  <UserLine username="Kotashima" img={<UserOutlined />}/>
+                </div>
               </div>
+              {/* <div className="user-messages"></div> */}
             </div>
           ) : null}
 
