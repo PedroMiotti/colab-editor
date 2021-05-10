@@ -17,6 +17,8 @@ import {notification} from 'antd';
 import {
   CaretDownOutlined,
   CaretRightOutlined,
+  SendOutlined,
+  CoffeeOutlined,
   CopyFilled,
   FileOutlined,
   SettingOutlined,
@@ -53,6 +55,8 @@ const Editor = () => {
   const [inputValue, setInputValue] = useState("");
   const [fileList, setFileList] = useState(files);
   const [currentFile, setCurrentFile] = useState({});
+
+  const [isOpenChat, setIsOpenChat] = useState(false);
 
   const username = localStorage.getItem("username");
 
@@ -223,16 +227,23 @@ const Editor = () => {
 
         <div id="bottom">
           <div id="sidebar">
-            <div>
+            <div className="sidebar-top">
+
               <div
                 className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"}
-                onClick={() => setIsOpenFiles(!isOpenFiles)}
+                onClick={() => {setIsOpenFiles(!isOpenFiles); setIsOpenChat(false)}}
               >
                 <FileOutlined />
               </div>
+
+              <div className={isOpenChat ? "sidebar-item-toogle" : "sidebar-item"}
+                onClick={() => {setIsOpenChat(!isOpenChat); setIsOpenFiles(false)}} style={{fontSize: '.8em'}}>
+                <CoffeeOutlined/>
+              </div>
+              
             </div>
             <div id="sidebar-bottom">
-              <div className="sidebar-item">
+              <div className="sidebar-item" >
                 <UserOutlined />
               </div>
               <div className="sidebar-item">
@@ -242,7 +253,7 @@ const Editor = () => {
           </div>
 
           {isOpenFiles ? (
-            <div id="files">
+            <div id="container">
               <div id="files-header">
                 <h2>Files</h2>
                 <PlusOutlined
@@ -269,6 +280,10 @@ const Editor = () => {
                 ) : null}
               </div>
             </div>
+          ) : null}
+
+          {isOpenChat ? (
+            <div id="container"></div>
           ) : null}
 
           {/* Configuração Split.js e as duas respectivas divs que serão divididas por ele */}
