@@ -299,9 +299,9 @@ const Editor = () => {
                   </div>
                 </div>
                 <div className="user-list-content">
-                  <UserLine username="FShinoda" img={<UserOutlined />}/>
-                  <UserLine username="Pedron" img={<UserOutlined />}/>
-                  <UserLine username="Jotaki" img={<UserOutlined />}/>
+                  <UserLine username="FShinoda" img={<UserOutlined />} imgName="raposa"/>
+                  <UserLine username="Pedron" img={<UserOutlined />} imgName="rinoceronte"/>
+                  <UserLine username="Jotaki" img={<UserOutlined />} imgName="dragão ma"/>
                   <UserLine username="Kitashima" img={<UserOutlined />}/>
                   <UserLine username="Katashima" img={<UserOutlined />}/>
                   <UserLine username="Hiroshima" img={<UserOutlined />}/>

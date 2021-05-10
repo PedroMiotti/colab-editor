@@ -3,13 +3,16 @@ import './style.css';
 
 //Antd
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { Avatar, Tooltip } from 'antd';
 
-const UserLine = ({username, img}) =>{
+const UserLine = ({username, img, imgName}) =>{
     return(
         <div className="UserLine">
             <div className="active-sign"></div>
-            <Avatar size={32} className="avatar" icon={img} />
+            <Tooltip title={imgName} placement="top" color={"#000"}>
+                <Avatar size={32} className="avatar" icon={img} />
+            </Tooltip>
+            
             <h6>{username}</h6>
         </div>
     )
