@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import {useParams} from 'react-router-dom';
 import "./style.css";
 
 import MonacoEditor from "../../components/Editor/";
@@ -61,7 +62,8 @@ const Editor = () => {
   const username = localStorage.getItem("username");
 
   // copy id to clipboard
-  const url = window.location.href;
+  const {namespaceId} = useParams();
+  const url = namespaceId;
 
   const successNotification = (type, placement) =>{
     notification[type]({
@@ -283,7 +285,14 @@ const Editor = () => {
           ) : null}
 
           {isOpenChat ? (
-            <div id="container"></div>
+            <div id="container">
+              <div className="user-list">
+                <div className="user-list-header">
+
+                </div>
+                <div className="user-list-content"></div>
+              </div>
+            </div>
           ) : null}
 
           {/* Configuração Split.js e as duas respectivas divs que serão divididas por ele */}

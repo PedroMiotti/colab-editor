@@ -1,4 +1,4 @@
-export function getFileExtension(filename){
+function getFileExtension(filename){
     var extension = "Arquivo sem extensão";
     // Verifica se tem pontos no nome do arquivo
     var indexOfPeriod = filename.indexOf(".");
@@ -20,4 +20,38 @@ export function getFileExtension(filename){
     }
 
     return extension;    
+}
+
+export function getLanguage(filename){
+    let fileExtension = getFileExtension(filename);
+    let language = {};
+
+    switch(fileExtension){
+        case "js":
+            language = {id: 63, name: 'javascript'};
+            break;
+        case "ts":
+            language = {id: 74, name: 'typescript'};
+            break;
+        case "py":
+            language = {id: 71, name: 'python'};
+            break;
+        case "java":
+            language = {id: 62, name: 'java'};
+            break;
+        case "c":
+            // algumas linguagens possuem versões para rodar, não sei qual é a versão ideal então coloquei qualquer uma 
+            language = {id: 48, name: 'c'}; 
+            break;
+        case "cc":
+            language = {id: 52, name: 'c++'};
+            break;
+        case "c#":
+            language = {id: 51, name: 'c#'} 
+        default:
+            language = {id: 43, name: 'plain text'};
+
+    }
+
+    return language;
 }
