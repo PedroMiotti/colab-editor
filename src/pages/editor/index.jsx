@@ -212,9 +212,9 @@ const Editor = () => {
             </div>
 
             <div className="navbar-info">
-              <h2>{username} /</h2>
-              <button value={url} onClick={copyToClipboard}>
-                <CopyFilled />
+              <h2>{username}/</h2>
+              <button className="btn-copy" value={url} onClick={copyToClipboard}>
+                <CopyFilled className="copy-icon"/>
                 Link
               </button>
             </div>

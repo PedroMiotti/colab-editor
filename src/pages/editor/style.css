@@ -129,6 +129,19 @@ body{
   color: var(--projectNameFont);
   cursor: pointer;
 }
+.copy-icon{
+  margin-right: 5px;
+}
+
+.btn-copy{
+  background-color: var(--mediumPurple);
+  border: none;
+  cursor: pointer;
+  color: var(--golden);
+  font-size: 1em;
+  padding: .15rem .25rem .15rem .20rem;
+  border-radius: 5px;
+}
 
 
 
