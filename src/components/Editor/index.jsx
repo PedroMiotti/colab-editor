@@ -3,24 +3,25 @@ import React, { useState } from 'react';
 // Monaco
 import Editor from "@monaco-editor/react";
 
-const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp}) => {
+import MonacoWrapper from './Components/MonacoWrapper'
+
+const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorRef}) => {
 
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [language, setlanguage] = useState(languageProp);
   const [theme, setTheme] = useState(themeProp);
 
-  function handleEditorDidMount(){
-    setIsEditorReady(true);
-  }
+  const didMount = editor => {
+    editorRef.current = editor;
+};
 
   return(
     <>
-
-      <Editor
+      <MonacoWrapper
         theme={themeProp}
         language={languageProp}
         value={valueProp}
-        editorDidMount={handleEditorDidMount}
+        editorDidMount={didMount}
         loading={"Loading..."}
         onChange={onChangeProp}
       />

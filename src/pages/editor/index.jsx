@@ -7,8 +7,16 @@ import FileBox from "./components/fileBox/index.jsx";
 
 import { FitAddon } from "xterm-addon-fit";
 
+import { convertToUint8 } from '../../utils/convertToUint8';
+
 import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
+
+import DiffMatchPatch from "diff-match-patch";
+
+import { useDebouncedCallback } from "use-debounce";
+
+import automerge from "automerge";
 
 // Icons
 import {
@@ -19,6 +27,7 @@ import {
   SettingOutlined,
   UserOutlined,
   PlusOutlined,
+  ConsoleSqlOutlined,
 } from "@ant-design/icons";
 
 // Context
@@ -26,12 +35,16 @@ import { useRoomContext } from "../../context/room/room.context";
 
 // Split.js
 import Split from "react-split";
+import { string } from "prop-types";
+
+const dmp = new DiffMatchPatch();
 
 const Editor = () => {
   const {
     roomLoaded,
     files,
     currentFileCode,
+    codeChange,
     createFile,
     joinFile,
     updateFileCode,
@@ -49,17 +62,19 @@ const Editor = () => {
   const [inputValue, setInputValue] = useState("");
   const [fileList, setFileList] = useState(files);
   const [currentFile, setCurrentFile] = useState({});
+  const [loadDoc, setLoadDoc] = useState(false);
+
+  const [content, setContent] = useState("");
+
+  const editorRef = useRef(null);
+  const doc = useRef(null);
 
   const username = localStorage.getItem("username");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (files) setFileList(files);
   }, [files]);
 
-  const addFileToListTemp = (name) => {
-    const newFile = [{ name }, ...fileList];
-    setFileList(newFile);
-  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -67,9 +82,7 @@ const Editor = () => {
 
       if (!file_name) return;
 
-      addFileToListTemp(file_name);
       createFile(file_name);
-
       setIsAddingFile(!isAddingFile);
       setInputValue("");
     }
@@ -80,11 +93,35 @@ const Editor = () => {
 
     joinFile(currentFile.filename, fileName);
     setCurrentFile(file);
+
+    let parsedCode = JSON.parse(file.text);
+    let parsedValues = Object.values(parsedCode);
+    let newArr = new Uint8Array(parsedValues);
+
+    doc.current = automerge.load(newArr);
+    setContent(doc.current.content.toString());
+
+    setLoadDoc(true);
   };
+
+  useEffect(() => {
+    if (loadDoc) {
+      let parsedCode = JSON.parse(currentFileCode);
+      let parsedValues = Object.values(parsedCode);
+      let newArr = new Uint8Array(parsedValues);
+
+      doc.current = automerge.load(newArr);
+      setContent(doc.current.content.toString());
+    }
+
+    return () => {
+      setLoadDoc(" ");
+      setContent(" ");
+    }
+  }, [currentFileCode]);
 
   const xtermRef = useRef(null);
   const fitAddon = new FitAddon();
-  const editorRef = useRef(null);
 
   /* Fazer uma função bloqueante?*/
   /* xtermRef.current.terminal.setOption("theme", {background: "#bbb"});
@@ -122,12 +159,6 @@ const Editor = () => {
     );
   };
 
-  const handleEditorChange = (value, e) => {
-    // setCodeToSubmit(value);
-    console.log(e)
-    updateFileCode(currentFile.filename, value);
-  };
-
   const chooseLanguage = (e) => {
     const selectedIndex = e.target.options.selectedIndex;
     setLanguage({
@@ -135,6 +166,103 @@ const Editor = () => {
       name: e.target.value,
     });
   };
+
+  const handleChange = useDebouncedCallback((value) => {
+    let prevValue = doc.current.content.toString()
+
+    const patches = dmp.patch_make(prevValue, value);
+
+    let startIdx = -1;
+    let changeLength = 0;
+
+    const newDoc = automerge.change(doc.current, docRef => {
+      patches.forEach((patch) => {
+        let idx = patch.start1;
+
+        patch.diffs.forEach(([operation, changeText]) => {
+          switch (operation) {
+            case 1: // Insertion
+              if (startIdx === -1) {
+                startIdx = idx;
+              }
+              docRef.content.insertAt(idx, ...changeText.split(""));
+              changeLength += changeText.length;
+
+            case 0: // No Change
+              idx += changeText.length;
+              break;
+
+            case -1: // Deletion
+              if (startIdx === -1) {
+                startIdx = idx;
+              }
+              for (let i = 0; i < changeText.length; i++) {
+                docRef.content.deleteAt(idx);
+              }
+              changeLength -= changeText.length;
+              break;
+          }
+        });
+      });
+    });
+
+    const changes = automerge.getChanges(doc.current, newDoc);
+    let loadFile = automerge.load(changes[0]);
+    console.log(loadFile)
+    doc.current = newDoc;
+
+    updateFileCode(
+      currentFile.filename,
+      JSON.stringify(changes),
+      startIdx,
+      changeLength
+    );
+
+    setContent(doc.current.content.toString());
+  }, 700);
+
+  useEffect(() => {
+    if (codeChange.update) {
+      handleChange.flush();
+
+      setTimeout(() => {
+        const { changes, startIdx, changeLength } = codeChange;
+
+        let parsedCode = JSON.parse(JSON.parse(changes));
+        let parsedValues = Object.values(parsedCode[0]);
+        let newArr = new Uint8Array(parsedValues);
+
+        let newChanges = automerge.applyChanges(doc.current, [newArr]); 
+        doc.current = newChanges[0];
+
+        const editor = editorRef.current;
+        const model = editor.getModel();
+        let offset = model.getOffsetAt(editor.getPosition());
+
+        if (offset > startIdx) {
+          offset += changeLength;
+        }
+
+        setContent(doc.current.content.toString());
+
+        document.activeElement.blur();
+        
+        // Set new cursor position
+        setTimeout(() => {
+          editor.focus();
+          const newPosition = model.getPositionAt(offset);
+          editor.setPosition(newPosition);
+          editor.setSelection({
+            startLineNumber: newPosition.lineNumber,
+            endLineNumber: newPosition.lineNumber,
+            startColumn: newPosition.column,
+            endColumn: newPosition.column,
+          });
+
+        }, 1);
+      }, 1);
+    }
+  }, [codeChange]);
 
   return (
     <div id="editorPage">
@@ -236,7 +364,7 @@ const Editor = () => {
                       clickEvent={() => chooseFile(files.filename)}
                     />
                   ))
-                  .reverse()}
+                  .sort()}
 
                 {isAddingFile ? (
                   <FileBox
@@ -259,9 +387,10 @@ const Editor = () => {
                 <MonacoEditor
                   languageProp={language.name}
                   themeProp={theme}
-                  onChangeProp={handleEditorChange}
+                  valueProp={content}
+                  onChangeProp={handleChange}
                   path={currentFile?.filename}
-                  valueProp={currentFileCode}
+                  editorRef={editorRef}
                 />
               </div>
             </div>
