@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import {useParams} from 'react-router-dom';
 import "./style.css";
 
+// Components
+import UserLine from './components/userLine/userLine';
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
 import FileBox from "./components/fileBox/index.jsx";
@@ -18,10 +21,15 @@ import { useDebouncedCallback } from "use-debounce";
 
 import automerge from "automerge";
 
+// Antd
+import {notification} from 'antd';
+
 // Icons
 import {
   CaretDownOutlined,
   CaretRightOutlined,
+  SendOutlined,
+  CoffeeOutlined,
   CopyFilled,
   FileOutlined,
   SettingOutlined,
@@ -38,6 +46,7 @@ import Split from "react-split";
 import { string } from "prop-types";
 
 const dmp = new DiffMatchPatch();
+
 
 const Editor = () => {
   const {
@@ -69,7 +78,28 @@ const Editor = () => {
   const editorRef = useRef(null);
   const doc = useRef(null);
 
+  const [isOpenChat, setIsOpenChat] = useState(false);
+
   const username = localStorage.getItem("username");
+
+  // copy id to clipboard
+  const { namespaceId } = useParams();
+  const url = namespaceId;
+
+  const successNotification = (type, placement) =>{
+    notification[type]({
+      message: 'Copiado para a área de transferência',
+      duration: 1.5,
+      className : "copyNotification",    
+      placement,
+    });
+  };
+
+  const copyToClipboard = (e) =>{
+    navigator.clipboard.writeText(e.target.value);
+    successNotification('success', 'bottomRight');
+  }
+
 
   useEffect(() => {
     if (files) setFileList(files);
@@ -308,27 +338,34 @@ const Editor = () => {
             </div>
 
             <div className="navbar-info">
-              <h2>{username} /</h2>
-              <a>
-                <CopyFilled />
+              <h2>{username}/</h2>
+              <button className="btn-copy" value={url} onClick={copyToClipboard}>
+                <CopyFilled className="copy-icon"/>
                 Link
-              </a>
+              </button>
             </div>
           </div>
         </div>
 
         <div id="bottom">
           <div id="sidebar">
-            <div>
+            <div className="sidebar-top">
+
               <div
                 className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"}
-                onClick={() => setIsOpenFiles(!isOpenFiles)}
+                onClick={() => {setIsOpenFiles(!isOpenFiles); setIsOpenChat(false)}}
               >
                 <FileOutlined />
               </div>
+
+              <div className={isOpenChat ? "sidebar-item-toogle" : "sidebar-item"}
+                onClick={() => {setIsOpenChat(!isOpenChat); setIsOpenFiles(false)}} style={{fontSize: '.8em'}}>
+                <CoffeeOutlined/>
+              </div>
+              
             </div>
             <div id="sidebar-bottom">
-              <div className="sidebar-item">
+              <div className="sidebar-item" >
                 <UserOutlined />
               </div>
               <div className="sidebar-item">
@@ -338,7 +375,7 @@ const Editor = () => {
           </div>
 
           {isOpenFiles ? (
-            <div id="files">
+            <div id="container">
               <div id="files-header">
                 <h2>Files</h2>
                 <PlusOutlined
@@ -367,6 +404,33 @@ const Editor = () => {
             </div>
           ) : null}
 
+          {isOpenChat ? (
+            <div id="container">
+              <div className="user-list">
+                <div className="user-list-header">
+                  <div className="line">
+                    <div className="line-title">
+                      <h6>Online</h6>
+                    </div>
+                  </div>
+                </div>
+                <div className="user-list-content">
+                  <UserLine username="FShinoda" img={<UserOutlined />} imgName="raposa"/>
+                  <UserLine username="Pedron" img={<UserOutlined />} imgName="rinoceronte"/>
+                  <UserLine username="Jotaki" img={<UserOutlined />} imgName="dragão ma"/>
+                  <UserLine username="Kitashima" img={<UserOutlined />}/>
+                  <UserLine username="Katashima" img={<UserOutlined />}/>
+                  <UserLine username="Hiroshima" img={<UserOutlined />}/>
+                  <UserLine username="Katajima" img={<UserOutlined />}/>
+                  <UserLine username="Keitajima" img={<UserOutlined />}/>
+                  <UserLine username="Katahashi" img={<UserOutlined />}/>
+                  <UserLine username="Kotashima" img={<UserOutlined />}/>
+                </div>
+              </div>
+              {/* <div className="user-messages"></div> */}
+            </div>
+          ) : null}
+
           {/* Configuração Split.js e as duas respectivas divs que serão divididas por ele */}
           <Split
             className="split"
@@ -392,7 +456,7 @@ const Editor = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Editor;

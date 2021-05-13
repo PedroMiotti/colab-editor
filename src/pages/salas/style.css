@@ -127,7 +127,7 @@
 .createRoomNotification {
     font-family: var(--bodyTextFont);
     color: var(--mediumGrey);
-    background-color: var(--lightPink);
+    background-color: var(--notifPurple);
     border-radius: .25em;
     font-weight: 700;
 }
