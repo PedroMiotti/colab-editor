@@ -435,7 +435,7 @@ const Editor = () => {
           <Split
             className="split"
             minSize={100}
-            gutterSize={4} /* finura da barra */
+            gutterSize={4} 
           >
             <div id="editor">
               <div id="resistent-box">
@@ -446,12 +446,15 @@ const Editor = () => {
                   onChangeProp={handleChange}
                   path={currentFile?.filename}
                   editorRef={editorRef}
+                  style={{height: "100%"}}
                 />
               </div>
             </div>
+
             <div id="terminal-editor">
               <Terminal terminalRef={xtermRef} />
             </div>
+
           </Split>
         </div>
       </div>

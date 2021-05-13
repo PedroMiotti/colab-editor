@@ -7,7 +7,7 @@ const Terminal = ({terminalRef}) => {
   
   return(
     <div className="Terminal-container">
-      <XTerm ref={terminalRef} />
+      <XTerm ref={terminalRef} style={{width: "100%"}} />
     </div>
   )
 
