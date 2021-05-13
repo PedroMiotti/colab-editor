@@ -9,7 +9,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "antd": "^4.15.0",
-    "automerge": "^1.0.1-preview.0",
+    "automerge": "^0.12.1",
     "axios": "^0.21.1",
     "diff-match-patch": "^1.0.5",
     "monaco-editor": "^0.23.0",

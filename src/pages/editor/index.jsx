@@ -95,10 +95,7 @@ const Editor = () => {
     setCurrentFile(file);
 
     let parsedCode = JSON.parse(file.text);
-    let parsedValues = Object.values(parsedCode);
-    let newArr = new Uint8Array(parsedValues);
-
-    doc.current = automerge.load(newArr);
+    doc.current = automerge.load(parsedCode);
     setContent(doc.current.content.toString());
 
     setLoadDoc(true);
@@ -107,10 +104,7 @@ const Editor = () => {
   useEffect(() => {
     if (loadDoc) {
       let parsedCode = JSON.parse(currentFileCode);
-      let parsedValues = Object.values(parsedCode);
-      let newArr = new Uint8Array(parsedValues);
-
-      doc.current = automerge.load(newArr);
+      doc.current = automerge.load(parsedCode);
       setContent(doc.current.content.toString());
     }
 
@@ -168,7 +162,7 @@ const Editor = () => {
   };
 
   const handleChange = useDebouncedCallback((value) => {
-    let prevValue = doc.current.content.toString()
+    const prevValue = doc.current.content.toString()
 
     const patches = dmp.patch_make(prevValue, value);
 
@@ -176,7 +170,7 @@ const Editor = () => {
     let changeLength = 0;
 
     const newDoc = automerge.change(doc.current, docRef => {
-      patches.forEach((patch) => {
+      patches.forEach(patch => {
         let idx = patch.start1;
 
         patch.diffs.forEach(([operation, changeText]) => {
@@ -207,8 +201,6 @@ const Editor = () => {
     });
 
     const changes = automerge.getChanges(doc.current, newDoc);
-    let loadFile = automerge.load(changes[0]);
-    console.log(loadFile)
     doc.current = newDoc;
 
     updateFileCode(
@@ -228,12 +220,11 @@ const Editor = () => {
       setTimeout(() => {
         const { changes, startIdx, changeLength } = codeChange;
 
-        let parsedCode = JSON.parse(JSON.parse(changes));
-        let parsedValues = Object.values(parsedCode[0]);
-        let newArr = new Uint8Array(parsedValues);
+        let parsedCode = JSON.parse(changes);
 
-        let newChanges = automerge.applyChanges(doc.current, [newArr]); 
-        doc.current = newChanges[0];
+        let newChanges = automerge.applyChanges(doc.current, parsedCode); 
+        console.log(newChanges.content.toString())
+        doc.current = newChanges;
 
         const editor = editorRef.current;
         const model = editor.getModel();
