@@ -24,7 +24,7 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
         editorDidMount={didMount}
         loading={"Loading..."}
         onChange={onChangeProp}
-        style={style}
+        // style={style}
       />
     </>
   )

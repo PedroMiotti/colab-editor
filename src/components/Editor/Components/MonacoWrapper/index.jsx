@@ -1,13 +1,13 @@
-import React, { useRef, useEffect } from "react";
-
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-
 import PropTypes from "prop-types";
+import React, { useRef, useEffect } from "react";
 
 // Custom modification of 'react-monaco-editor' package
 
 const noop = () => {};
-
+const processSize = size => {
+    return !/^\d+$/.test(size) ? size : `${size}px`;
+};
 
 const MonacoWrapper = props => {
     const containerRef = useRef(null);
@@ -54,7 +54,7 @@ const MonacoWrapper = props => {
         const value = props.value;
         const editor = editorRef.current;
         const model = editor.getModel();
-
+        
         if (value != null && value !== model.getValue()) {
             preventTriggerChange.current = true;
             editor.pushUndoStop();
@@ -70,7 +70,6 @@ const MonacoWrapper = props => {
             editor.pushUndoStop();
             preventTriggerChange.current = false;
         }
-
         const subscription = editorRef.current.onDidChangeModelContent(
             event => {
                 if (!preventTriggerChange.current) {
@@ -86,18 +85,32 @@ const MonacoWrapper = props => {
         };
     }, [props.value]);
 
+    useEffect(() => {
+        if (editorRef.current) {
+            editorRef.current.layout();
+        }
+    }, [props.width, props.height]);
+
+    const fixedWidth = processSize(props.width);
+    const fixedHeight = processSize(props.height);
+    const style = {
+        width: fixedWidth,
+        height: fixedHeight
+    };
+
     return (
         <div
             ref={containerRef}
-            style={props.style}
+            style={style}
             className="react-monaco-editor"
         ></div>
     );
 };
 
 MonacoWrapper.defaultProps = {
+    width: "100%",
+    height: "100%",
     value: null,
-    style: {},
     defaultValue: "",
     language: "javascript",
     theme: null,
@@ -108,8 +121,9 @@ MonacoWrapper.defaultProps = {
     onChange: noop
 };
 MonacoWrapper.propTypes = {
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     value: PropTypes.string,
-    style: PropTypes.object,
     defaultValue: PropTypes.string,
     language: PropTypes.string,
     theme: PropTypes.string,

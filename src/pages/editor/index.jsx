@@ -289,9 +289,9 @@ const Editor = () => {
     <div id="editorPage">
       <div id="container-editor">
         {roomLoad && <h1>loading...</h1>}
-
+{/* 
         <div id="top">
-          {/* NAVBAR */}
+          NAVBAR
           <div id="navbar-editor">
             <div className="navbar-main">
               <h1>ALL.CO</h1>
@@ -345,10 +345,10 @@ const Editor = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div id="bottom">
-          <div id="sidebar">
+          {/* <div id="sidebar">
             <div className="sidebar-top">
 
               <div
@@ -372,9 +372,9 @@ const Editor = () => {
                 <SettingOutlined />
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {isOpenFiles ? (
+          {/* {isOpenFiles ? (
             <div id="container">
               <div id="files-header">
                 <h2>Files</h2>
@@ -427,9 +427,8 @@ const Editor = () => {
                   <UserLine username="Kotashima" img={<UserOutlined />}/>
                 </div>
               </div>
-              {/* <div className="user-messages"></div> */}
             </div>
-          ) : null}
+          ) : null} */}
 
           {/* Configuração Split.js e as duas respectivas divs que serão divididas por ele */}
           <Split
@@ -438,7 +437,7 @@ const Editor = () => {
             gutterSize={4} 
           >
             <div id="editor">
-              <div id="resistent-box">
+              {/* <div id="resistent-box"> */}
                 <MonacoEditor
                   languageProp={language.name}
                   themeProp={theme}
@@ -446,9 +445,9 @@ const Editor = () => {
                   onChangeProp={handleChange}
                   path={currentFile?.filename}
                   editorRef={editorRef}
-                  style={{height: "100%"}}
+                  // style={{height: "100%", width: "100%"}}
                 />
-              </div>
+              {/* </div> */}
             </div>
 
             <div id="terminal-editor">

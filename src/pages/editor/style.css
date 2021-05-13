@@ -142,17 +142,12 @@
 }
 
 
-
-
-
-
-
-
 /* Page Content */
 #bottom{
-  height: 95vh;
+  height: 100vh;
+  max-height: 100vh;
   width: 100vw;
-  background-color: green;
+  /* background-color: green; */
   display: flex;
   flex-direction: row;
 }
@@ -210,6 +205,7 @@
   width:15vw;
   background-color: var(--mediumGrey);
 }
+
 #files-header{
   display: flex;
   justify-content: space-between;
@@ -319,7 +315,7 @@ h6{
 }
 
 .monaco-editor {
-  padding-top: .25rem;
+  padding-top: .35rem;
 }
 
 #resistent-box{
@@ -341,7 +337,7 @@ h6{
 .split {
   display: flex;
   flex-direction: row;
-  width: 98vw;
+  width: 100%;
 }
 
 .gutter {
