@@ -12,7 +12,7 @@ const UserLine = ({username, img, imgName}) =>{
             <Tooltip title={imgName} placement="top" color={"#000"}>
                 <Avatar size={32} className="avatar" icon={img} />
             </Tooltip>
-            
+
             <h6>{username}</h6>
         </div>
     )
