@@ -11,6 +11,7 @@ import {
   LEAVE_ROOM,
   CREATE_FILE,
   UPDATE_FILE_LIST,
+  REALTIME_CODE,
 } from "../types.js";
 
 import React, { useReducer, useContext } from "react";
@@ -49,9 +50,13 @@ const RoomState = ({ children }) => {
         });
       });
 
-      socket.on('user-joined:file', function (data, callback) {
-        console.log('Socket (server-side): received message:', data);
-        callback("File content");
+      socket.on('user-joined:file', (data) => {
+        dispatch({
+          type: UPDATE_FILE_CODE,
+          payload: {
+            code: data
+          },
+        });
     });
 
       socket.on("update:user", (data) => {
@@ -76,10 +81,13 @@ const RoomState = ({ children }) => {
       });
 
       socket.on("realtime:code", (data) => {
+        const { changes, startIdx, changeLength } = data;
         dispatch({
-          type: UPDATE_FILE_CODE,
+          type: REALTIME_CODE,
           payload: {
-            code: data.value
+            changes,
+            startIdx,
+            changeLength
           },
         });
       });
@@ -91,6 +99,8 @@ const RoomState = ({ children }) => {
         socket.off("update:user");
         socket.off("update:files");
         socket.off("realtime:code");
+        socket.off("user-joined:file");
+
       }
     };
   }, [socket]);
@@ -128,9 +138,10 @@ const RoomState = ({ children }) => {
     socket.emit("join:file", {prevFile, currentFile});
   }
 
-  const updateFileCode = (filename, code) => {
-    socket.emit("update:code", {filename, code});
+  const updateFileCode = (filename, changes, startIdx, changeLength) => {
+    socket.emit("update:code", {filename, changes, startIdx, changeLength});
   }
+
 
   return (
     <RoomContext.Provider
@@ -141,6 +152,7 @@ const RoomState = ({ children }) => {
         activeUsers: state.activeUsers,
         files: state.files,
         currentFileCode: state.currentFileCode,      
+        codeChange: state.codeChange,
         roomLoaded: state.roomLoaded,
         loading: state.loading,
         createRoom,

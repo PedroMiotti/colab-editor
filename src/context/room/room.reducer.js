@@ -11,6 +11,7 @@ import {
   LEAVE_ROOM,
   CREATE_FILE,
   UPDATE_FILE_LIST,
+  REALTIME_CODE,
 } from "../types.js";
 
 const action = {
@@ -24,7 +25,13 @@ export const initialState = {
   currentUser: { username: "", userId: "", socketId: "", isHost: false },
   activeUsers: [],
   files: [],
-  currentFileCode: ' ',
+  currentFileCode: " ",
+  codeChange: {
+    changes: '',
+    startIdx: '',
+    changeLength: '',
+    update: false,
+  },
   roomLoaded: null,
   loading: false,
 
@@ -68,6 +75,17 @@ export default function roomReducer(state = initialState, action) {
       return {
         ...state,
         currentFileCode: payload.code,
+      };
+
+    case REALTIME_CODE:
+      return {
+        ...state,
+        codeChange: {
+          changes: payload.changes,
+          startIdx: payload.startIdx,
+          changeLength: payload.changeLength,
+          update: true,
+        },
       };
 
     case UPDATE_ROOM_LANGUAGE:
