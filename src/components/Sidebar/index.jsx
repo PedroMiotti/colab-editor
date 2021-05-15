@@ -19,6 +19,8 @@ const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
     joinFile,
   } = useRoomContext();
 
+  // TODO -> Fix the drawer toggle
+  // TODO -> Fix the :select icon
   const [fileList, setFileList] = useState(files);
   const [isOpenChat, setIsOpenChat] = useState(false);
   const [isOpenFiles, setIsOpenFiles] = useState(true);
