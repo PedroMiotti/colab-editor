@@ -6,18 +6,19 @@ import "../../assets/style/backgroundEffect.css";
 import { Button, notification, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import CreateRoomModal from "../../components/CreateRoomModal";
+// Context
 import { useRoomContext } from "../../context/room/room.context";
 import { NamespaceContext } from "../../context/namespace.js";
+
 import { v4 as uuidv4 } from "uuid";
 
 const PaginaInicial = () => {
   const { createRoom, joinRoom, checkForExistingRoomAndUsername } = useRoomContext();
 
-  const [nspName, setNamespace] = useContext(NamespaceContext);
+  const [ nspName, setNamespace ] = useContext(NamespaceContext);
   const [ confirmCreateRoom, setConfirmCreateRoom ] = useState(false);
   const [ confirmJoinRoom, setConfirmJoinRoom ] = useState(false);
-  const [sessionCode, setSessionCode] = useState("");
+  const [ sessionCode, setSessionCode ] = useState("");
 
   const username = localStorage.getItem('username');
 

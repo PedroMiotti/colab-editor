@@ -7,7 +7,6 @@ import MonacoWrapper from './Components/MonacoWrapper'
 
 const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorRef, style}) => {
 
-  const [isEditorReady, setIsEditorReady] = useState(false);
   const [language, setlanguage] = useState(languageProp);
   const [theme, setTheme] = useState(themeProp);
 
@@ -16,7 +15,7 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
 };
 
   return(
-    <>
+    <div>
       <MonacoWrapper
         theme={themeProp}
         language={languageProp}
@@ -24,9 +23,8 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
         editorDidMount={didMount}
         loading={"Loading..."}
         onChange={onChangeProp}
-        style={style}
-      />
-    </>
+        />
+    </div>
   )
 }
 export default MonacoEditor;
