@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 
 // Components
-import UserLine from "../../components/Sidebar/components/RoomInfoDrawer/components/Separator";
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
 
@@ -19,9 +18,6 @@ import automerge from "automerge";
 
 // Icons
 import {
-  SendOutlined,
-  PlusOutlined,
-  ConsoleSqlOutlined,
 } from "@ant-design/icons";
 
 // Context
