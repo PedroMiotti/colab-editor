@@ -13,7 +13,6 @@ const MonacoWrapper = props => {
     const containerRef = useRef(null);
     const editorRef = useRef(null);
     const preventTriggerChange = useRef(false);
-
     useEffect(() => {
         // Initialize monaco instance
         const value = props.value != null ? props.value : props.defaultValue;
@@ -54,7 +53,6 @@ const MonacoWrapper = props => {
         const value = props.value;
         const editor = editorRef.current;
         const model = editor.getModel();
-        
         if (value != null && value !== model.getValue()) {
             preventTriggerChange.current = true;
             editor.pushUndoStop();
@@ -101,7 +99,7 @@ const MonacoWrapper = props => {
     return (
         <div
             ref={containerRef}
-            style={style}
+            style={{width: "100%", height: "100%"}}
             className="react-monaco-editor"
         ></div>
     );

@@ -1,0 +1,130 @@
+/* Navbar */
+#navbar-editor{
+    padding: 0 2rem;
+    display: grid;  
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "main config info";  
+    align-items: center;
+    background-color: var(--deepPurple);
+    font-family: var(--projectNameFont);
+    color: var(--golden);
+    font-size: .5em;
+    height: 5vh;
+    max-height: 5vh;
+    min-height: 5vh;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .navbar-main{
+    grid-area: main;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .navbar-main h1{
+    cursor: pointer;
+    color: #eee;
+    text-shadow:
+      0 0 1ex rgba(89, 39, 148, 1),
+      0 0 2px rgba(238, 238, 238, 0.8);
+  }
+  
+  .navbar-main h1::before {
+    content: "> ";
+  }
+  
+  .navbar-config{
+    grid-area: config;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .dropdown{
+    background-color: var(--mediumPurple);
+    padding: .25rem 1.2rem .25rem 0.4rem;
+    border-radius: 4px;
+    color: var(--lightPink);
+    font-family: var(--bodyTextFont);
+    font-weight: 700;
+    border: 0;
+    appearance: none;
+  }
+  
+  .custom-select{
+    position: relative;
+    margin-right: .5rem;
+  }
+  
+  .custom-arrow{
+    position:absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 1rem;
+    height: 100%;
+    background-color: var(--lightPurple);
+    pointer-events: none;
+    border-radius: 0 4px 4px 0 ;
+  }
+  
+  .arrow{
+    position: relative;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .run-button{
+    background-color: var(--mediumPurple);
+    border: 0;
+    border-radius: 4px;
+    color: var(--lightBlue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .25rem .5rem .25rem .5rem;
+    cursor: pointer;
+    margin-left: 2rem;
+  }
+  
+  .run-button:hover{
+    background-color: var(--lightPurple);
+  }
+  
+  .play-ico{
+    font-size: .5rem;
+  }
+  
+  .navbar-info{
+    grid-area: info;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: .5rem;
+    font-family: var(--bodyTextFont);
+  }
+  
+  .navbar-info h2 {
+    color: var(--lightPink);
+  }
+  
+  .navbar-info a{
+    color: var(--projectNameFont);
+    cursor: pointer;
+  }
+  .copy-icon{
+    margin-right: 5px;
+  }
+  
+  .btn-copy{
+    background-color: var(--mediumPurple);
+    border: none;
+    cursor: pointer;
+    color: var(--golden);
+    font-size: 1em;
+    padding: .15rem .25rem .15rem .20rem;
+    border-radius: 5px;
+  }
+  

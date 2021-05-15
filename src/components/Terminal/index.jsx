@@ -10,7 +10,7 @@ const CustomTerminal = ({terminalRef}) => {
   
   return(
     <div className="Terminal-container" >
-      <Terminal ref={terminalRef}  welcomeMessage={"<WelcomeBanner />"} promptLabel={'tech@root:~$'} />
+      <Terminal style={{height: '100%', width: "100%"}} ref={terminalRef}  welcomeMessage={"<WelcomeBanner />"} promptLabel={'tech@root:~$'} />
     </div>
   )
 
