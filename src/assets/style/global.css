@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -38,9 +41,21 @@ body {
   --lightBlue: #80ffdb;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
+/* customizar scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--mediumGrey); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
 
 /*
   RESPONSIVENESS

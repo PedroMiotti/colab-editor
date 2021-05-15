@@ -12,34 +12,30 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 
-const Sidebar = ({ openSidebar, closeSidebar }) => {
+const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
   const {
     files,
     createFile,
     joinFile,
   } = useRoomContext();
 
-
+  const [fileList, setFileList] = useState(files);
+  const [isOpenChat, setIsOpenChat] = useState(false);
+  const [isOpenFiles, setIsOpenFiles] = useState(true);
 
   return (
     <div id="sidebar-container">
       <div className="sidebar-top">
         <div
           className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"}
-          onClick={() => {
-            setIsOpenFiles(!isOpenFiles);
-            setIsOpenChat(false);
-          }}
+          onClick={() => componentToRender("1")}
         >
           <FileOutlined />
         </div>
 
         <div
           className={isOpenChat ? "sidebar-item-toogle" : "sidebar-item"}
-          onClick={() => {
-            setIsOpenChat(!isOpenChat);
-            setIsOpenFiles(false);
-          }}
+          onClick={() => componentToRender("2")}
           style={{ fontSize: ".8em" }}
         >
           <CoffeeOutlined />

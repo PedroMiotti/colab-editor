@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 
 // Components
-import UserLine from "./components/userLine/userLine";
+import UserLine from "../../components/Sidebar/components/RoomInfoDrawer/components/Separator";
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
-import FileBox from "./components/fileBox/index.jsx";
 
 import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/Sidebar";
+import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
+import RoomInfoDrawer from "../../components/Sidebar/components/RoomInfoDrawer";
 
 import DiffMatchPatch from "diff-match-patch";
 
@@ -20,11 +22,6 @@ import {
   SendOutlined,
   PlusOutlined,
   ConsoleSqlOutlined,
-
-  CoffeeOutlined,
-  FileOutlined,
-  UserOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
 
 // Context
@@ -42,7 +39,6 @@ const Editor = () => {
     files,
     currentFileCode,
     codeChange,
-    createFile,
     joinFile,
     updateFileCode,
   } = useRoomContext();
@@ -57,11 +53,9 @@ const Editor = () => {
   const [currentFile, setCurrentFile] = useState({});
   const [loadDoc, setLoadDoc] = useState(false);
   const [content, setContent] = useState("");
-  
-  const [isAddingFile, setIsAddingFile] = useState(false);
   const [fileList, setFileList] = useState(files);
-  const [isOpenChat, setIsOpenChat] = useState(false);
-  const [isOpenFiles, setIsOpenFiles] = useState(true);
+
+  const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] = useState("1");
 
   const editorRef = useRef(null);
   const doc = useRef(null);
@@ -70,18 +64,6 @@ const Editor = () => {
   useEffect(() => {
     if (files) setFileList(files);
   }, [files]);
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      let file_name = event.target.value;
-
-      if (!file_name) return;
-
-      createFile(file_name);
-      setIsAddingFile(!isAddingFile);
-      setInputValue("");
-    }
-  };
 
   const chooseFile = (fileName) => {
     let file = fileList.find((f) => f.filename === fileName);
@@ -94,6 +76,17 @@ const Editor = () => {
     setContent(doc.current.content.toString());
 
     setLoadDoc(true);
+  };
+
+  const sidebarComponentSwitch = (current) => {
+    switch (current) {
+      case "1":
+        return <FilesDrawer fileList={fileList} chooseFile={chooseFile} />;
+      case "2":
+        return <RoomInfoDrawer />;
+      default:
+        return "Not configured yet";
+    }
   };
 
   useEffect(() => {
@@ -205,106 +198,17 @@ const Editor = () => {
   return (
     <div id="editorPage">
       <div id="container-editor">
-        
         {/* TODO -> Create a loading page  */}
         {roomLoad && <h1>loading...</h1>}
 
         <Navbar />
 
         <div id="bottom">
-          <div id="sidebar">
-            <div className="sidebar-top">
-              <div
-                className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"}
-                onClick={() => {
-                  setIsOpenFiles(!isOpenFiles);
-                  setIsOpenChat(false);
-                }}
-              >
-                <FileOutlined />
-              </div>
+          <Sidebar componentToRender={setComponentToRenderFromSidebar} />
 
-              <div
-                className={isOpenChat ? "sidebar-item-toogle" : "sidebar-item"}
-                onClick={() => {
-                  setIsOpenChat(!isOpenChat);
-                  setIsOpenFiles(false);
-                }}
-                style={{ fontSize: ".8em" }}
-              >
-                <CoffeeOutlined />
-              </div>
-            </div>
-            <div id="sidebar-bottom">
-              <div className="sidebar-item">
-                <UserOutlined />
-              </div>
-              <div className="sidebar-item">
-                <SettingOutlined />
-              </div>
-            </div>
+          <div id="drawer-container">
+            {sidebarComponentSwitch(componentToRenderFromSidebar)}
           </div>
-
-          {isOpenFiles ? (
-            <div id="container">
-              <div id="files-header">
-                <h2>Files</h2>
-                <PlusOutlined
-                  className="plus-ico"
-                  onClick={() => setIsAddingFile(!isAddingFile)}
-                />
-              </div>
-              <div id="files-body">
-                {fileList
-                  ?.map((files) => (
-                    <FileBox
-                      name={files.filename}
-                      key={files._id}
-                      clickEvent={() => chooseFile(files.filename)}
-                    />
-                  ))
-                  .sort()}
-
-                {isAddingFile ? (
-                  <FileBox
-                    event={handleKeyDown}
-                    toggle={() => setIsAddingFile(!isAddingFile)}
-                  />
-                ) : null}
-              </div>
-            </div>
-          ) : null}
-
-          {isOpenChat ? (
-            <div id="container">
-              <div className="user-list">
-                <div className="user-list-header">
-                  <div className="line">
-                    <div className="line-title">
-                      <h6>Online</h6>
-                    </div>
-                  </div>
-                </div>
-                <div className="user-list-content">
-                  <UserLine
-                    username="FShinoda"
-                    img={<UserOutlined />}
-                    imgName="raposa"
-                  />
-                  <UserLine
-                    username="Pedron"
-                    img={<UserOutlined />}
-                    imgName="rinoceronte"
-                  />
-                  <UserLine
-                    username="Jotaki"
-                    img={<UserOutlined />}
-                    imgName="dragão ma"
-                  />
-                </div>
-              </div>
-            </div>
-          ) : null}
 
           <Split className="split" minSize={100} gutterSize={4}>
             <MonacoEditor

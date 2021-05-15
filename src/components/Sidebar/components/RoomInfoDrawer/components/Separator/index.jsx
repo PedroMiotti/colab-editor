@@ -5,7 +5,7 @@ import './style.css';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Tooltip } from 'antd';
 
-const UserLine = ({username, img, imgName}) =>{
+const Separator = ({username, img, imgName}) =>{
     return(
         <div className="UserLine">
             <div className="active-sign"></div>
@@ -18,4 +18,4 @@ const UserLine = ({username, img, imgName}) =>{
     )
 }
 
-export default UserLine;
+export default Separator;

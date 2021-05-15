@@ -66,113 +66,11 @@
   cursor: pointer;
 }
 
-/* FILES */
-
-#container{
+#drawer-container{
   display: flex;
   flex-direction: column;
-  width: 15vw;
+  width:15vw;
   background-color: var(--mediumGrey);
-}
-
-#files-header{
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--mediumGrey);
-  padding: 18px;
-  padding-left: 22px;
-  padding-top: 22px;
-  align-items: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  position: relative;
-  font-size: .45em;  
-}
-
-.plus-ico{
-  font-size: 1.33em;
-  cursor: pointer;
-}
-
-.bg-dark{
-  background-color: var(--darkGrey);
-}
-
-.more-ico{
-  font-size: 1em;
-}
-
-#files-body{
-  overflow-y: auto;
-}
-
-/* customizar scroll bar */
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: var(--mediumGrey); 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-.user-list{
-  width: 100%;
-  height: 40%;
-  padding-top: 15px;
-
-}
-
-/* Caso for implementar mensagens
-.user-messages{
-  width: 100%;
-  height: 60%;
-  padding-bottom: 15px;
-} */
-
-
-.line{
-  position: relative;
-  background-color: #666;
-  margin: 30px auto;
-  width: 70%;
-  height: 1px;
-}
-
-.line-title{
-  background-color: var(--mediumGrey);
-  position: absolute;
-  top: -13px;
-  left: 30px;
-  padding: 0 10px;
-}
-
-.line-title h6{
-  font-size: .55em;
-}
-
-.user-list-content{
-  width: 70%;
-  height: 100%;
-  margin: 0 auto;
-  padding-top: 5px;
-  overflow-y: hidden;
-  
-}
-
-.user-list-content:hover{
-  overflow-y: auto;
-  
-}
-
-.user-list-content::-webkit-scrollbar-thumb {
-  background: #333;
-
 }
 
 #editor{
@@ -198,7 +96,6 @@
   position: relative;
 
 }
-
 
 /* SPLIT.JS */
 
