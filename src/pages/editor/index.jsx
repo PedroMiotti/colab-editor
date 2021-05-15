@@ -121,14 +121,19 @@ const Editor = () => {
   const chooseFile = (fileName) => {
     let file = fileList.find((f) => f.filename === fileName);
 
-    joinFile(currentFile.filename, fileName);
-    setCurrentFile(file);
-
-    let parsedCode = JSON.parse(file.text);
-    doc.current = automerge.load(parsedCode);
-    setContent(doc.current.content.toString());
-
-    setLoadDoc(true);
+    if(file.filename === currentFile.filename){
+      return;
+    }
+    else{
+      joinFile(currentFile.filename, fileName);
+      setCurrentFile(file);
+      
+      let parsedCode = JSON.parse(file.text);
+      doc.current = automerge.load(parsedCode);
+      setContent(doc.current.content.toString());
+      
+      setLoadDoc(true);
+    }
   };
 
   useEffect(() => {
