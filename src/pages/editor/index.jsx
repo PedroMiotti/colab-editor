@@ -39,6 +39,7 @@ const Editor = () => {
     updateFileCode,
   } = useRoomContext();
 
+  // TODO -> Remove this states and add create the function to reconize the extension of the file
   const [language, setLanguage] = useState({ id: "63", name: "javascript" });
   const [theme, setTheme] = useState("vs-dark");
   const [stdin, setStdin] = useState("");
