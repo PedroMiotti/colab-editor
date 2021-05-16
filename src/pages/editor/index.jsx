@@ -80,7 +80,6 @@ const Editor = () => {
       setContent(doc.current.content.toString());
 
       setLoadDoc(true);
-      console.log(selectLanguage(getLanguageId(file.filename)))
     }
   };
 
