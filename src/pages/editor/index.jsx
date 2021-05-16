@@ -9,6 +9,9 @@ import Sidebar from "../../components/Sidebar";
 import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
 import RoomInfoDrawer from "../../components/Sidebar/components/RoomInfoDrawer";
 
+// Assets
+import { getLanguageId, selectLanguage } from '../../helpers/filenameUtils';
+
 import DiffMatchPatch from "diff-match-patch";
 
 import { useDebouncedCallback } from "use-debounce";
@@ -69,6 +72,7 @@ const Editor = () => {
     }
     else {
       joinFile(currentFile.filename, fileName);
+      setLanguage(selectLanguage(getLanguageId(file.filename)))
       setCurrentFile(file);
 
       let parsedCode = JSON.parse(file.text);
@@ -76,6 +80,7 @@ const Editor = () => {
       setContent(doc.current.content.toString());
 
       setLoadDoc(true);
+      console.log(selectLanguage(getLanguageId(file.filename)))
     }
   };
 
@@ -217,7 +222,7 @@ const Editor = () => {
 
           <Split className="split" minSize={100} gutterSize={4}>
             <MonacoEditor
-              languageProp={language.name}
+              languageProp={language.value}
               themeProp={theme}
               valueProp={content}
               onChangeProp={handleChange}

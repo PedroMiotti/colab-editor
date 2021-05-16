@@ -68,13 +68,14 @@ export const validateFileName = (filename) => {
     
 }
 
-export const selectLanguageSrc = (languageId) => {
+export const selectLanguage = (languageId) => {
     let result;
-    let src;
+    let language;
 
     result = languages.languages.filter((i) => i.id.toString() == languageId)
 
-    src = result[0] ? result[0].src : '';
+    language = result[0] ? result[0] : '';
 
-    return src;
+    return language;
 }
+

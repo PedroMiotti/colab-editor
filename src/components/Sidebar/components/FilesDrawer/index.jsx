@@ -5,7 +5,7 @@ import "./style.css";
 import { PlusOutlined } from "@ant-design/icons";
 
 // Helpers
-import { validateFileName, getLanguageId, selectLanguageSrc } from "../../../../helpers/filenameUtils";
+import { validateFileName, getLanguageId, selectLanguage } from "../../../../helpers/filenameUtils";
 
 // Components
 import FileBox from "./components/fileBox/index.jsx";
@@ -31,6 +31,8 @@ const FilesDrawer = ({ fileList, chooseFile }) => {
         return;
       }
 
+      // TODO -> Prevent a user from creating a file that already exists
+
       createFile(file_name);
       setIsAddingFile(!isAddingFile);
     }
@@ -50,7 +52,7 @@ const FilesDrawer = ({ fileList, chooseFile }) => {
             <FileBox
               key={files._id}
               name={files.filename}
-              logoSrc={selectLanguageSrc(getLanguageId(files.filename))}
+              logoSrc={selectLanguage(getLanguageId(files.filename)).src}
               clickEvent={() => chooseFile(files.filename)}
             />
           ))

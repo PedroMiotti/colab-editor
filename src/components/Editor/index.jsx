@@ -12,13 +12,14 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
 
   const didMount = editor => {
     editorRef.current = editor;
-};
+  };
 
+  // TODO -> Fix why the language highlight isnt working
   return(
     <div>
       <MonacoWrapper
-        theme={themeProp}
-        language={languageProp}
+        theme={theme}
+        language={language}
         value={valueProp}
         editorDidMount={didMount}
         loading={"Loading..."}
