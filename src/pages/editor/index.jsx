@@ -51,6 +51,7 @@ const Editor = () => {
   const [fileList, setFileList] = useState(files);
 
   const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] = useState("1");
+  const [toggleSidebarComponent, setToggleSidebarComponent] = useState(true);
 
   const editorRef = useRef(null);
   const doc = useRef(null);
@@ -63,17 +64,17 @@ const Editor = () => {
   const chooseFile = (fileName) => {
     let file = fileList.find((f) => f.filename === fileName);
 
-    if(file.filename === currentFile.filename){
+    if (file.filename === currentFile.filename) {
       return;
     }
-    else{
+    else {
       joinFile(currentFile.filename, fileName);
       setCurrentFile(file);
-      
+
       let parsedCode = JSON.parse(file.text);
       doc.current = automerge.load(parsedCode);
       setContent(doc.current.content.toString());
-      
+
       setLoadDoc(true);
     }
   };
@@ -204,11 +205,15 @@ const Editor = () => {
         <Navbar />
 
         <div id="bottom">
-          <Sidebar componentToRender={setComponentToRenderFromSidebar} />
+          <Sidebar closeSidebarComponent={() => setToggleSidebarComponent(!toggleSidebarComponent)} componentToRender={setComponentToRenderFromSidebar} />
 
-          <div id="drawer-container">
-            {sidebarComponentSwitch(componentToRenderFromSidebar)}
-          </div>
+          {toggleSidebarComponent ?
+            <div id="drawer-container">
+              {sidebarComponentSwitch(componentToRenderFromSidebar)}
+            </div>
+            :
+            null
+          }
 
           <Split className="split" minSize={100} gutterSize={4}>
             <MonacoEditor

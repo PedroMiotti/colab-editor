@@ -13,7 +13,6 @@
   }
   
   .sidebar-top{
-    /* margin-top: 0.4em; */
     width: 100%;
     text-align: center;
   }
@@ -30,7 +29,7 @@
     padding: 20px 0;
   }
   
-  .sidebar-item-toogle{
+  .sidebar-item-toggle{
     background-color: var(--mediumGrey);
     font-size: .65em;
     padding: 20px 0px;

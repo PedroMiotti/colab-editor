@@ -9,17 +9,17 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 
-const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
+const Sidebar = ({ closeSidebarComponent, componentToRender }) => {
 
   // TODO -> Fix the drawer toggle
-  // TODO -> Fix the :select icon
-  const [isOpenChat, setIsOpenChat] = useState(false);
-  const [isOpenFiles, setIsOpenFiles] = useState(true);
   const [ currentComponentOpen, setCurrentComponentOpen ] = useState("1");
 
   const changeCurrentComponent = (componentId) => {
     componentToRender(componentId);
     setCurrentComponentOpen(componentId);
+    
+    if(componentId === currentComponentOpen)
+      closeSidebarComponent();
   } 
 
 
@@ -27,14 +27,14 @@ const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
     <div id="sidebar-container">
       <div className="sidebar-top">
         <div
-          className={currentComponentOpen == "1" ? "sidebar-item-toogle" : "sidebar-item"}
+          className={currentComponentOpen == "1" ? "sidebar-item-toggle" : "sidebar-item"}
           onClick={() => changeCurrentComponent("1")}
         >
           <FileOutlined />
         </div>
 
         <div
-          className={currentComponentOpen == "2" ? "sidebar-item-toogle" : "sidebar-item"}
+          className={currentComponentOpen == "2" ? "sidebar-item-toggle" : "sidebar-item"}
           onClick={() => changeCurrentComponent("2")}
           style={{ fontSize: ".8em" }}
         >
