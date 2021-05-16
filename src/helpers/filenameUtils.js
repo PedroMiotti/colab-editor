@@ -22,46 +22,47 @@ function getFileExtension(filename){
     return extension;    
 }
 
-// Import logo img
-import jsLogo from '../assets/langLogos/jsLogo.svg';
-import tsLogo from '../assets/langLogos/tsLogo.svg';
-import pythonLogo from '../assets/langLogos/pythonLogo.svg';
-import javaLogo from '../assets/langLogos/javaLogo.svg';
-import cLogo from '../assets/langLogos/cLogo.svg';
-import cplusplusLogo from '../assets/langLogos/cplusplusLogo.svg';
-import csharpLogo from '../assets/langLogos/csharpLogo.svg';
 
-export function getLanguage(filename){
+export function getLanguageInfo(filename){
     let fileExtension = getFileExtension(filename);
     let language = {};
 
     switch(fileExtension){
         case "js":
-            language = {id: 63, name: 'javascript', img: jsLogo};
+            language = {id: 63, name: 'javascript', src: "langLogos/63.svg"};
             break;
         case "ts":
-            language = {id: 74, name: 'typescript', img: tsLogo};
+            language = {id: 74, name: 'typescript', src: "langLogos/74.svg"};
             break;
         case "py":
-            language = {id: 71, name: 'python', img: pythonLogo};
+            language = {id: 71, name: 'python', src: "langLogos/71.svg"};
             break;
         case "java":
-            language = {id: 62, name: 'java', img: javaLogo};
+            language = {id: 62, name: 'java', src: "langLogos/62.svg"};
             break;
         case "c":
             // algumas linguagens possuem versões para rodar, não sei qual é a versão ideal então coloquei qualquer uma 
-            language = {id: 48, name: 'c', img: cLogo}; 
+            language = {id: 48, name: 'c', src: "langLogos/48.svg"}; 
             break;
-        case "cc":
-            language = {id: 52, name: 'c++', img: cplusplusLogo};
+        case "cpp":
+            language = {id: 52, name: 'c++', src: "langLogos/52.svg"};
             break;
         case "c#":
-            language = {id: 51, name: 'c#', img: csharpLogo} 
+            language = {id: 51, name: 'c#', src: "langLogos/51.svg"} 
             break;
         default:
-            language = {id: 43, name: 'plain text'};
+            language = {id: 43, name: 'plain text', src: "langLogos/23.svg"};
 
     }
 
     return language;
+}
+
+export const validateFileName = (filename) => {
+    var rg1=/^[^\\/:\*\?"<>\|]+$/; // forbidden characters \ / : * ? " < > |
+    var rg2=/^\./; // cannot start with dot 
+    var rg3=/^(nul|prn|con|lpt[0-9]|com[0-9])(\.|$)/i; // forbidden file names
+    
+    return rg1.test(filename)&&!rg2.test(filename)&&!rg3.test(filename);
+    
 }

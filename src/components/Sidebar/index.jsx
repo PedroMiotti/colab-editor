@@ -11,17 +11,15 @@ import {
 
 const Sidebar = ({ closeSidebarComponent, componentToRender }) => {
 
-  // TODO -> Fix the drawer toggle
   const [ currentComponentOpen, setCurrentComponentOpen ] = useState("1");
 
   const changeCurrentComponent = (componentId) => {
     componentToRender(componentId);
     setCurrentComponentOpen(componentId);
-    
+
     if(componentId === currentComponentOpen)
       closeSidebarComponent();
   } 
-
 
   return (
     <div id="sidebar-container">
