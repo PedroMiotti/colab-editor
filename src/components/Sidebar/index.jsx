@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
 
-// Context
-import { useRoomContext } from "../../context/room/room.context";
-
 // Icons
 import {
   CoffeeOutlined,
@@ -13,31 +10,32 @@ import {
 } from "@ant-design/icons";
 
 const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
-  const {
-    files,
-    createFile,
-    joinFile,
-  } = useRoomContext();
 
   // TODO -> Fix the drawer toggle
   // TODO -> Fix the :select icon
-  const [fileList, setFileList] = useState(files);
   const [isOpenChat, setIsOpenChat] = useState(false);
   const [isOpenFiles, setIsOpenFiles] = useState(true);
+  const [ currentComponentOpen, setCurrentComponentOpen ] = useState("1");
+
+  const changeCurrentComponent = (componentId) => {
+    componentToRender(componentId);
+    setCurrentComponentOpen(componentId);
+  } 
+
 
   return (
     <div id="sidebar-container">
       <div className="sidebar-top">
         <div
-          className={isOpenFiles ? "sidebar-item-toogle" : "sidebar-item"}
-          onClick={() => componentToRender("1")}
+          className={currentComponentOpen == "1" ? "sidebar-item-toogle" : "sidebar-item"}
+          onClick={() => changeCurrentComponent("1")}
         >
           <FileOutlined />
         </div>
 
         <div
-          className={isOpenChat ? "sidebar-item-toogle" : "sidebar-item"}
-          onClick={() => componentToRender("2")}
+          className={currentComponentOpen == "2" ? "sidebar-item-toogle" : "sidebar-item"}
+          onClick={() => changeCurrentComponent("2")}
           style={{ fontSize: ".8em" }}
         >
           <CoffeeOutlined />
@@ -54,4 +52,6 @@ const Sidebar = ({ openSidebar, closeSidebar, componentToRender }) => {
     </div>
   );
 };
+
+
 export default Sidebar;

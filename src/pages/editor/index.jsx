@@ -4,7 +4,6 @@ import "./style.css";
 // Components
 import MonacoEditor from "../../components/Editor/";
 import Terminal from "../../components/Terminal/";
-
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
@@ -25,7 +24,6 @@ import { useRoomContext } from "../../context/room/room.context";
 
 // Split.js
 import Split from "react-split";
-import { string } from "prop-types";
 
 const dmp = new DiffMatchPatch();
 
