@@ -1,0 +1,65 @@
+{
+  "languages": [
+    {
+      "id": 63,
+      "value": "javascript",
+      "name": "Javascript",
+      "src": "langLogos/63.svg"
+    },
+    {
+      "id": 74,
+      "value": "typescript",
+      "name": "Typescript",
+      "src": "langLogos/74.svg"
+    },
+    {
+      "id": 71,
+      "value": "python",
+      "name": "Python",
+      "src": "langLogos/71.svg"
+    },
+    {
+      "id": 62,
+      "value": "text/x-java",
+      "name": "Java",
+      "src": "langLogos/62.svg"
+    },
+    {
+      "id": 49,
+      "value": "text/x-csrc",
+      "name": "C",
+      "src": "langLogos/49.svg"
+    },
+    {
+      "id": 54,
+      "value": "text/x-c++src",
+      "name": "C++",
+      "src": "langLogos/54.svg"
+    },
+    {
+      "id": 51,
+      "value": "text/x-csharp",
+      "name": "C#",
+      "src": "langLogos/51.svg"
+    },
+    {
+      "id": 43,
+      "value": "plain text",
+      "name": "plain text",
+      "src": "langLogos/43.svg"
+    },
+    {
+      "id": 48,
+      "value": "c",
+      "name": "c",
+      "src": "langLogos/48.svg"
+    },
+    {
+      "id": 52,
+      "value": "c++",
+      "name": "c++",
+      "src": "langLogos/52.svg"
+    }
+
+  ]
+}

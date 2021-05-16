@@ -5,7 +5,7 @@ import "./style.css";
 import { PlusOutlined } from "@ant-design/icons";
 
 // Helpers
-import { validateFileName } from "../../../../helpers/filenameUtils";
+import { validateFileName, getLanguageId, selectLanguageSrc } from "../../../../helpers/filenameUtils";
 
 // Components
 import FileBox from "./components/fileBox/index.jsx";
@@ -46,11 +46,11 @@ const FilesDrawer = ({ fileList, chooseFile }) => {
         />
       </div>
       <div id="files-body">
-        {fileList
-          ?.map((files) => (
+        {fileList?.map((files) => (
             <FileBox
-              name={files.filename}
               key={files._id}
+              name={files.filename}
+              logoSrc={selectLanguageSrc(getLanguageId(files.filename))}
               clickEvent={() => chooseFile(files.filename)}
             />
           ))

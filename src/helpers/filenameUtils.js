@@ -1,5 +1,7 @@
+import languages from '../assets/languages.json';
+
 function getFileExtension(filename){
-    var extension = "Arquivo sem extensão";
+    var extension = "";
     // Verifica se tem pontos no nome do arquivo
     var indexOfPeriod = filename.indexOf(".");
     
@@ -23,35 +25,34 @@ function getFileExtension(filename){
 }
 
 
-export function getLanguageInfo(filename){
+export function getLanguageId(filename){
     let fileExtension = getFileExtension(filename);
     let language = {};
 
     switch(fileExtension){
         case "js":
-            language = {id: 63, name: 'javascript', src: "langLogos/63.svg"};
+            language = 63;
             break;
         case "ts":
-            language = {id: 74, name: 'typescript', src: "langLogos/74.svg"};
+            language = 74;
             break;
         case "py":
-            language = {id: 71, name: 'python', src: "langLogos/71.svg"};
+            language = 71;
             break;
         case "java":
-            language = {id: 62, name: 'java', src: "langLogos/62.svg"};
+            language = 62;
             break;
         case "c":
-            // algumas linguagens possuem versões para rodar, não sei qual é a versão ideal então coloquei qualquer uma 
-            language = {id: 48, name: 'c', src: "langLogos/48.svg"}; 
+            language = 48; 
             break;
         case "cpp":
-            language = {id: 52, name: 'c++', src: "langLogos/52.svg"};
+            language = 52;
             break;
         case "c#":
-            language = {id: 51, name: 'c#', src: "langLogos/51.svg"} 
+            language = 51; 
             break;
         default:
-            language = {id: 43, name: 'plain text', src: "langLogos/23.svg"};
+            language = 43;
 
     }
 
@@ -65,4 +66,15 @@ export const validateFileName = (filename) => {
     
     return rg1.test(filename)&&!rg2.test(filename)&&!rg3.test(filename);
     
+}
+
+export const selectLanguageSrc = (languageId) => {
+    let result;
+    let src;
+
+    result = languages.languages.filter((i) => i.id.toString() == languageId)
+
+    src = result[0] ? result[0].src : '';
+
+    return src;
 }
