@@ -59,7 +59,7 @@ export function getLanguage(filename){
             language = {id: 51, name: 'c#', img: csharpLogo} 
             break;
         default:
-            language = {id: 43, name: 'plain text'};
+            language = {id: 43, name: 'plain text', img: null};
 
     }
 
