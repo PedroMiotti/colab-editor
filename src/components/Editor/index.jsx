@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
 // Monaco
-import Editor from "@monaco-editor/react";
-
 import MonacoWrapper from './Components/MonacoWrapper'
 
 const editorOptions = {
@@ -20,17 +18,15 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
 
   // TODO -> Fix why the language highlight isnt working
   return(
-    <div>
       <MonacoWrapper
+        language="javascript"
         theme={themeProp}
-        language={languageProp}
-        value={valueProp}
         editorDidMount={didMount}
         options={editorOptions}
-        loading={"Loading..."}
         onChange={onChangeProp}
+        value={valueProp}
+        // loading={"Loading..."}
         />
-    </div>
   )
 }
 export default MonacoEditor;

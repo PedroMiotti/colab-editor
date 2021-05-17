@@ -107,7 +107,7 @@ const Editor = () => {
     };
   }, [currentFileCode]);
 
-  const handleChange = useDebouncedCallback((value) => {
+  const handleChange = useDebouncedCallback(( value) => {
     const prevValue = doc.current.content.toString();
 
     const patches = dmp.patch_make(prevValue, value);

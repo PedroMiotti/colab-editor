@@ -14,9 +14,11 @@ const MonacoWrapper = props => {
     const editorRef = useRef(null);
     const preventTriggerChange = useRef(false);
     useEffect(() => {
+
         // Initialize monaco instance
         const value = props.value != null ? props.value : props.defaultValue;
         const { language, theme, options, overrideServices } = props;
+
         if (containerRef.current) {
             // Before initializing monaco editor
             const parentOptions = props.editorWillMount(monaco);
@@ -25,7 +27,7 @@ const MonacoWrapper = props => {
                 containerRef.current,
                 {
                     value,
-                    language,
+                    ...(language ? { language } : {}),
                     ...options,
                     ...(theme ? { theme } : {})
                 },
@@ -53,6 +55,7 @@ const MonacoWrapper = props => {
         const value = props.value;
         const editor = editorRef.current;
         const model = editor.getModel();
+        
         if (value != null && value !== model.getValue()) {
             preventTriggerChange.current = true;
             editor.pushUndoStop();
@@ -100,7 +103,7 @@ const MonacoWrapper = props => {
         <div
             ref={containerRef}
             style={style}
-            className="react-monaco-editor-container"
+            className="react-monaco-editor"
         ></div>
     );
 };
@@ -110,7 +113,7 @@ MonacoWrapper.defaultProps = {
     height: "100%",
     value: null,
     defaultValue: "",
-    language: "javascript",
+    language: null,
     theme: null,
     options: {},
     overrideServices: {},
@@ -118,6 +121,7 @@ MonacoWrapper.defaultProps = {
     editorWillMount: noop,
     onChange: noop
 };
+
 MonacoWrapper.propTypes = {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
