@@ -31,8 +31,6 @@ const FilesDrawer = ({ fileList, chooseFile }) => {
         return;
       }
 
-      // TODO -> Prevent a user from creating a file that already exists
-
       createFile(file_name);
       setIsAddingFile(!isAddingFile);
     }

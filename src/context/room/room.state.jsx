@@ -23,7 +23,7 @@ import { instance as axios } from "../../api";
 import RoomContext from "./room.context";
 import roomReducer, { initialState as initialValues } from "./room.reducer";
 
-import history from "../../utils/history";
+import history from "../../helpers/history";
 
 const RoomState = ({ children }) => {
   const initialState = {

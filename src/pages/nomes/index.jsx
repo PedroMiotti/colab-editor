@@ -6,7 +6,7 @@ import "../../assets/style/backgroundEffect.css";
 import { Button } from 'antd';
 
 // Utils
-import history from '../../utils/history'
+import history from '../../helpers/history'
 
 const PaginaNome = () => {
 

@@ -5,7 +5,7 @@ import './style.css';
 import { useParams } from "react-router-dom";
 
 // Assets
-import { runCode } from "../../api/runCode.js";
+// import { runCode } from "../../api/runCode.js";
 
 // Components
 import { customNotification } from '../Notification';
@@ -18,7 +18,7 @@ import {
   } from "@ant-design/icons";
 
 
-const Navbar = () => {
+const Navbar = ({ runCode }) => {
   const [language, setLanguage] = useState({ id: "63", name: "javascript" });
   const [theme, setTheme] = useState("vs-dark");
   const [codeToSubmit, setCodeToSubmit] = useState("");
@@ -26,19 +26,19 @@ const Navbar = () => {
 
   const username = localStorage.getItem("username");
 
-  const runSouceCode = () => {
-    let solutionResponse = runCode(codeToSubmit, stdin, language.id).then(
-      (res) => {
-        if (res.stdout) {
-          console.log(res.stdout + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-        } else if (res.stderr) {
-          console.log(res.stderr + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-        } else {
-          console.log(res.compile_output + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-        }
-      }
-    );
-  };
+  // const runSouceCode = () => {
+  //   let solutionResponse = runCode(codeToSubmit, stdin, language.id).then(
+  //     (res) => {
+  //       if (res.stdout) {
+  //         console.log(res.stdout + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
+  //       } else if (res.stderr) {
+  //         console.log(res.stderr + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
+  //       } else {
+  //         console.log(res.compile_output + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
+  //       }
+  //     }
+  //   );
+  // };
 
   // copy id to clipboard
   const { namespaceId } = useParams();
@@ -49,14 +49,6 @@ const Navbar = () => {
     customNotification("success", "bottomRight", "Copiado para a área de transferência", "copyNotification", 1.5  );
   };
 
-  const chooseLanguage = (e) => {
-    const selectedIndex = e.target.options.selectedIndex;
-    setLanguage({
-      id: e.target.options[selectedIndex].getAttribute("data-key"),
-      name: e.target.value,
-    });
-  };
-
   return (
     <div id="navbar-editor">
       <div className="navbar-main">
@@ -64,41 +56,10 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-config">
-        {/* <div className="custom-select">
-          <select className="language dropdown" onChange={chooseLanguage}>
-            {languages.map((language) => (
-              <option
-                value={language.value}
-                data-key={language.id}
-                key={language.id}
-              >
-                {language.name}
-              </option>
-            ))}
-          </select>
-
-          <span className="custom-arrow">
-            <CaretDownOutlined className="arrow" />
-          </span>
-        </div> */}
-
-        {/* <div className="custom-select">
-          <select
-            className="theme dropdown"
-            onChange={(e) => setTheme(e.target.value)}
-          >
-            <option value="vs-dark">Dark</option>
-            <option value="light">Light</option>
-          </select>
-
-          <span className="custom-arrow">
-            <CaretDownOutlined className="arrow" />
-          </span>
-        </div> */}
 
         <div className="run"></div>
 
-        <button className="run-button" onClick={runSouceCode}>
+        <button className="run-button" onClick={runCode}>
           <CaretRightOutlined className="play-ico" />
         </button>
       </div>

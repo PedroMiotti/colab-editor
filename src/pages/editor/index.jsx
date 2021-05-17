@@ -8,19 +8,20 @@ import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
 import RoomInfoDrawer from "../../components/Sidebar/components/RoomInfoDrawer";
+import Welcome from "./components/Welcome";
 
 // Assets
-import { getLanguageId, selectLanguage } from '../../helpers/filenameUtils';
+import { getLanguageId, selectLanguage } from "../../helpers/filenameUtils";
+import {
+  pushToStdout,
+  clearTerminal,
+} from "../../components/Terminal/terminalUtils";
 
 import DiffMatchPatch from "diff-match-patch";
 
 import { useDebouncedCallback } from "use-debounce";
 
 import automerge from "automerge";
-
-// Icons
-import {
-} from "@ant-design/icons";
 
 // Context
 import { useRoomContext } from "../../context/room/room.context";
@@ -40,39 +41,38 @@ const Editor = () => {
     updateFileCode,
   } = useRoomContext();
 
-  // TODO -> Remove this states and add create the function to reconize the extension of the file
   const [language, setLanguage] = useState({ id: "63", name: "javascript" });
   const [theme, setTheme] = useState("vs-dark");
   const [stdin, setStdin] = useState("");
 
   const [roomLoad, setRoomLoad] = useState(roomLoaded);
-  const [codeToSubmit, setCodeToSubmit] = useState("");
-  const [inputValue, setInputValue] = useState("");
+
   const [currentFile, setCurrentFile] = useState({});
   const [loadDoc, setLoadDoc] = useState(false);
   const [content, setContent] = useState("");
   const [fileList, setFileList] = useState(files);
 
-  const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] = useState("1");
+  const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] =
+    useState("1");
   const [toggleSidebarComponent, setToggleSidebarComponent] = useState(true);
 
   const editorRef = useRef(null);
   const doc = useRef(null);
   const termRef = useRef(null);
 
-  useEffect(() => {
-    if (files) setFileList(files);
-  }, [files]);
+  const runCode = () => {
+    clearTerminal(termRef);
+    pushToStdout(termRef, "Out");
+  };
 
   const chooseFile = (fileName) => {
     let file = fileList.find((f) => f.filename === fileName);
 
     if (file.filename === currentFile.filename) {
       return;
-    }
-    else {
+    } else {
       joinFile(currentFile.filename, fileName);
-      setLanguage(selectLanguage(getLanguageId(file.filename)))
+      setLanguage(selectLanguage(getLanguageId(file.filename)));
       setCurrentFile(file);
 
       let parsedCode = JSON.parse(file.text);
@@ -94,20 +94,7 @@ const Editor = () => {
     }
   };
 
-  useEffect(() => {
-    if (loadDoc) {
-      let parsedCode = JSON.parse(currentFileCode);
-      doc.current = automerge.load(parsedCode);
-      setContent(doc.current.content.toString());
-    }
-
-    return () => {
-      setLoadDoc(" ");
-      setContent(" ");
-    };
-  }, [currentFileCode]);
-
-  const handleChange = useDebouncedCallback(( value) => {
+  const handleChange = useDebouncedCallback((value) => {
     const prevValue = doc.current.content.toString();
 
     const patches = dmp.patch_make(prevValue, value);
@@ -200,34 +187,60 @@ const Editor = () => {
     }
   }, [codeChange]);
 
+  useEffect(() => {
+    if (files) setFileList(files);
+  }, [files]);
+
+  useEffect(() => {
+    if (loadDoc) {
+      let parsedCode = JSON.parse(currentFileCode);
+      doc.current = automerge.load(parsedCode);
+      setContent(doc.current.content.toString());
+    }
+
+    return () => {
+      setLoadDoc(" ");
+      setContent(" ");
+    };
+  }, [currentFileCode]);
+
   return (
     <div id="editorPage">
       <div id="container-editor">
         {/* TODO -> Create a loading page  */}
         {roomLoad && <h1>loading...</h1>}
 
-        <Navbar />
+        <Navbar runCode={runCode} />
 
         <div id="bottom">
-          <Sidebar closeSidebarComponent={() => setToggleSidebarComponent(!toggleSidebarComponent)} componentToRender={setComponentToRenderFromSidebar} />
+          <Sidebar
+            closeSidebarComponent={() =>
+              setToggleSidebarComponent(!toggleSidebarComponent)
+            }
+            componentToRender={setComponentToRenderFromSidebar}
+          />
 
-          {toggleSidebarComponent ?
+          {toggleSidebarComponent ? (
             <div id="drawer-container">
               {sidebarComponentSwitch(componentToRenderFromSidebar)}
             </div>
-            :
-            null
-          }
+          ) : null}
 
           <Split className="split" minSize={100} gutterSize={4}>
-            <MonacoEditor
-              languageProp={language.value}
-              themeProp={theme}
-              valueProp={content}
-              onChangeProp={handleChange}
-              path={currentFile?.filename}
-              editorRef={editorRef}
-            />
+            <div>
+              {Object.entries(currentFile).length === 0 ? (
+                <Welcome />
+              ) : (
+                <MonacoEditor
+                  languageProp={language.value}
+                  themeProp={theme}
+                  valueProp={content}
+                  onChangeProp={handleChange}
+                  path={currentFile?.filename}
+                  editorRef={editorRef}
+                />
+              )}
+            </div>
             <Terminal terminalRef={termRef} />
           </Split>
         </div>

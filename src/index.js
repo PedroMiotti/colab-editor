@@ -10,7 +10,7 @@ import { SocketContextProvider } from "./context/socket.js";
 import { NamespaceContextProvider } from "./context/namespace.js";
 
 //Router
-import history from "./utils/history";
+import history from "./helpers/history";
 import { Router } from "react-router-dom";
 import Routes from "./router";
 

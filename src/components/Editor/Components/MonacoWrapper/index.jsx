@@ -13,6 +13,7 @@ const MonacoWrapper = props => {
     const containerRef = useRef(null);
     const editorRef = useRef(null);
     const preventTriggerChange = useRef(false);
+    
     useEffect(() => {
 
         // Initialize monaco instance
