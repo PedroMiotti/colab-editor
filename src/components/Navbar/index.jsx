@@ -26,20 +26,6 @@ const Navbar = ({ runCode }) => {
 
   const username = localStorage.getItem("username");
 
-  // const runSouceCode = () => {
-  //   let solutionResponse = runCode(codeToSubmit, stdin, language.id).then(
-  //     (res) => {
-  //       if (res.stdout) {
-  //         console.log(res.stdout + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-  //       } else if (res.stderr) {
-  //         console.log(res.stderr + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-  //       } else {
-  //         console.log(res.compile_output + `\nExecution Time : ${res.time} Secs Memory used : ${res.memory} bytes`)
-  //       }
-  //     }
-  //   );
-  // };
-
   // copy id to clipboard
   const { namespaceId } = useParams();
   const url = namespaceId;

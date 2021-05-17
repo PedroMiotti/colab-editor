@@ -30,6 +30,7 @@ const RoomInfoDrawer = ({ fileList }) => {
               username={user.username}
               img={<UserOutlined />}
               imgName="raposa"
+              key={user._id}
             />  
           ))}
         </div>
