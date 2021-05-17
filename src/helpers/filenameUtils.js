@@ -1,5 +1,7 @@
+import languages from '../assets/languages.json';
+
 function getFileExtension(filename){
-    var extension = "Arquivo sem extensão";
+    var extension = "";
     // Verifica se tem pontos no nome do arquivo
     var indexOfPeriod = filename.indexOf(".");
     
@@ -22,46 +24,58 @@ function getFileExtension(filename){
     return extension;    
 }
 
-// Import logo img
-import jsLogo from '../assets/langLogos/jsLogo.svg';
-import tsLogo from '../assets/langLogos/tsLogo.svg';
-import pythonLogo from '../assets/langLogos/pythonLogo.svg';
-import javaLogo from '../assets/langLogos/javaLogo.svg';
-import cLogo from '../assets/langLogos/cLogo.svg';
-import cplusplusLogo from '../assets/langLogos/cplusplusLogo.svg';
-import csharpLogo from '../assets/langLogos/csharpLogo.svg';
 
-export function getLanguage(filename){
+export function getLanguageId(filename){
     let fileExtension = getFileExtension(filename);
     let language = {};
 
     switch(fileExtension){
         case "js":
-            language = {id: 63, name: 'javascript', img: jsLogo};
+            language = 63;
             break;
         case "ts":
-            language = {id: 74, name: 'typescript', img: tsLogo};
+            language = 74;
             break;
         case "py":
-            language = {id: 71, name: 'python', img: pythonLogo};
+            language = 71;
             break;
         case "java":
-            language = {id: 62, name: 'java', img: javaLogo};
+            language = 62;
             break;
         case "c":
-            // algumas linguagens possuem versões para rodar, não sei qual é a versão ideal então coloquei qualquer uma 
-            language = {id: 48, name: 'c', img: cLogo}; 
+            language = 48; 
             break;
-        case "cc":
-            language = {id: 52, name: 'c++', img: cplusplusLogo};
+        case "cpp":
+            language = 52;
             break;
         case "c#":
-            language = {id: 51, name: 'c#', img: csharpLogo} 
+            language = 51; 
             break;
         default:
-            language = {id: 43, name: 'plain text', img: null};
+            language = 43;
 
     }
 
     return language;
 }
+
+export const validateFileName = (filename) => {
+    var rg1=/^[^\\/:\*\?"<>\|]+$/; // forbidden characters \ / : * ? " < > |
+    var rg2=/^\./; // cannot start with dot 
+    var rg3=/^(nul|prn|con|lpt[0-9]|com[0-9])(\.|$)/i; // forbidden file names
+    
+    return rg1.test(filename)&&!rg2.test(filename)&&!rg3.test(filename);
+    
+}
+
+export const selectLanguage = (languageId) => {
+    let result;
+    let language;
+
+    result = languages.languages.filter((i) => i.id.toString() == languageId)
+
+    language = result[0] ? result[0] : '';
+
+    return language;
+}
+

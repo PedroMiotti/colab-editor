@@ -5,11 +5,15 @@ import "./style.css";
 import { UserOutlined } from "@ant-design/icons";
 
 // Components
-import Separator from "./components/Separator";
+import Userbox from "./components/Userbox";
 
-// TODO -> Rename the separator
+// Context 
+import { useRoomContext } from '../../../../context/room/room.context';
 
 const RoomInfoDrawer = ({ fileList }) => {
+
+  const { activeUsers } = useRoomContext();
+
   return (
     <>
       <div className="user-list">
@@ -21,21 +25,13 @@ const RoomInfoDrawer = ({ fileList }) => {
           </div>
         </div>
         <div className="user-list-content">
-          <Separator
-            username="FShinoda"
-            img={<UserOutlined />}
-            imgName="raposa"
-          />
-          <Separator
-            username="Pedron"
-            img={<UserOutlined />}
-            imgName="rinoceronte"
-          />
-          <Separator
-            username="Jotaki"
-            img={<UserOutlined />}
-            imgName="dragão ma"
-          />
+          {activeUsers.map((user) => (
+            <Userbox
+              username={user.username}
+              img={<UserOutlined />}
+              imgName="raposa"
+            />  
+          ))}
         </div>
       </div>
     </>

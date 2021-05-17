@@ -1,20 +1,24 @@
 #file-box{
     
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: var(--mediumGrey);
     font-size: .5em;
-    padding: 15px 15px 15px 35px;
+    height: 40px;
+    width: 100%;
+    padding: 0 8px;
     
 }
 
 #file-box-input{
     width:70%;
     border: 0;
-    padding: 3px 0;
+    padding: 0 0 0 3px ;
     background-color: var(--mediumGrey);
     color: #eee;
+    margin-left: 6px;
+    line-height: 5px;
     
 }
 
@@ -32,6 +36,16 @@
     background-color: var(--lightGrey);
     cursor: pointer;
     
+}
+
+.file-container{
+    display: flex;
+    width: 80%;
+}
+
+.language-icon-container img{
+    width: 15px;
+    height: 15px;
 }
 
 

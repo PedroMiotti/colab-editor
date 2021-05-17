@@ -5,7 +5,6 @@ import './style.css';
 import { useParams } from "react-router-dom";
 
 // Assets
-import { languages } from "../../assets/languages.js";
 import { runCode } from "../../api/runCode.js";
 
 // Components

@@ -49,7 +49,7 @@ const RoomState = ({ children }) => {
           },
         });
       });
-
+      
       socket.on('user-joined:file', (data) => {
         dispatch({
           type: UPDATE_FILE_CODE,

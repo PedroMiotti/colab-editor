@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
 
 // Monaco
-import Editor from "@monaco-editor/react";
-
 import MonacoWrapper from './Components/MonacoWrapper'
+
+const editorOptions = {
+  fontSize: 14,
+  automaticLayout: true,
+  scrollBeyondLastLine: false
+};
 
 const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorRef, style}) => {
 
-  const [language, setlanguage] = useState(languageProp);
-  const [theme, setTheme] = useState(themeProp);
-
   const didMount = editor => {
     editorRef.current = editor;
-};
+  };
 
+
+  // TODO -> Fix why the language highlight isnt working
   return(
-    <div>
       <MonacoWrapper
+        language="javascript"
         theme={themeProp}
-        language={languageProp}
-        value={valueProp}
         editorDidMount={didMount}
-        loading={"Loading..."}
+        options={editorOptions}
         onChange={onChangeProp}
+        value={valueProp}
+        // loading={"Loading..."}
         />
-    </div>
   )
 }
 export default MonacoEditor;

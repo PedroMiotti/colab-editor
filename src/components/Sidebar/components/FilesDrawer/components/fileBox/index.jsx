@@ -8,13 +8,19 @@ const FileBox = (props) => {
   return (
     <div id="file-box" onClick={props.clickEvent}>
       {props.name ? (
-        <input
-          id="file-box-input"
-          disabled={true}
-          maxLength={maxLength}
-          value={props.name}
-          
-        />
+        <div className="file-container">
+
+          <div className="language-icon-container">
+            <img src={"/" + props.logoSrc} alt="language logo" />
+          </div>
+          <input
+            id="file-box-input"
+            disabled={true}
+            maxLength={maxLength}
+            value={props.name}
+            />
+
+        </div>
       ) : (
         <input
           id="file-box-input"
