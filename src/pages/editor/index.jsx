@@ -52,8 +52,7 @@ const Editor = () => {
   const [content, setContent] = useState("");
   const [fileList, setFileList] = useState(files);
 
-  const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] =
-    useState("1");
+  const [componentToRenderFromSidebar, setComponentToRenderFromSidebar] = useState("1");
   const [toggleSidebarComponent, setToggleSidebarComponent] = useState(true);
 
   const editorRef = useRef(null);
@@ -156,7 +155,6 @@ const Editor = () => {
         let parsedCode = JSON.parse(changes);
 
         let newChanges = automerge.applyChanges(doc.current, parsedCode);
-        console.log(newChanges.content.toString());
         doc.current = newChanges;
 
         const editor = editorRef.current;
