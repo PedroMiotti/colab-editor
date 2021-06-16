@@ -33,6 +33,33 @@
     0 0 2px rgba(238, 238, 238, 0.8);
 }
 
+.roomPage-nameInput{
+    height: inherit;
+    text-align: left;
+    background: transparent;
+    border: none;
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    width: auto;
+    max-width: 400px ;
+    color: rgba(89, 39, 148, 0.8);
+    text-shadow:
+            0 0 1ex rgba(111, 64, 167, 1),
+            0 0 2px rgba(238, 238, 238, 0.8);
+
+    padding-left: 10px;
+    caret: inherit block;
+}
+
+.roomPage-nameInput::placeholder{
+    color: #585858;
+    text-shadow: none;
+    font-size: 40px;
+    text-align: left;
+    padding-left: 10px;
+}
+
 .caixas {    
     width: 50vw;
     position: relative;
