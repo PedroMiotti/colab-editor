@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap');
 
 * {
   margin: 0;
@@ -27,6 +28,7 @@ body {
 :root {
   --bodyTextFont: 'Inconsolata', monospace;
   --projectNameFont: 'Audiowide', cursive;
+  --terminalFont: 'Ubuntu Mono', monospace;
 
   --backgroundColor: #282c34;
   --deepPurple: #592794;

@@ -1,6 +1,36 @@
 .welcome-page-container{
     display: flex;
-    padding: 20px 0 0 50px;
-    background-color: #1e1e1e;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 60px 0 0 50px;
+    background-color: #000;
     height: 100%;
+
+    font-family: var(--terminalFont);
 }
+
+.welcome-page-container h1{
+    margin: 20px 0;
+}
+
+.welcome-page-container p{
+    font-size: 18px;
+    font-family: var(--terminalFont);
+    margin: 20px 0;
+
+}
+
+.welcome-page-container .welcome-page-img-container{
+    width: 100%;
+    margin: 20px 0;
+
+    display: flex;
+    align-content: center ;
+    justify-content: flex-start;
+}
+.welcome-page-container img{
+    width: 230px;
+}
+
+

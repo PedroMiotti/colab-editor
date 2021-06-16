@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Monaco
 import Editor from '@monaco-editor/react'
-import MonacoWrapper from './Components/MonacoWrapper'
+// import MonacoWrapper from './Components/MonacoWrapper'
 
 const editorOptions = {
   fontSize: 14,
@@ -16,8 +16,6 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
     editorRef.current = editor;
   };
 
-
-  // TODO -> Fix why the language highlight isnt working
   return(
       <Editor
         language={languageProp}
@@ -30,4 +28,5 @@ const MonacoEditor = ({languageProp, themeProp, valueProp, onChangeProp, editorR
         />
   )
 }
+
 export default MonacoEditor;
