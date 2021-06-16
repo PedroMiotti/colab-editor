@@ -23,6 +23,9 @@ import { instance as axios } from "../../api";
 import RoomContext from "./room.context";
 import roomReducer, { initialState as initialValues } from "./room.reducer";
 
+// Components
+import { customNotification } from '../../components/Notification';
+
 import history from "../../helpers/history";
 
 const RoomState = ({ children }) => {
@@ -34,11 +37,32 @@ const RoomState = ({ children }) => {
 
   const baseUrl = "/api/v1/room";
 
+  const username = localStorage.getItem('username');
+
   const [state, dispatch] = useReducer(roomReducer, initialState);
 
   React.useEffect(() => {
     if (socket) {
       socket.on("update:room", (data) => {
+        const newUserUsername = data.room.users[data.room.users.length - 1].username;
+        if(!(data.room.users[data.room.users.length - 1].username === username)){
+          customNotification("info", "topRight", `${newUserUsername} se juntou a sala ! 🔥 `, "copyNotification", 1.5 );
+        }
+
+        dispatch({
+          type: UPDATE_ROOM,
+          payload: {
+            _id: data.room._id,
+            namespaceId: data.room.namespaceId,
+            activeUsers: data.room.users,
+            files: data.room.files,
+          },
+        });
+      });
+
+      socket.on("user-left:room", (data) => {
+        customNotification("info", "topRight", `${data.userLeft.username} saiu da sala ! ☹️ `, "copyNotification", 1.5 );
+
         dispatch({
           type: UPDATE_ROOM,
           payload: {
@@ -96,6 +120,7 @@ const RoomState = ({ children }) => {
     return () => {
       if (socket) {
         socket.off("update:room");
+        socket.off("user-left:room");
         socket.off("update:user");
         socket.off("update:files");
         socket.off("realtime:code");
@@ -131,6 +156,7 @@ const RoomState = ({ children }) => {
   };
 
   const createFile = (filename) => {
+    console.log(socket)
     socket.emit("create:file", filename);
   }
 
@@ -140,6 +166,14 @@ const RoomState = ({ children }) => {
 
   const updateFileCode = (filename, changes, startIdx, changeLength) => {
     socket.emit("update:code", {filename, changes, startIdx, changeLength});
+  }
+
+  const leaveRoom = () => {
+    socket.emit("user-left:room");
+
+    dispatch({ type: LEAVE_ROOM });
+
+    history.push("/");
   }
 
 
@@ -161,6 +195,7 @@ const RoomState = ({ children }) => {
         createFile,
         joinFile,
         updateFileCode,
+        leaveRoom
       }}
     >
       {children}

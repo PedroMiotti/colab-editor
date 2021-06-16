@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
 import RoomInfoDrawer from "../../components/Sidebar/components/RoomInfoDrawer";
+import ConfigDrawer from "../../components/Sidebar/components/ConfigDrawer";
 import Welcome from "./components/Welcome";
 
 // Assets
@@ -88,6 +89,8 @@ const Editor = () => {
         return <FilesDrawer fileList={fileList} chooseFile={chooseFile} />;
       case "2":
         return <RoomInfoDrawer />;
+      case "3":
+        return <ConfigDrawer />;
       default:
         return "Not configured yet";
     }

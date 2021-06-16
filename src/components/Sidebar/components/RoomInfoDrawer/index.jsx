@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.css";
 
 // Icons
@@ -10,7 +10,7 @@ import Userbox from "./components/Userbox";
 // Context 
 import { useRoomContext } from '../../../../context/room/room.context';
 
-const RoomInfoDrawer = ({ fileList }) => {
+const RoomInfoDrawer = () => {
 
   const { activeUsers } = useRoomContext();
 

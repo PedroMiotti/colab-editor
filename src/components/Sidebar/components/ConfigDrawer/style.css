@@ -1,0 +1,80 @@
+.config-drawer-component{
+    height: 95%;
+    width: 100%;
+    padding: 0 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-content: space-between;
+
+}
+
+.config-drawer-title{
+    background-color: black;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.config-drawer-header h6{
+    font-family: var(--bodyTextFont);
+}
+
+.config-drawer-header{
+    text-align: center;
+}
+
+.config-drawer-content{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0 0 10px;
+
+}
+
+.config-drawer-content p{
+    font-size: 20px;
+}
+
+.config-drawer-footer{
+    text-align: center;
+}
+
+.config-drawer-footer button{
+    width: 95%;
+    height: 45px;
+    border: 0;
+    background-color: var(--red);
+    border-radius: 5px;
+    color: #fff;
+
+}
+
+.config-drawer-footer button:hover{
+    background-color: var(--red-hover);
+    cursor: pointer;
+}
+
+.leave-button-confirm{
+    color: var(--red);
+}
+
+.leave-button-cancel:hover,
+.leave-button-confirm:hover{
+    cursor: pointer;
+}
+
+.ant-popover-arrow-content,
+.ant-popover-arrow{
+    background-color: var(--lightGrey);
+    color: #fff;
+}
+.ant-popover-inner-content,
+.ant-popover-title,
+.ant-popover-inner,
+.ant-popover-content{
+    background-color: #000;
+    color: #fff;
+}

@@ -41,6 +41,10 @@ body {
   --lightPink: #f1d4d4;
   --golden: #ffda7b;
   --lightBlue: #80ffdb;
+
+  --red: #bf0d0e;
+  --red-hover: #8e090a;
+
 }
 
 /* customizar scroll bar */
