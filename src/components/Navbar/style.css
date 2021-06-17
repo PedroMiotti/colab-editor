@@ -1,9 +1,9 @@
 /* Navbar */
-#navbar-editor{
+#navbar-editor {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: "main config info";  
+    grid-template-areas: "main config info";
     align-items: center;
     background-color: var(--deepPurple);
     font-family: var(--projectNameFont);
@@ -15,38 +15,36 @@
     height: 5vh;
     max-height: 5vh;
     min-height: 5vh;
-
 }
-  
-  .navbar-main{
+
+.navbar-main {
     grid-area: main;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  }
-  
-  .navbar-main h1{
-    cursor: pointer;
-    color: #eee;
-    text-shadow:
-      0 0 1ex rgba(89, 39, 148, 1),
-      0 0 2px rgba(238, 238, 238, 0.8);
-  }
-
-.navbar-main img{
-  width: 40px;
-  margin-right: 10px;
-  align-self: center;
 }
 
-  .navbar-config{
+.navbar-main h1 {
+    cursor: pointer;
+    color: #eee;
+    text-shadow: 0 0 1ex rgba(89, 39, 148, 1),
+    0 0 2px rgba(238, 238, 238, 0.8);
+}
+
+.navbar-main img {
+    width: 40px;
+    margin-right: 10px;
+    align-self: center;
+}
+
+.navbar-config {
     grid-area: config;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-  }
-  
-  .dropdown{
+}
+
+.dropdown {
     background-color: var(--mediumPurple);
     padding: .25rem 1.2rem .25rem 0.4rem;
     border-radius: 4px;
@@ -55,15 +53,15 @@
     font-weight: 700;
     border: 0;
     appearance: none;
-  }
-  
-  .custom-select{
+}
+
+.custom-select {
     position: relative;
     margin-right: .5rem;
-  }
-  
-  .custom-arrow{
-    position:absolute;
+}
+
+.custom-arrow {
+    position: absolute;
     top: 0;
     right: 0;
     display: block;
@@ -71,17 +69,17 @@
     height: 100%;
     background-color: var(--lightPurple);
     pointer-events: none;
-    border-radius: 0 4px 4px 0 ;
-  }
-  
-  .arrow{
+    border-radius: 0 4px 4px 0;
+}
+
+.arrow {
     position: relative;
-    left:50%;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-  }
-  
-  .run-button{
+}
+
+.run-button {
     background-color: var(--mediumPurple);
     border: 0;
     border-radius: 4px;
@@ -92,38 +90,39 @@
     padding: .25rem .5rem .25rem .5rem;
     cursor: pointer;
     margin-left: 2rem;
-  }
-  
-  .run-button:hover{
+}
+
+.run-button:hover {
     background-color: var(--lightPurple);
-  }
-  
-  .play-ico{
+}
+
+.play-ico {
     font-size: .5rem;
-  }
-  
-  .navbar-info{
+}
+
+.navbar-info {
     grid-area: info;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: .5rem;
     font-family: var(--bodyTextFont);
-  }
-  
-  .navbar-info h2 {
+}
+
+.navbar-info h2 {
     color: var(--lightPink);
-  }
-  
-  .navbar-info a{
+}
+
+.navbar-info a {
     color: var(--projectNameFont);
     cursor: pointer;
-  }
-  .copy-icon{
+}
+
+.copy-icon {
     margin-right: 5px;
-  }
-  
-  .btn-copy{
+}
+
+.btn-copy {
     background-color: var(--mediumPurple);
     border: none;
     cursor: pointer;
@@ -131,5 +130,5 @@
     font-size: 1em;
     padding: .15rem .25rem .15rem .20rem;
     border-radius: 5px;
-  }
+}
   
