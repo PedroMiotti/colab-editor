@@ -1,7 +1,6 @@
 /* Navbar */
 #navbar-editor{
-    padding: 0 2rem;
-    display: grid;  
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "main config info";  
@@ -10,16 +9,20 @@
     font-family: var(--projectNameFont);
     color: var(--golden);
     font-size: .5em;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 0 2rem;
     height: 5vh;
     max-height: 5vh;
     min-height: 5vh;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
+
+}
   
   .navbar-main{
     grid-area: main;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
   }
   
   .navbar-main h1{
@@ -29,11 +32,13 @@
       0 0 1ex rgba(89, 39, 148, 1),
       0 0 2px rgba(238, 238, 238, 0.8);
   }
-  
-  .navbar-main h1::before {
-    content: "> ";
-  }
-  
+
+.navbar-main img{
+  width: 40px;
+  margin-right: 10px;
+  align-self: center;
+}
+
   .navbar-config{
     grid-area: config;
     display: flex;
