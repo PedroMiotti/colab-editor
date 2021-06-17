@@ -6,7 +6,7 @@ export const runCode = async (source_code,stdin, language_id) => {
     let solutionJson;
 
     const response = await axios
-      .post(`http://localhost/submissions`, {
+      .post(`http://localhost:2358/submissions`, {
         source_code,
         stdin,
         language_id,
@@ -28,7 +28,7 @@ export const runCode = async (source_code,stdin, language_id) => {
     ) {
       if (token) {
         const getResult = await axios
-          .get(`http://localhost/submissions/${token}`)
+          .get(`http://localhost:2358/submissions/${token}`)
           .then((res) => {
             jsonGetSolution = res.data;
             return jsonGetSolution;

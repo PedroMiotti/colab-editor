@@ -105,6 +105,13 @@
   width: 100%;
 }
 
+.split-vertical {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .gutter {
   background-color: #eee;
   background-repeat: no-repeat;
@@ -116,6 +123,11 @@
   cursor: col-resize;
 }
 
+.gutter.gutter-vertical {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: row-resize;
+}
+
 @media screen and (max-width: 2000px){
   #top{
     height: 6vh;
@@ -123,10 +135,8 @@
   
   /* Navbar */
   #navbar-editor{
-    
     height: 6vh;
     max-height: 6vh;
-    
   }
 
 }

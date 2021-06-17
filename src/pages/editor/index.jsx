@@ -10,6 +10,7 @@ import FilesDrawer from "../../components/Sidebar/components/FilesDrawer";
 import RoomInfoDrawer from "../../components/Sidebar/components/RoomInfoDrawer";
 import ConfigDrawer from "../../components/Sidebar/components/ConfigDrawer";
 import Welcome from "./components/Welcome";
+import InputContainer from "../../components/Input";
 
 // Assets
 import { getLanguageId, selectLanguage } from "../../helpers/filenameUtils";
@@ -17,6 +18,8 @@ import {
   pushToStdout,
   clearTerminal,
 } from "../../components/Terminal/terminalUtils";
+
+import { runCode } from "../../api/runCode.js";
 
 import DiffMatchPatch from "diff-match-patch";
 
@@ -59,10 +62,29 @@ const Editor = () => {
   const editorRef = useRef(null);
   const doc = useRef(null);
   const termRef = useRef(null);
+  const stdinRef = useRef(null);
 
-  const runCode = () => {
+  const runSourceCode = () => {
+    console.log(stdinRef.current.value)
     clearTerminal(termRef);
-    pushToStdout(termRef, "Out");
+
+    pushToStdout(termRef, "Compilando ...");
+
+    runCode(content, stdin, language.id).then((res) => {
+      if(res.stdout){
+        clearTerminal(termRef);
+        pushToStdout(termRef, res.stdout);
+      }
+      else if(res.stderr){
+        clearTerminal(termRef);
+        pushToStdout(termRef, res.stderr);
+      }
+      else{
+        clearTerminal(termRef);
+        pushToStdout(termRef, res.compile_output);
+      }
+    })
+
   };
 
   const chooseFile = (fileName) => {
@@ -205,13 +227,18 @@ const Editor = () => {
     };
   }, [currentFileCode]);
 
+  window.onbeforeunload = function() {
+    return "Você tem certeza que deseja sair da pagina ? Você será levado a pagina principal";
+  };
+
+
   return (
     <div id="editorPage">
       <div id="container-editor">
         {/* TODO -> Create a loading page  */}
         {roomLoad && <h1>loading...</h1>}
 
-        <Navbar runCode={runCode} />
+        <Navbar runCode={runSourceCode} />
 
         <div id="bottom">
           <Sidebar
@@ -227,7 +254,7 @@ const Editor = () => {
             </div>
           ) : null}
 
-          <Split className="split" minSize={100} gutterSize={4}>
+          <Split className="split" minSize={100} gutterSize={6}>
             <div>
               {Object.entries(currentFile).length === 0 ? (
                 <Welcome />
@@ -242,7 +269,10 @@ const Editor = () => {
                 />
               )}
             </div>
-            <Terminal terminalRef={termRef} />
+            <Split  direction="vertical" className="split-vertical">
+              <Terminal terminalRef={termRef} />
+              <InputContainer stdinRef={stdinRef} change={(e) => setStdin(e.target.value)}/>
+            </Split>
           </Split>
         </div>
       </div>

@@ -7,7 +7,7 @@ import WelcomeBanner from './components/WelcomeBanner'
 const CustomTerminal = ({ terminalRef }) => {
   return(
     <div className="Terminal-container" >
-      <Terminal noEchoBack style={{height: '100%', width: "100%"}} ref={terminalRef}  welcomeMessage={<WelcomeBanner />} promptLabel={'tech@root:~$'} />
+      <Terminal noEchoBack style={{ width: "100%", height: "100%"}} ref={terminalRef}  welcomeMessage={<WelcomeBanner />} promptLabel={<b>root@tech:~$</b>} />
     </div>
   )
 
