@@ -26,7 +26,7 @@ const FileBox = (props) => {
           id="file-box-input"
           autoFocus
           maxLength={maxLength}
-          placeholder=" "
+          placeholder="Nome do arquivo "
           onKeyDown={props.event}
           onBlur={props.toggle}
         />

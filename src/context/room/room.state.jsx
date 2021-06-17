@@ -156,7 +156,6 @@ const RoomState = ({ children }) => {
   };
 
   const createFile = (filename) => {
-    console.log(socket)
     socket.emit("create:file", filename);
   }
 

@@ -27,11 +27,20 @@ const FilesDrawer = ({ fileList, chooseFile }) => {
 
       if (!file_name) return;
       if (!validatedFilename){
-        customNotification("error", "bottomRight", "Nome de arquivo invalido", "copyNotification", 1.5);
+        customNotification("error", "bottomRight", "Nome de arquivo inválido", "copyNotification", 1.5);
         return;
       }
 
-      createFile(file_name);
+      const numberOfFiles = fileList.filter((v) => (v.filename === file_name)).length
+      let suffixToAppend = numberOfFiles === 0 ? "" : numberOfFiles.toString();
+      let newFileName = file_name;
+
+      if(!(numberOfFiles === 0)){
+        let str = file_name.split('.');
+        newFileName = str[0] + suffixToAppend + "." + str[1];
+      }
+
+      createFile(newFileName);
       setIsAddingFile(!isAddingFile);
     }
   };

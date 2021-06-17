@@ -13,8 +13,8 @@
 
 #file-box-input{
     width:70%;
-    border: 0;
-    padding: 0 0 0 3px ;
+    border: none;
+    padding: 3px 3px ;
     background-color: var(--mediumGrey);
     color: #eee;
     margin-left: 6px;
@@ -23,8 +23,10 @@
 }
 
 #file-box-input:focus{
-    border: solid 1px #444;
-    background-color: var(--lightGrey);
+    /*border: solid 1px #444;*/
+    border: none;
+    background: transparent;
+    /*background-color: var(--lightGrey);*/
 }
 
 #file-box:hover{

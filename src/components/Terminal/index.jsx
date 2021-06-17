@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 
-// import { XTerm } from "xterm-for-react";
 import Terminal from 'react-console-emulator'
 
 import WelcomeBanner from './components/WelcomeBanner'
