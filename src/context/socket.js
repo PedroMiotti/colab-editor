@@ -2,6 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 // import { SOCKET_URL } from 'config';
 import { NamespaceContext } from "./namespace.js";
+import { SOCKET_URL } from "../enviroment";
 
 export const SocketContextProvider = ({ children }) => {
   const [nspName, setNamespace] = React.useContext(NamespaceContext);
@@ -9,7 +10,7 @@ export const SocketContextProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (nspName !== null) {
-      setSocket(io.connect(`http://localhost:3005/${nspName}`));
+      setSocket(io.connect(`${SOCKET_URL}${nspName}`));
     }
   }, [nspName]);
 

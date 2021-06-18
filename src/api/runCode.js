@@ -1,12 +1,12 @@
 import axios from "axios";
-
+import { JUDGE_API } from "../enviroment";
 
 export const runCode = async (source_code,stdin, language_id) => {
     let token;
     let solutionJson;
 
     const response = await axios
-      .post(`http://localhost:2358/submissions`, {
+      .post(JUDGE_API, {
         source_code,
         stdin,
         language_id,
@@ -28,7 +28,7 @@ export const runCode = async (source_code,stdin, language_id) => {
     ) {
       if (token) {
         const getResult = await axios
-          .get(`http://localhost:2358/submissions/${token}`)
+          .get(JUDGE_API + "/" + token)
           .then((res) => {
             jsonGetSolution = res.data;
             return jsonGetSolution;

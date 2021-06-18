@@ -65,7 +65,6 @@ const Editor = () => {
   const stdinRef = useRef(null);
 
   const runSourceCode = () => {
-    console.log(stdinRef.current.value)
     clearTerminal(termRef);
 
     pushToStdout(termRef, "Compilando ...");

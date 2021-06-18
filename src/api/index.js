@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL: string = 'http://localhost:3005';
+import { API_URL } from "../enviroment";
 
 export const instance = axios.create({
-  baseURL: BASE_URL
+  baseURL: API_URL
 });
 
 
