@@ -61,7 +61,8 @@ const RoomState = ({ children }) => {
       });
 
       socket.on("user-left:room", (data) => {
-        customNotification("info", "topRight", `${data.userLeft.username} saiu da sala ! ☹️ `, "copyNotification", 1.5 );
+        if(data)
+          customNotification("info", "topRight", `${data.userLeft.username} saiu da sala ! ☹️ `, "copyNotification", 1.5 );
 
         dispatch({
           type: UPDATE_ROOM,

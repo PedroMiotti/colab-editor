@@ -1,9 +1,32 @@
-# Techpot Colab Code Editor
+<p align="center">
+<a href="https://codetreats.herokuapp.com/">
+<img src=".github/img/techpot-colab-logo.png" alt="Logo" />
+</a>
+</p>
 
-Colaborative code editor developt with Nodejs, Socket.IO, ReactJS
+<p align="center">
 
-## Judge0 Config
+ <a href="https://github.com/adarshaacharya/CodeTreats/blob/master/LICENSE" target="_blank">
+<img alt="License: MIT" src="https://img.shields.io/github/license/adarshaacharya/CodeTreats" />
+</a>
 
-1. Install [docker](https://docs.docker.com/docker-for-windows/install/)
-2. Install [docker compose](https://docs.docker.com/compose/install/) -- Se você estiver usando o windows não precisa, já vem junto com o docker desktop
-3. Follow these [steps](https://github.com/judge0/judge0/blob/master/CHANGELOG.md#deployment-procedure)
+</p>
+
+<h4 align="center">
+In-browser collaborative code editor.
+</h4>
+
+
+## ⭐ Features
+
+-   In-browser IDE with VS Code like text editor having features like auto-completion, code-formatting
+-   Supports nine languages
+-   Realtime Collaboration
+-   Multi-files
+
+> ⚠️ *Website isn't mobile friendly.*
+
+
+## 📝 License
+
+This project is [MIT](https://github.com/adarshaacharya/CodeTreats/blob/master/LICENSE) licensed.
