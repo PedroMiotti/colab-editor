@@ -1,7 +1,5 @@
 <p align="center">
-<a href="https://codetreats.herokuapp.com/">
 <img src=".github/img/techpot-colab-logo.png" alt="Logo" />
-</a>
 </p>
 
 <p align="center">
@@ -20,7 +18,7 @@ In-browser collaborative code editor.
 ## ⭐ Features
 
 -   In-browser IDE with VS Code like text editor having features like auto-completion, code-formatting
--   Supports nine languages
+-   Supports for 9 languages
 -   Realtime Collaboration
 -   Multi-files
 
@@ -31,7 +29,7 @@ In-browser collaborative code editor.
 Before running app locally make sure that you have the following set up:
 
 -   [The Techpot-colab API](https://github.com/PedroMiotti/colab-editor-api)
--   [Judge0 API](https://github.com/judge0/judge0#get-started) - You can start with the free plan on RapidAPI or host it yourself. I recommend you hosted it yourself, its pretty easy.
+-   [Judge0 API](https://github.com/judge0/judge0#get-started) - You can start with the free plan on RapidAPI or host it yourself. I recommend you hosted it yourself, its pretty easy to get started.
 
 ## 🚀 Local Development
 
@@ -42,8 +40,6 @@ https://github.com/PedroMiotti/colab-editor
 ```
 
 ## Step 2: Install dependencies
-
-Install both client and server dependencies
 
 ```bash
 
