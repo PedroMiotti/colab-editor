@@ -17,7 +17,7 @@ In-browser collaborative code editor.
 
 ## ⭐ Features
 
--   In-browser IDE with VS Code like text editor having features like auto-completion, code-formatting
+-   In-browser IDE with VS Code like text editor having features like auto-completion, code-formatting ...
 -   Supports for 9 languages
 -   Realtime Collaboration
 -   Multi-files
